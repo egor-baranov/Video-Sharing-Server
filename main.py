@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from User import *
+from Video import *
 
 app = Flask(__name__)
 
@@ -12,6 +13,9 @@ newUser.city = "city"
 newUser.phone = "89004445533"
 
 users = [newUser]
+
+
+videos = []
 
 
 def get_user_by_email(email: str):
@@ -65,7 +69,27 @@ def register():
 
 @app.route("/list")
 def list_of_users():
-    return jsonify({"users": [u.to_dict() for u in users]})
+    return jsonify({"users": [u.to_dict() for u in users],
+                    "videos": [v.to_dict() for v in videos]})
+
+
+@app.route("/addVideo")
+def add_video():
+    video = Video()
+
+    video.title = request.args.get("title")
+    video.description = request.args.get("description")
+    video.tags = request.args.get("tags")
+    video.size = int(request.args.get("size"))
+    video.length = int(request.args.get("length"))
+
+    videos.append(video)
+    return jsonify({"ok": True})
+
+
+@app.route("/getVideos")
+def get_videos():
+    count = int(request.args.get("count"))
 
 
 @app.route("/exist")
