@@ -1,8 +1,11 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS, cross_origin
 from User import *
 from Video import *
 
 app = Flask(__name__)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 newUser = User()
 newUser.username = "admin"
@@ -33,11 +36,13 @@ def get_user_by_phone(phone: str):
 
 
 @app.route("/")
+@cross_origin()
 def main_page():
     return jsonify("Main Page")
 
 
 @app.route("/login")
+@cross_origin()
 def login():
     phone_user = get_user_by_phone(request.args.get("phone"))
     email_user = get_user_by_email(request.args.get("email"))
@@ -53,6 +58,7 @@ def login():
 
 
 @app.route("/register")
+@cross_origin()
 def register():
     user = User()
 
@@ -68,12 +74,14 @@ def register():
 
 
 @app.route("/list")
+@cross_origin()
 def list_of_users():
     return jsonify({"users": [u.to_dict() for u in users],
                     "videos": [v.to_dict() for v in videos]})
 
 
 @app.route("/addVideo")
+@cross_origin()
 def add_video():
     video = Video()
 
@@ -88,11 +96,13 @@ def add_video():
 
 
 @app.route("/getVideos")
+@cross_origin()
 def get_videos():
     count = int(request.args.get("count"))
 
 
 @app.route("/exist")
+@cross_origin()
 def exist():
     phone = request.args.get("phone")
     email = request.args.get("email")
