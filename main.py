@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, Response, jsonify, request
 from flask_cors import CORS, cross_origin
 from User import *
 from Video import *
@@ -7,17 +7,20 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
-newUser = User()
-newUser.username = "admin"
-newUser.password = "password"
-newUser.email = "admin@admin.com"
-newUser.birth_date = "31.12.2000"
-newUser.city = "city"
-newUser.phone = "89004445533"
+headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Credentials": "true",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
+}
 
-users = [newUser]
-
-
+users = [UserFactory.new_user(
+    username="admin",
+    password="password",
+    email="admin@admin.com",
+    birth_date="31.12.2000",
+    city="city",
+    phone="89004445533"
+)]
 videos = []
 
 
@@ -38,7 +41,7 @@ def get_user_by_phone(phone: str):
 @app.route("/")
 @cross_origin()
 def main_page():
-    return jsonify("Main Page")
+    return jsonify("Main Page", headers=headers)
 
 
 @app.route("/login")
@@ -49,35 +52,43 @@ def login():
     password = request.args.get("password")
 
     if phone_user.is_not_fake() and phone_user.password == password:
-        return {"ok": True, "user": phone_user.to_dict()}
+        return jsonify({
+            "ok": True,
+            "user": phone_user.to_dict()
+        }, headers=headers)
 
     if email_user.is_not_fake() and email_user.password == password:
-        return {"ok": True, "user": email_user.to_dict()}
+        return jsonify({
+            "ok": True,
+            "user": email_user.to_dict()
+        }, headers=headers)
 
-    return {"ok": False, "user": User().to_dict()}
+    return jsonify({"ok": False, "user": User().to_dict()}, headers=headers)
 
 
 @app.route("/register")
 @cross_origin()
 def register():
-    user = User()
-
-    user.username = request.args.get("username")
-    user.phone = request.args.get("phone")
-    user.password = request.args.get("password")
-    user.email = request.args.get("email")
-    user.city = request.args.get("city")
-    user.birth_date = request.args.get("birthDate")
+    user = UserFactory.new_user(
+        username=request.args.get("username"),
+        phone=request.args.get("phone"),
+        password=request.args.get("password"),
+        email=request.args.get("email"),
+        city=request.args.get("city"),
+        birth_date=request.args.get("birthDate")
+    )
 
     users.append(user)
-    return jsonify({"ok": True})
+    return jsonify({"ok": True}, headers=headers)
 
 
 @app.route("/list")
 @cross_origin()
 def list_of_users():
-    return jsonify({"users": [u.to_dict() for u in users],
-                    "videos": [v.to_dict() for v in videos]})
+    return jsonify({
+        "users": [u.to_dict() for u in users],
+        "videos": [v.to_dict() for v in videos]
+    }, headers=headers)
 
 
 @app.route("/addVideo")
@@ -92,7 +103,7 @@ def add_video():
     video.length = int(request.args.get("length"))
 
     videos.append(video)
-    return jsonify({"ok": True})
+    return jsonify({"ok": True}, headers=headers)
 
 
 @app.route("/getVideos")
@@ -106,7 +117,8 @@ def get_videos():
 def exist():
     phone = request.args.get("phone")
     email = request.args.get("email")
-    return jsonify({"ok": get_user_by_email(email).is_not_fake() or get_user_by_phone(phone).is_not_fake()})
+    return jsonify({"ok": get_user_by_email(email).is_not_fake() or get_user_by_phone(phone).is_not_fake()},
+                   headers=headers)
 
 
 if __name__ == "__main__":

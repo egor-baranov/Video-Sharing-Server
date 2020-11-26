@@ -10,9 +10,9 @@ class User:
     birth_date: str
     email: str
 
-    def __init__(self, name: str = "", phone: str = "", password: str = "", city: str = "", birth_date: str = "",
+    def __init__(self, username: str = "", phone: str = "", password: str = "", city: str = "", birth_date: str = "",
                  email: str = ""):
-        self.username = name
+        self.username = username
         self.phone = phone
         self.password = password
         self.city = city
@@ -39,17 +39,17 @@ class UserFactory:
         return User()
 
     @staticmethod
-    def new_user(name: str, phone: str, password: str, city: str, birth_date: str, email: str) -> User:
-        return User(name, phone, password, city, birth_date, email)
+    def new_user(username: str, phone: str, password: str, city: str, birth_date: str, email: str) -> User:
+        return User(username, phone, password, city, birth_date, email)
 
     @staticmethod
     def from_dict(data: typing.Dict[str: str]):
         return UserFactory.new_user(
-            name=data["username"],
+            username=data["username"],
             phone=data["phone"],
             password=data["password"],
             city=data["city"],
-            birth_date=data["birth_date"],
+            birth_date=data["birthDate"],
             email=data["email"]
         )
 
