@@ -1,4 +1,4 @@
-from flask import Flask, Response, jsonify, request
+from flask import Flask, Response, jsonify, request, make_response
 from flask_cors import CORS, cross_origin
 from User import *
 from Video import *
@@ -41,7 +41,9 @@ def get_user_by_phone(phone: str):
 @app.route("/")
 @cross_origin()
 def main_page():
-    return jsonify("Main Page", headers=headers)
+    resp = make_response(jsonify("Main Page"))
+    resp.headers = headers
+    return resp
 
 
 @app.route("/login")
@@ -52,18 +54,22 @@ def login():
     password = request.args.get("password")
 
     if phone_user.is_not_fake() and phone_user.password == password:
-        return jsonify({
+        resp = make_response(jsonify({
             "ok": True,
             "user": phone_user.to_dict()
-        }, headers=headers)
+        }))
 
-    if email_user.is_not_fake() and email_user.password == password:
-        return jsonify({
+    elif email_user.is_not_fake() and email_user.password == password:
+        resp = make_response(jsonify({
             "ok": True,
             "user": email_user.to_dict()
-        }, headers=headers)
+        }))
 
-    return jsonify({"ok": False, "user": User().to_dict()}, headers=headers)
+    else:
+        resp = make_response(jsonify({"ok": False, "user": User().to_dict()}))
+
+    resp.headers = headers
+    return resp
 
 
 @app.route("/register")
@@ -79,16 +85,20 @@ def register():
     )
 
     users.append(user)
-    return jsonify({"ok": True}, headers=headers)
+    resp = make_response(jsonify({"ok": True}))
+    resp.headers = headers
+    return resp
 
 
 @app.route("/list")
 @cross_origin()
 def list_of_users():
-    return jsonify({
+    resp = make_response(jsonify({
         "users": [u.to_dict() for u in users],
         "videos": [v.to_dict() for v in videos]
-    }, headers=headers)
+    }))
+    resp.headers = headers
+    return resp
 
 
 @app.route("/addVideo")
@@ -103,7 +113,10 @@ def add_video():
     video.length = int(request.args.get("length"))
 
     videos.append(video)
-    return jsonify({"ok": True}, headers=headers)
+
+    resp = make_response(jsonify({"ok": True}))
+    resp.headers = headers
+    return resp
 
 
 @app.route("/getVideos")
@@ -117,8 +130,11 @@ def get_videos():
 def exist():
     phone = request.args.get("phone")
     email = request.args.get("email")
-    return jsonify({"ok": get_user_by_email(email).is_not_fake() or get_user_by_phone(phone).is_not_fake()},
-                   headers=headers)
+
+    resp = make_response(
+        jsonify({"ok": get_user_by_email(email).is_not_fake() or get_user_by_phone(phone).is_not_fake()}))
+    resp.headers = headers
+    return resp
 
 
 if __name__ == "__main__":
