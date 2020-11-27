@@ -22,7 +22,7 @@ class User:
     def is_not_fake(self) -> int:
         return len(self.username) > 0
 
-    def to_dict(self) -> typing.Dict[str: str]:
+    def to_dict(self) -> dict:
         return {
             "username": self.username,
             "phone": self.phone,
@@ -43,7 +43,7 @@ class UserFactory:
         return User(username, phone, password, city, birth_date, email)
 
     @staticmethod
-    def from_dict(data: typing.Dict[str: str]):
+    def from_dict(data: dict):
         return UserFactory.new_user(
             username=data["username"],
             phone=data["phone"],
