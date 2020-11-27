@@ -1,7 +1,7 @@
-from flask import Flask, Response, jsonify, request, make_response
+from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS, cross_origin
-from User import *
-from Video import *
+from data.User import *
+from data.Video import *
 
 app = Flask(__name__)
 cors = CORS(app)
