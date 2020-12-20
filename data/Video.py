@@ -1,8 +1,7 @@
+import random
 import typing
 
-
-class Comment:
-    pass
+from data.Comment import Comment
 
 
 class Video:
@@ -13,25 +12,35 @@ class Video:
     length: int
     views: int
     likes: int
+    video_id: int
 
     comments: typing.List[Comment] = []
 
-    def __init__(self, title: str = "", description: str = "", tags: str = "", size: int = 0, length: int = 0,
-                 views: int = 0, likes: int = 0):
+    def __init__(self,
+                 title: str = "",
+                 description: str = "",
+                 tags: str = "",
+                 size: int = 0,
+                 length: int = 0,
+                 views: int = 0):
         self.title = title
         self.description = description
         self.tags = tags
         self.size = size
         self.length = length
         self.views = views
-        self.likes = likes
+        self.likes = 0
+        self.video_id = random.randint(100000, 999999)
 
     def to_dict(self):
         return {"title": self.title,
                 "description": self.description,
                 "tags": self.tags,
                 "size": self.size,
-                "length": self.length}
+                "length": self.length,
+                "views": self.views,
+                "likeCount": self.likes,
+                "videoId": self.video_id}
 
 
 class VideoFactory:
@@ -40,5 +49,5 @@ class VideoFactory:
         return Video()
 
     @staticmethod
-    def new_video(title: str, description: str, tags: str, size: int, length: int, views: int, likes: int):
-        return Video(title, description, tags, size, length, views, likes)
+    def new_video(title: str, description: str, tags: str, size: int, length: int, views: int):
+        return Video(title, description, tags, size, length, views)
