@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS, cross_origin
 from data.User import *
 from data.Video import *
+import random
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -21,7 +22,12 @@ users = [UserFactory.new_user(
     city="city",
     phone="89004445533"
 )]
-videos = []
+
+videos = [
+    Video(title="title1", length=2374),
+    Video(title="title2", length=24),
+    Video(title="title3", length=123)
+]
 
 
 def get_user_by_email(email: str):
@@ -123,6 +129,12 @@ def add_video():
 @cross_origin()
 def get_videos():
     count = int(request.args.get("count"))
+    video_list = []
+    for i in range(count):
+        video_list.append(random.choice(videos).to_dict())
+    resp = make_response(jsonify({"videos": video_list}))
+    resp.headers = headers
+    return resp
 
 
 @app.route("/exist")
@@ -135,6 +147,32 @@ def exist():
         jsonify({"ok": get_user_by_email(email).is_not_fake() or get_user_by_phone(phone).is_not_fake()}))
     resp.headers = headers
     return resp
+
+
+@app.route("/likeVideo")
+@cross_origin()
+def like_video():
+    video_id = int(request.args.get("videoId"))
+
+    for i in range(len(videos)):
+        if videos[i].video_id == video_id:
+            videos[i].likes += 1
+            resp = make_response(jsonify({"ok": True, "likeCount": videos[i].likes}))
+            resp.headers = headers
+            return resp
+
+
+@app.route("/unlikeVideo")
+@cross_origin()
+def unlike_video():
+    video_id = int(request.args.get("videoId"))
+
+    for i in range(len(videos)):
+        if videos[i].video_id == video_id:
+            videos[i].likes -= 1
+            resp = make_response(jsonify({"ok": True, "likeCount": videos[i].likes}))
+            resp.headers = headers
+            return resp
 
 
 if __name__ == "__main__":
