@@ -24,9 +24,9 @@ users = [UserFactory.new_user(
 )]
 
 videos = [
-    Video(title="title1", length=2374),
-    Video(title="title2", length=24),
-    Video(title="title3", length=123)
+    Video(title="Видео для отладки 1", length=2374),
+    Video(title="Видео для отладки 2", length=24),
+    Video(title="Видео для отладки 3", length=123)
 ]
 
 
@@ -117,6 +117,7 @@ def add_video():
     video.tags = request.args.get("tags")
     video.size = int(request.args.get("size"))
     video.length = int(request.args.get("length"))
+    video.cloudinary_id = int(request.args.get("id"))
 
     videos.append(video)
 
@@ -155,7 +156,7 @@ def like_video():
     video_id = int(request.args.get("videoId"))
 
     for i in range(len(videos)):
-        if videos[i].video_id == video_id:
+        if videos[i].cloudinary_id == video_id:
             videos[i].likes += 1
             resp = make_response(jsonify({"ok": True, "likeCount": videos[i].likes}))
             resp.headers = headers
@@ -168,7 +169,7 @@ def unlike_video():
     video_id = int(request.args.get("videoId"))
 
     for i in range(len(videos)):
-        if videos[i].video_id == video_id:
+        if videos[i].cloudinary_id == video_id:
             videos[i].likes -= 1
             resp = make_response(jsonify({"ok": True, "likeCount": videos[i].likes}))
             resp.headers = headers
