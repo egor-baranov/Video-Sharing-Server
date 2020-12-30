@@ -211,6 +211,30 @@ def unlike_video():
             resp.headers = headers
             return resp
 
+
+# admin-panel functions
+@app.route("/blockUser")
+@cross_origin()
+def block_user():
+    phone_user = get_user_by_phone(request.args.get("phone"))
+    email_user = get_user_by_email(request.args.get("email"))
+
+    if phone_user.is_not_fake():
+        users.remove(phone_user)
+        blocked_users.append(phone_user)
+        resp = make_response(jsonify({"ok": True, "blockedUsers": blocked_users}))
+
+    elif email_user.is_not_fake():
+        users.remove(email_user)
+        blocked_users.append(email_user)
+        resp = make_response(jsonify({"ok": True, "blockedUsers": blocked_users}))
+
+    else:
+        resp = make_response(jsonify({"ok": False}))
+
+    resp.headers = headers
+    return resp
+
 if __name__ == "__main__":
     # app.debug = True
     app.run()
