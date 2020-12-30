@@ -158,12 +158,24 @@ def comment_list():
 def add_video():
     video = Video()
 
+    email_user = get_user_by_email(request.args.get("email"))
+    phone_user = get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+
     video.title = request.args.get("title")
     video.description = request.args.get("description")
     video.tags = request.args.get("tags")
     video.size = int(request.args.get("size"))
     video.length = int(request.args.get("length"))
     video.cloudinary_id = int(request.args.get("id"))
+
+    user.liked_videos.append(video.cloudinary_id)
 
     videos.append(video)
 
@@ -221,19 +233,6 @@ def like_video():
 
             resp = make_response(
                 jsonify({"ok": True, "likeCount": videos[i].likes, "isLiked": str(video_id in user.liked_videos)}))
-            resp.headers = headers
-            return resp
-
-
-@app.route("/unlikeVideo")
-@cross_origin()
-def unlike_video():
-    video_id = int(request.args.get("videoId"))
-
-    for i in range(len(videos)):
-        if videos[i].cloudinary_id == video_id:
-            videos[i].likes -= 1
-            resp = make_response(jsonify({"ok": True, "likeCount": videos[i].likes}))
             resp.headers = headers
             return resp
 
