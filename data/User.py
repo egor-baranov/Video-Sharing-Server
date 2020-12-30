@@ -10,6 +10,10 @@ class User:
     birth_date: str
     email: str
 
+    uploaded_videos: typing.List
+    liked_videos: typing.List
+    liked_comments: typing.List
+
     def __init__(self, username: str = "", phone: str = "", password: str = "", city: str = "", birth_date: str = "",
                  email: str = ""):
         self.username = username
@@ -31,6 +35,15 @@ class User:
             "birthDate": self.birth_date,
             "email": self.email
         }
+
+    def upload_video(self, video_id: int):
+        self.uploaded_videos.append(video_id)
+
+    def like_video(self, video_id: int):
+        self.liked_videos.append(video_id)
+
+    def like_comment(self, comment_id: int):
+        self.liked_comments.append(comment_id)
 
 
 class UserFactory:
