@@ -254,6 +254,27 @@ def reset_password():
     return resp
 
 
+@app.route("/deleteComment")
+@cross_origin()
+def delete_comment():
+    comment_id = int(request.args.get("id"))
+
+    if all([c.comment_id != comment_id for c in comments]):
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    comment = get_comment_by_id(comment_id)
+
+    comments.remove(comment)
+    comment.text = "-Комментарий был удален администрацией-"
+    comments.append(comment)
+
+    resp = make_response(jsonify())
+    resp.headers = headers
+    return resp
+
+
 if __name__ == "__main__":
     # app.debug = True
     app.run()
