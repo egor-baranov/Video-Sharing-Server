@@ -143,6 +143,16 @@ def user_list():
     return resp
 
 
+@app.route("/commentList")
+@cross_origin()
+def comment_list():
+    resp = make_response(jsonify({
+        "comments": [c.to_dict() for c in comments]
+    }))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/addVideo")
 @cross_origin()
 def add_video():
