@@ -235,6 +235,25 @@ def block_user():
     resp.headers = headers
     return resp
 
+
+@app.route("/resetPassword")
+@cross_origin()
+def reset_password():
+    phone = request.args.get("phone")
+    email = request.args.get("email")
+
+    for i in range(len(users)):
+        if users[i].email == email or users[i].phone == phone:
+            users[i].password = ""
+            resp = make_response(jsonify({"ok": True, "users": users}))
+            resp.headers = headers
+            return resp
+
+    resp = make_response(jsonify({"ok": False, "users": users}))
+    resp.headers = headers
+    return resp
+
+
 if __name__ == "__main__":
     # app.debug = True
     app.run()
