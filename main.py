@@ -23,11 +23,15 @@ users = [UserFactory.new_user(
     phone="89004445533"
 )]
 
+blocked_users = []
+
 videos = [
     Video(title="Видео для отладки 1", length=2374),
     Video(title="Видео для отладки 2", length=24),
     Video(title="Видео для отладки 3", length=123)
 ]
+
+comments = []
 
 
 def get_user_by_email(email: str):
@@ -42,6 +46,18 @@ def get_user_by_phone(phone: str):
         if user.phone == phone:
             return user
     return User()
+
+
+def get_video_by_id(video_id: int):
+    for video in videos:
+        if video.video_id == video_id:
+            return video
+
+
+def get_comment_by_id(comment_id: int):
+    for comment in comments:
+        if comment.comment_id == comment_id:
+            return comment
 
 
 @app.route("/")
@@ -98,10 +114,30 @@ def register():
 
 @app.route("/list")
 @cross_origin()
-def list_of_users():
+def full_list():
     resp = make_response(jsonify({
         "users": [u.to_dict() for u in users],
         "videos": [v.to_dict() for v in videos]
+    }))
+    resp.headers = headers
+    return resp
+
+
+@app.route("/videoList")
+@cross_origin()
+def video_list():
+    resp = make_response(jsonify({
+        "videos": [v.to_dict() for v in videos]
+    }))
+    resp.headers = headers
+    return resp
+
+
+@app.route("/userList")
+@cross_origin()
+def user_list():
+    resp = make_response(jsonify({
+        "users": [u.to_dict() for u in users]
     }))
     resp.headers = headers
     return resp
@@ -130,10 +166,10 @@ def add_video():
 @cross_origin()
 def get_videos():
     count = int(request.args.get("count"))
-    video_list = []
+    ret_videos = []
     for i in range(count):
-        video_list.append(random.choice(videos).to_dict())
-    resp = make_response(jsonify({"videos": video_list}))
+        ret_videos.append(random.choice(videos).to_dict())
+    resp = make_response(jsonify({"videos": ret_videos}))
     resp.headers = headers
     return resp
 
@@ -174,7 +210,6 @@ def unlike_video():
             resp = make_response(jsonify({"ok": True, "likeCount": videos[i].likes}))
             resp.headers = headers
             return resp
-
 
 if __name__ == "__main__":
     # app.debug = True
