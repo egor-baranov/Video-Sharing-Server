@@ -200,11 +200,27 @@ def exist():
 @cross_origin()
 def like_video():
     video_id = int(request.args.get("videoId"))
+    email_user = get_user_by_email(request.args.get("email"))
+    phone_user = get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
 
     for i in range(len(videos)):
         if videos[i].cloudinary_id == video_id:
-            videos[i].likes += 1
-            resp = make_response(jsonify({"ok": True, "likeCount": videos[i].likes}))
+            if video_id in user.liked_videos:
+                user.liked_videos.remove(video_id)
+                videos[i].likes -= 1
+            else:
+                user.liked_videos.append(video_id)
+                videos[i].likes += 1
+
+            resp = make_response(
+                jsonify({"ok": True, "likeCount": videos[i].likes, "isLiked": str(video_id in user.liked_videos)}))
             resp.headers = headers
             return resp
 
