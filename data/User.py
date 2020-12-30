@@ -23,7 +23,10 @@ class User:
         self.birth_date = birth_date
         self.email = email
 
-    def is_not_fake(self) -> int:
+    def is_fake(self) -> bool:
+        return not self.is_not_fake()
+
+    def is_not_fake(self) -> bool:
         return len(self.username) > 0
 
     def to_dict(self) -> dict:
