@@ -237,6 +237,25 @@ def like_video():
             return resp
 
 
+@app.route("/isVideoLikedByUser")
+@cross_origin()
+def is_video_liked_by_user():
+    video_id = int(request.args.get("videoId"))
+    email_user = get_user_by_email(request.args.get("email"))
+    phone_user = get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+
+    resp = make_response(jsonify({"ok": True, "result": video_id in user.liked_videos}))
+    resp.headers = headers
+    return resp
+
+
 # admin-panel functions
 @app.route("/blockUser")
 @cross_origin()
