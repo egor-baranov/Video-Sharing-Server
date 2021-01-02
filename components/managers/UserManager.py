@@ -30,3 +30,5 @@ class UserManager:
 
         with open(config.users_path, "wt") as f:
             f.write(json.dumps([u.to_dict() for u in blocked_users]))
+
+
