@@ -211,6 +211,9 @@ def like_video():
                          "isLiked": str(video_id in user.liked_videos)}))
             resp.headers = headers
             return resp
+    resp = make_response(jsonify({"ok": False}))
+    resp.headers = headers
+    return resp
 
 
 @app.route("/isVideoLikedByUser")
