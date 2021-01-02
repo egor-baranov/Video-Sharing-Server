@@ -1,5 +1,5 @@
 from data.User import UserFactory
-from data.Video import Video
+from data.Video import Video, VideoFactory
 
 import components.config as config
 import json
@@ -49,10 +49,21 @@ class DatabaseWorker:
         with open(config.users_path, "wt") as f:
             f.write(json.dumps([u.to_dict() for u in blocked_users]))
 
-    Videos = [
-        Video(title="Видео для отладки 1", length=2374),
-        Video(title="Видео для отладки 2", length=24),
-        Video(title="Видео для отладки 3", length=123)
-    ]
+    # videos data methods
+    @staticmethod
+    def read_videos():
+        with open(config.videos_path, "rt") as f:
+            return [VideoFactory.from_dict(d) for d in json.loads(f.read())]
+
+    @staticmethod
+    def write_videos(d: typing.List[Video]):
+        with open(config.videos_path, "wt") as f:
+            f.write(json.dumps([v.to_dict() for v in d]))
+
+    @staticmethod
+    def add_video(v: Video):
+        videos = DatabaseWorker.read_videos()
+        videos.append(v)
+        DatabaseWorker.write_videos(videos)
 
     Comments = []
