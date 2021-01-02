@@ -1,61 +1,36 @@
-from flask import Flask, jsonify, request, make_response
-from flask_cors import CORS, cross_origin
+from flask import make_response, jsonify, request
+
+from components.core import *
+
+from components.core import headers
+from components.database.dbworker import DatabaseWorker
 from data.User import *
 from data.Video import *
 import random
 
-app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
-
-headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Credentials": "true",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
-}
-
-users = [UserFactory.new_user(
-    username="admin",
-    password="password",
-    email="admin@admin.com",
-    birth_date="31.12.2000",
-    city="city",
-    phone="89004445533"
-)]
-
-blocked_users = []
-
-videos = [
-    Video(title="Видео для отладки 1", length=2374),
-    Video(title="Видео для отладки 2", length=24),
-    Video(title="Видео для отладки 3", length=123)
-]
-
-comments = []
-
 
 def get_user_by_email(email: str):
-    for user in users:
+    for user in DatabaseWorker.Users:
         if user.email == email:
             return user
     return User()
 
 
 def get_user_by_phone(phone: str):
-    for user in users:
+    for user in DatabaseWorker.Users:
         if user.phone == phone:
             return user
     return User()
 
 
 def get_video_by_id(video_id: int):
-    for video in videos:
+    for video in DatabaseWorker.Videos:
         if video.video_id == video_id:
             return video
 
 
 def get_comment_by_id(comment_id: int):
-    for comment in comments:
+    for comment in DatabaseWorker.Comments:
         if comment.comment_id == comment_id:
             return comment
 
@@ -106,7 +81,7 @@ def register():
         birth_date=request.args.get("birthDate")
     )
 
-    users.append(user)
+    DatabaseWorker.Users.append(user)
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
     return resp
@@ -116,8 +91,8 @@ def register():
 @cross_origin()
 def full_list():
     resp = make_response(jsonify({
-        "users": [u.to_dict() for u in users],
-        "videos": [v.to_dict() for v in videos]
+        "users": [u.to_dict() for u in DatabaseWorker.Users],
+        "videos": [v.to_dict() for v in DatabaseWorker.Videos]
     }))
     resp.headers = headers
     return resp
@@ -127,7 +102,7 @@ def full_list():
 @cross_origin()
 def video_list():
     resp = make_response(jsonify({
-        "videos": [v.to_dict() for v in videos]
+        "videos": [v.to_dict() for v in DatabaseWorker.Videos]
     }))
     resp.headers = headers
     return resp
@@ -137,7 +112,7 @@ def video_list():
 @cross_origin()
 def user_list():
     resp = make_response(jsonify({
-        "users": [u.to_dict() for u in users]
+        "users": [u.to_dict() for u in DatabaseWorker.Users]
     }))
     resp.headers = headers
     return resp
@@ -147,7 +122,7 @@ def user_list():
 @cross_origin()
 def comment_list():
     resp = make_response(jsonify({
-        "comments": [c.to_dict() for c in comments]
+        "comments": [c.to_dict() for c in DatabaseWorker.Comments]
     }))
     resp.headers = headers
     return resp
@@ -177,7 +152,7 @@ def add_video():
 
     user.liked_videos.append(video.cloudinary_id)
 
-    videos.append(video)
+    DatabaseWorker.Videos.append(video)
 
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
@@ -190,7 +165,7 @@ def get_videos():
     count = int(request.args.get("count"))
     ret_videos = []
     for i in range(count):
-        ret_videos.append(random.choice(videos).to_dict())
+        ret_videos.append(random.choice(DatabaseWorker.Videos).to_dict())
     resp = make_response(jsonify({"videos": ret_videos}))
     resp.headers = headers
     return resp
@@ -222,17 +197,18 @@ def like_video():
 
     user = email_user if email_user.is_not_fake() else phone_user
 
-    for i in range(len(videos)):
-        if videos[i].cloudinary_id == video_id:
+    for i in range(len(DatabaseWorker.Videos)):
+        if DatabaseWorker.Videos[i].cloudinary_id == video_id:
             if video_id in user.liked_videos:
                 user.liked_videos.remove(video_id)
-                videos[i].likes -= 1
+                DatabaseWorker.Videos[i].likes -= 1
             else:
                 user.liked_videos.append(video_id)
-                videos[i].likes += 1
+                DatabaseWorker.Videos[i].likes += 1
 
             resp = make_response(
-                jsonify({"ok": True, "likeCount": videos[i].likes, "isLiked": str(video_id in user.liked_videos)}))
+                jsonify({"ok": True, "likeCount": DatabaseWorker.Videos[i].likes,
+                         "isLiked": str(video_id in user.liked_videos)}))
             resp.headers = headers
             return resp
 
@@ -264,14 +240,14 @@ def block_user():
     email_user = get_user_by_email(request.args.get("email"))
 
     if phone_user.is_not_fake():
-        users.remove(phone_user)
-        blocked_users.append(phone_user)
-        resp = make_response(jsonify({"ok": True, "blockedUsers": blocked_users}))
+        DatabaseWorker.Users.remove(phone_user)
+        DatabaseWorker.BlockedUsers.append(phone_user)
+        resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.BlockedUsers}))
 
     elif email_user.is_not_fake():
-        users.remove(email_user)
-        blocked_users.append(email_user)
-        resp = make_response(jsonify({"ok": True, "blockedUsers": blocked_users}))
+        DatabaseWorker.Users.remove(email_user)
+        DatabaseWorker.BlockedUsers.append(email_user)
+        resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.BlockedUsers}))
 
     else:
         resp = make_response(jsonify({"ok": False}))
@@ -286,14 +262,14 @@ def reset_password():
     phone = request.args.get("phone")
     email = request.args.get("email")
 
-    for i in range(len(users)):
-        if users[i].email == email or users[i].phone == phone:
-            users[i].password = ""
-            resp = make_response(jsonify({"ok": True, "users": users}))
+    for i in range(len(DatabaseWorker.Users)):
+        if DatabaseWorker.Users[i].email == email or DatabaseWorker.Users[i].phone == phone:
+            DatabaseWorker.Users[i].password = ""
+            resp = make_response(jsonify({"ok": True, "users": DatabaseWorker.Users}))
             resp.headers = headers
             return resp
 
-    resp = make_response(jsonify({"ok": False, "users": users}))
+    resp = make_response(jsonify({"ok": False, "users": DatabaseWorker.Users}))
     resp.headers = headers
     return resp
 
@@ -303,16 +279,16 @@ def reset_password():
 def delete_comment():
     comment_id = int(request.args.get("id"))
 
-    if all([c.comment_id != comment_id for c in comments]):
+    if all([c.comment_id != comment_id for c in DatabaseWorker.Comments]):
         resp = make_response(jsonify({"ok": False}))
         resp.headers = headers
         return resp
 
     comment = get_comment_by_id(comment_id)
 
-    comments.remove(comment)
+    DatabaseWorker.Comments.remove(comment)
     comment.text = "-Комментарий был удален администрацией-"
-    comments.append(comment)
+    DatabaseWorker.Comments.append(comment)
 
     resp = make_response(jsonify())
     resp.headers = headers
