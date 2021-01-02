@@ -24,7 +24,7 @@ def get_user_by_phone(phone: str):
 
 
 def get_video_by_id(video_id: int):
-    for video in DatabaseWorker.Videos:
+    for video in DatabaseWorker.read_videos():
         if video.video_id == video_id:
             return video
 
@@ -92,7 +92,7 @@ def register():
 def full_list():
     resp = make_response(jsonify({
         "users": [u.to_dict() for u in DatabaseWorker.read_users()],
-        "videos": [v.to_dict() for v in DatabaseWorker.Videos]
+        "videos": [v.to_dict() for v in DatabaseWorker.read_videos()]
     }))
     resp.headers = headers
     return resp
@@ -102,7 +102,7 @@ def full_list():
 @cross_origin()
 def video_list():
     resp = make_response(jsonify({
-        "videos": [v.to_dict() for v in DatabaseWorker.Videos]
+        "videos": [v.to_dict() for v in DatabaseWorker.read_videos()]
     }))
     resp.headers = headers
     return resp
@@ -152,7 +152,7 @@ def add_video():
 
     user.liked_videos.append(video.cloudinary_id)
 
-    DatabaseWorker.Videos.append(video)
+    DatabaseWorker.add_video(video)
 
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
@@ -165,7 +165,7 @@ def get_videos():
     count = int(request.args.get("count"))
     ret_videos = []
     for i in range(count):
-        ret_videos.append(random.choice(DatabaseWorker.Videos).to_dict())
+        ret_videos.append(random.choice(DatabaseWorker.read_videos()).to_dict())
     resp = make_response(jsonify({"videos": ret_videos}))
     resp.headers = headers
     return resp
@@ -197,21 +197,25 @@ def like_video():
 
     user = email_user if email_user.is_not_fake() else phone_user
 
-    for i in range(len(DatabaseWorker.Videos)):
-        if DatabaseWorker.Videos[i].cloudinary_id == video_id:
+    videos = DatabaseWorker.read_videos()
+
+    for i in range(len(videos)):
+        if videos[i].cloudinary_id == video_id:
             if video_id in user.liked_videos:
                 user.liked_videos.remove(video_id)
-                DatabaseWorker.Videos[i].likes -= 1
+                videos[i].likes -= 1
             else:
                 user.liked_videos.append(video_id)
-                DatabaseWorker.Videos[i].likes += 1
+                videos[i].likes += 1
 
             resp = make_response(
-                jsonify({"ok": True, "likeCount": DatabaseWorker.Videos[i].likes,
+                jsonify({"ok": True, "likeCount": videos[i].likes,
                          "isLiked": str(video_id in user.liked_videos)}))
+            DatabaseWorker.write_videos(videos)
             resp.headers = headers
             return resp
     resp = make_response(jsonify({"ok": False}))
+    DatabaseWorker.write_videos(videos)
     resp.headers = headers
     return resp
 
