@@ -2,6 +2,7 @@
   <dictionary name="enter">
     <words>
       <w>cloudinary</w>
+      <w>cors</w>
     </words>
   </dictionary>
 </component>
