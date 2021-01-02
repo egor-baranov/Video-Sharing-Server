@@ -10,14 +10,14 @@ import random
 
 
 def get_user_by_email(email: str):
-    for user in DatabaseWorker.Users:
+    for user in DatabaseWorker.read_users():
         if user.email == email:
             return user
     return User()
 
 
 def get_user_by_phone(phone: str):
-    for user in DatabaseWorker.Users:
+    for user in DatabaseWorker.read_users():
         if user.phone == phone:
             return user
     return User()
@@ -81,7 +81,7 @@ def register():
         birth_date=request.args.get("birthDate")
     )
 
-    DatabaseWorker.Users.append(user)
+    DatabaseWorker.add_user(user)
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
     return resp
@@ -91,7 +91,7 @@ def register():
 @cross_origin()
 def full_list():
     resp = make_response(jsonify({
-        "users": [u.to_dict() for u in DatabaseWorker.Users],
+        "users": [u.to_dict() for u in DatabaseWorker.read_users()],
         "videos": [v.to_dict() for v in DatabaseWorker.Videos]
     }))
     resp.headers = headers
@@ -112,7 +112,7 @@ def video_list():
 @cross_origin()
 def user_list():
     resp = make_response(jsonify({
-        "users": [u.to_dict() for u in DatabaseWorker.Users]
+        "users": [u.to_dict() for u in DatabaseWorker.read_users()]
     }))
     resp.headers = headers
     return resp
@@ -243,12 +243,12 @@ def block_user():
     email_user = get_user_by_email(request.args.get("email"))
 
     if phone_user.is_not_fake():
-        DatabaseWorker.Users.remove(phone_user)
+        DatabaseWorker.remove_user(phone_user)
         DatabaseWorker.BlockedUsers.append(phone_user)
         resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.BlockedUsers}))
 
     elif email_user.is_not_fake():
-        DatabaseWorker.Users.remove(email_user)
+        DatabaseWorker.remove_user(email_user)
         DatabaseWorker.BlockedUsers.append(email_user)
         resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.BlockedUsers}))
 
@@ -265,14 +265,18 @@ def reset_password():
     phone = request.args.get("phone")
     email = request.args.get("email")
 
-    for i in range(len(DatabaseWorker.Users)):
-        if DatabaseWorker.Users[i].email == email or DatabaseWorker.Users[i].phone == phone:
-            DatabaseWorker.Users[i].password = ""
-            resp = make_response(jsonify({"ok": True, "users": DatabaseWorker.Users}))
+    users = DatabaseWorker.read_users()
+
+    for i in range(len(users)):
+        if users[i].email == email or users[i].phone == phone:
+            users[i].password = ""
+            resp = make_response(jsonify({"ok": True, "users": users}))
+            DatabaseWorker.write_users(users)
             resp.headers = headers
             return resp
 
-    resp = make_response(jsonify({"ok": False, "users": DatabaseWorker.Users}))
+    resp = make_response(jsonify({"ok": False, "users": users}))
+    DatabaseWorker.write_users(users)
     resp.headers = headers
     return resp
 
