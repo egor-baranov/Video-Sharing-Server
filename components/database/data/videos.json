@@ -1,14 +1,35 @@
 [
   {
-    "title": "Видео для отладки 1",
-    "length": 2374
+    "title": "Debug video 1",
+    "description": "",
+    "tags": "",
+    "size": 0,
+    "length": 2374,
+    "views": 0,
+    "likeCount": 0,
+    "videoId": 0,
+    "comments": []
   },
   {
-    "title": "Видео для отладки 2",
-    "length": 24
+    "title": "Debug video 2",
+    "description": "",
+    "tags": "",
+    "size": 0,
+    "length": 24,
+    "views": 0,
+    "likeCount": 0,
+    "videoId": 0,
+    "comments": []
   },
   {
-    "title": "Видео для отладки 3",
-    "length": 123
+    "title": "Debug video 3",
+    "description": "",
+    "tags": "",
+    "size": 0,
+    "length": 123,
+    "views": 0,
+    "likeCount": 0,
+    "videoId": 0,
+    "comments": []
   }
 ]
