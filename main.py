@@ -243,14 +243,12 @@ def block_user():
     email_user = get_user_by_email(request.args.get("email"))
 
     if phone_user.is_not_fake():
-        DatabaseWorker.remove_user(phone_user)
-        DatabaseWorker.BlockedUsers.append(phone_user)
-        resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.BlockedUsers}))
+        DatabaseWorker.block_user(phone_user)
+        resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.read_blocked_users()}))
 
     elif email_user.is_not_fake():
-        DatabaseWorker.remove_user(email_user)
-        DatabaseWorker.BlockedUsers.append(email_user)
-        resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.BlockedUsers}))
+        DatabaseWorker.block_user(email_user)
+        resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.read_blocked_users()}))
 
     else:
         resp = make_response(jsonify({"ok": False}))
