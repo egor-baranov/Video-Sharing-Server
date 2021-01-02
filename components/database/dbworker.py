@@ -33,6 +33,12 @@ class DatabaseWorker:
         users.append(u)
         DatabaseWorker.write_users(users)
 
+    @staticmethod
+    def remove_user(u: data.User):
+        users = DatabaseWorker.read_users()
+        users.remove(u)
+        DatabaseWorker.write_users(u)
+
     BlockedUsers = []
 
     Videos = [
