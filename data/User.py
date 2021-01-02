@@ -10,9 +10,9 @@ class User:
     birth_date: str
     email: str
 
-    uploaded_videos: typing.List
-    liked_videos: typing.List
-    liked_comments: typing.List
+    uploaded_videos: typing.List = []
+    liked_videos: typing.List = []
+    liked_comments: typing.List = []
 
     def __init__(self, username: str = "", phone: str = "", password: str = "", city: str = "", birth_date: str = "",
                  email: str = ""):
