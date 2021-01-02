@@ -8,14 +8,14 @@ import data
 
 
 class DatabaseWorker:
-    Users = [UserFactory.new_user(
-        username="admin",
-        password="password",
-        email="admin@admin.com",
-        birth_date="31.12.2000",
-        city="city",
-        phone="89004445533"
-    )]
+    # Users = [UserFactory.new_user(
+    #     username="admin",
+    #     password="password",
+    #     email="admin@admin.com",
+    #     birth_date="31.12.2000",
+    #     city="city",
+    #     phone="89004445533"
+    # )]
 
     @staticmethod
     def read_users():
@@ -23,9 +23,15 @@ class DatabaseWorker:
             return [UserFactory.from_dict(d) for d in json.loads(f.read())]
 
     @staticmethod
-    def write_users(d):
+    def write_users(d: typing.List[data.User]):
         with open(config.users_path, "wt") as f:
             f.write(json.dumps([u.to_dict() for u in d]))
+
+    @staticmethod
+    def add_user(u: data.User):
+        users = DatabaseWorker.read_users()
+        users.append(u)
+        DatabaseWorker.write_users(users)
 
     BlockedUsers = []
 
