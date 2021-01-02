@@ -1,9 +1,13 @@
 from data.User import UserFactory
 from data.Video import Video
 
+import components.config as config
+import json
+import typing
+import data
+
 
 class DatabaseWorker:
-
     Users = [UserFactory.new_user(
         username="admin",
         password="password",
@@ -12,6 +16,16 @@ class DatabaseWorker:
         city="city",
         phone="89004445533"
     )]
+
+    @staticmethod
+    def read_users():
+        with open(config.users_path, "rt") as f:
+            return [UserFactory.from_dict(d) for d in json.loads(f.read())]
+
+    @staticmethod
+    def write_users(d):
+        with open(config.users_path, "wt") as f:
+            f.write(json.dumps([u.to_dict() for u in d]))
 
     BlockedUsers = []
 
