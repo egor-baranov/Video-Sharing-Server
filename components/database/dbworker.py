@@ -15,7 +15,7 @@ class DatabaseWorker:
             return [UserFactory.from_dict(d) for d in json.loads(f.read())]
 
     @staticmethod
-    def write_users(d: typing.List[data.User]):
+    def write_users(d):
         with open(config.users_path, "wt") as f:
             f.write(json.dumps([u.to_dict() for u in d]))
 
