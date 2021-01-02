@@ -4,6 +4,7 @@ from components.core import *
 
 from components.core import headers
 from components.database.dbworker import DatabaseWorker
+from components.managers import VideoManager, UserManager
 from data.User import *
 from data.Video import *
 import random
@@ -81,7 +82,7 @@ def register():
         birth_date=request.args.get("birthDate")
     )
 
-    DatabaseWorker.add_user(user)
+    UserManager.add_user(user)
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
     return resp
@@ -152,7 +153,7 @@ def add_video():
 
     user.liked_videos.append(video.cloudinary_id)
 
-    DatabaseWorker.add_video(video)
+    VideoManager.add_video(video)
 
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
@@ -247,11 +248,11 @@ def block_user():
     email_user = get_user_by_email(request.args.get("email"))
 
     if phone_user.is_not_fake():
-        DatabaseWorker.block_user(phone_user)
+        UserManager.block_user(phone_user)
         resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.read_blocked_users()}))
 
     elif email_user.is_not_fake():
-        DatabaseWorker.block_user(email_user)
+        UserManager.block_user(email_user)
         resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.read_blocked_users()}))
 
     else:
