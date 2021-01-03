@@ -154,6 +154,7 @@ def add_video():
 
     user.liked_videos.append(video.video_id)
 
+    UserManager.update_user_data(user)
     VideoManager.add_video(video)
 
     resp = make_response(jsonify({"ok": True}))
