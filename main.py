@@ -150,9 +150,9 @@ def add_video():
     video.tags = request.args.get("tags")
     video.size = int(request.args.get("size"))
     video.length = int(request.args.get("length"))
-    video.cloudinary_id = int(request.args.get("id"))
+    video.video_id = int(request.args.get("id"))
 
-    user.liked_videos.append(video.cloudinary_id)
+    user.liked_videos.append(video.video_id)
 
     VideoManager.add_video(video)
 
@@ -202,7 +202,7 @@ def like_video():
     videos = DatabaseWorker.read_videos()
 
     for i in range(len(videos)):
-        if videos[i].cloudinary_id == video_id:
+        if videos[i].video_id == video_id:
             if video_id in user.liked_videos:
                 user.liked_videos.remove(video_id)
                 videos[i].likes -= 1

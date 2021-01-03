@@ -24,7 +24,7 @@ class Video:
                  length: int = 0,
                  views: int = 0,
                  like_count: int = 0,
-                 cloudinary_id: int = 0,
+                 video_id: int = 0,
                  comments: typing.List[Comment] = None):
         self.title = title
         self.description = description
@@ -33,7 +33,7 @@ class Video:
         self.length = length
         self.views = views
         self.likes = like_count
-        self.cloudinary_id = cloudinary_id
+        self.video_id = video_id
         self.comments = comments
 
     def to_dict(self):
@@ -44,7 +44,7 @@ class Video:
                 "length": self.length,
                 "views": self.views,
                 "likeCount": self.likes,
-                "videoId": self.cloudinary_id,
+                "videoId": self.video_id,
                 "comments": self.comments}
 
 
@@ -55,8 +55,8 @@ class VideoFactory:
 
     @staticmethod
     def new_video(title: str, description: str, tags: str, size: int, length: int, views: int, like_count: int,
-                  cloudinary_id: int, comments: typing.List[Comment]):
-        return Video(title, description, tags, size, length, views, like_count, cloudinary_id, comments)
+                  video_id: int, comments: typing.List[Comment]):
+        return Video(title, description, tags, size, length, views, like_count, video_id, comments)
 
     @staticmethod
     def from_dict(data: dict):
@@ -68,6 +68,6 @@ class VideoFactory:
             length=data["length"],
             views=data["views"],
             like_count=data["likeCount"],
-            cloudinary_id=data["videoId"],
+            video_id=data["videoId"],
             comments=data["comments"]
         )
