@@ -1,7 +1,7 @@
 import data
 import json
 import components.config as config
-from data.User import UserFactory
+from data.User import UserFactory, User
 from components.database.dbworker import DatabaseWorker
 
 
@@ -31,4 +31,13 @@ class UserManager:
         with open(config.users_path, "wt") as f:
             f.write(json.dumps([u.to_dict() for u in blocked_users]))
 
+    @staticmethod
+    def update_user_data(u: data.User):
+        users = DatabaseWorker.read_users()
 
+        for i in range(len(users)):
+            if users[i].phone == u.phone or users[i].email == u.email:
+                users[i] = u
+                break
+
+        DatabaseWorker.write_users(users)
