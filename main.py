@@ -212,7 +212,7 @@ def like_video():
 
             resp = make_response(
                 jsonify({"ok": True, "likeCount": videos[i].likes,
-                         "isLiked": str(video_id in user.liked_videos)}))
+                         "isLiked": video_id in user.liked_videos}))
             DatabaseWorker.write_videos(videos)
             UserManager.update_user_data(user)
             resp.headers = headers
