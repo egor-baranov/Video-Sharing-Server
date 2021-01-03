@@ -10,18 +10,29 @@ class User:
     birth_date: str
     email: str
 
-    uploaded_videos: typing.List = []
-    liked_videos: typing.List = []
-    liked_comments: typing.List = []
+    uploaded_videos: typing.List[int] = []
+    liked_videos: typing.List[int] = []
+    liked_comments: typing.List[int] = []
 
-    def __init__(self, username: str = "", phone: str = "", password: str = "", city: str = "", birth_date: str = "",
-                 email: str = ""):
+    def __init__(self,
+                 username: str = "",
+                 phone: str = "",
+                 password: str = "",
+                 city: str = "",
+                 birth_date: str = "",
+                 email: str = "",
+                 uploaded_videos: typing.List[int] = None,
+                 liked_videos: typing.List[int] = None,
+                 liked_comments: typing.List[int] = None):
         self.username = username
         self.phone = phone
         self.password = password
         self.city = city
         self.birth_date = birth_date
         self.email = email
+        self.uploaded_videos = uploaded_videos if uploaded_videos is not None else []
+        self.liked_videos = liked_videos if liked_videos is not None else []
+        self.liked_comments = liked_comments if liked_comments is not None else []
 
     def is_fake(self) -> bool:
         return not self.is_not_fake()
@@ -36,7 +47,10 @@ class User:
             "password": self.password,
             "city": self.city,
             "birthDate": self.birth_date,
-            "email": self.email
+            "email": self.email,
+            "uploadedVideos": self.uploaded_videos,
+            "likedVideos": self.liked_videos,
+            "likedComments": self.liked_comments
         }
 
     def upload_video(self, video_id: int):
@@ -55,8 +69,10 @@ class UserFactory:
         return User()
 
     @staticmethod
-    def new_user(username: str, phone: str, password: str, city: str, birth_date: str, email: str) -> User:
-        return User(username, phone, password, city, birth_date, email)
+    def new_user(username: str, phone: str, password: str, city: str, birth_date: str, email: str,
+                 uploaded_videos: typing.List[int], liked_videos: typing.List[int],
+                 liked_comments: typing.List[int]) -> User:
+        return User(username, phone, password, city, birth_date, email, uploaded_videos, liked_videos, liked_comments)
 
     @staticmethod
     def from_dict(data: dict):
@@ -66,7 +82,10 @@ class UserFactory:
             password=data["password"],
             city=data["city"],
             birth_date=data["birthDate"],
-            email=data["email"]
+            email=data["email"],
+            uploaded_videos=data["uploadedVideos"],
+            liked_videos=data["likedVideos"],
+            liked_comments=data["likedComments"]
         )
 
     @staticmethod
