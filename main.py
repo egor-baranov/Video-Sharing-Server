@@ -152,7 +152,7 @@ def add_video():
     video.length = int(request.args.get("length"))
     video.video_id = int(request.args.get("id"))
 
-    user.liked_videos.append(video.video_id)
+    user.uploaded_videos.append(video.video_id)
 
     UserManager.update_user_data(user)
     VideoManager.add_video(video)
