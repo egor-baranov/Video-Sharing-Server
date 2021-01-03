@@ -224,9 +224,9 @@ def like_video():
     return resp
 
 
-@app.route("/isVideoLikedByUser")
+@app.route("/videoLikeCount")
 @cross_origin()
-def is_video_liked_by_user():
+def video_like_count():
     video_id = int(request.args.get("videoId"))
     email_user = get_user_by_email(request.args.get("email"))
     phone_user = get_user_by_phone(request.args.get("phone"))
@@ -238,7 +238,8 @@ def is_video_liked_by_user():
 
     user = email_user if email_user.is_not_fake() else phone_user
 
-    resp = make_response(jsonify({"ok": True, "result": video_id in user.liked_videos}))
+    resp = make_response(
+        jsonify({"ok": True, "likeCount": get_video_by_id(video_id).likes, "isLiked": video_id in user.liked_videos}))
     resp.headers = headers
     return resp
 
