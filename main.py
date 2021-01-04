@@ -160,6 +160,23 @@ def get_videos():
     return resp
 
 
+@app.route("/getFavourite")
+@cross_origin()
+def get_favourite():
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+    resp = make_response(jsonify({"ok": True, "result": user.liked_videos}))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/exist")
 @cross_origin()
 def exist():
