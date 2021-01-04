@@ -11,20 +11,6 @@ from data.Video import *
 import random
 
 
-def get_user_by_email(email: str):
-    for user in DatabaseWorker.read_users():
-        if user.email == email:
-            return user
-    return User()
-
-
-def get_user_by_phone(phone: str):
-    for user in DatabaseWorker.read_users():
-        if user.phone == phone:
-            return user
-    return User()
-
-
 def get_video_by_id(video_id: int):
     for video in DatabaseWorker.read_videos():
         if video.video_id == video_id:
@@ -48,8 +34,8 @@ def main_page():
 @app.route("/login")
 @cross_origin()
 def login():
-    phone_user = get_user_by_phone(request.args.get("phone"))
-    email_user = get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
     password = request.args.get("password")
 
     if phone_user.is_not_fake() and phone_user.password == password:
@@ -135,8 +121,8 @@ def comment_list():
 def add_video():
     video = Video()
 
-    email_user = get_user_by_email(request.args.get("email"))
-    phone_user = get_user_by_phone(request.args.get("phone"))
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
     if email_user.is_fake() and phone_user.is_fake():
         resp = make_response(jsonify({"ok": False}))
@@ -150,7 +136,7 @@ def add_video():
     video.tags = request.args.get("tags")
     video.size = int(request.args.get("size"))
     video.length = int(request.args.get("length"))
-    video.video_id = int(request.args.get("id"))
+    video.video_id = int(request.args.get("videoId"))
 
     user.uploaded_videos.append(video.video_id)
 
@@ -181,7 +167,8 @@ def exist():
     email = request.args.get("email")
 
     resp = make_response(
-        jsonify({"ok": get_user_by_email(email).is_not_fake() or get_user_by_phone(phone).is_not_fake()}))
+        jsonify({"ok": UserManager.get_user_by_email(email).is_not_fake() or UserManager.get_user_by_phone(
+            phone).is_not_fake()}))
     resp.headers = headers
     return resp
 
@@ -190,8 +177,8 @@ def exist():
 @cross_origin()
 def like_video():
     video_id = int(request.args.get("videoId"))
-    email_user = get_user_by_email(request.args.get("email"))
-    phone_user = get_user_by_phone(request.args.get("phone"))
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
     if email_user.is_fake() and phone_user.is_fake():
         resp = make_response(jsonify({"ok": False}))
@@ -229,8 +216,8 @@ def like_video():
 @cross_origin()
 def video_like_count():
     video_id = int(request.args.get("videoId"))
-    email_user = get_user_by_email(request.args.get("email"))
-    phone_user = get_user_by_phone(request.args.get("phone"))
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
     if email_user.is_fake() and phone_user.is_fake():
         resp = make_response(jsonify({"ok": False}))
@@ -249,8 +236,8 @@ def video_like_count():
 @app.route("/blockUser")
 @cross_origin()
 def block_user():
-    phone_user = get_user_by_phone(request.args.get("phone"))
-    email_user = get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
 
     if phone_user.is_not_fake():
         UserManager.block_user(phone_user)

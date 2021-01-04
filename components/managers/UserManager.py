@@ -7,6 +7,20 @@ from components.database.dbworker import DatabaseWorker
 
 class UserManager:
     @staticmethod
+    def get_user_by_email(email: str):
+        for user in DatabaseWorker.read_users():
+            if user.email == email:
+                return user
+        return User()
+
+    @staticmethod
+    def get_user_by_phone(phone: str):
+        for user in DatabaseWorker.read_users():
+            if user.phone == phone:
+                return user
+        return User()
+
+    @staticmethod
     def add_user(u: data.User):
         users = DatabaseWorker.read_users()
         users.append(u)
