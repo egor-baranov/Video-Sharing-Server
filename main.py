@@ -184,6 +184,16 @@ def add_comment():
     return resp
 
 
+@app.route("/getComments")
+@cross_origin()
+def get_comments():
+    video_id = int(request.args.get("videoId"))
+
+    resp = make_response(jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments}))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/exist")
 @cross_origin()
 def exist():
