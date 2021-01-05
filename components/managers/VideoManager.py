@@ -25,3 +25,8 @@ class VideoManager:
                 break
 
         DatabaseWorker.write_videos(videos)
+
+    @staticmethod
+    def add_comment_to_video(video_id: int, comment_text: str):
+        video = VideoManager.get_video_by_id(video_id)
+        video.comments.append(comment_text)
