@@ -171,6 +171,19 @@ def get_favourite():
     return resp
 
 
+@app.route("/addComment")
+@cross_origin()
+def add_comment():
+    video_id = int(request.args.get("videoId"))
+    comment_text = request.args.get("commentText")
+
+    VideoManager.add_comment_to_video(video_id, comment_text)
+
+    resp = make_response(jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments}))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/exist")
 @cross_origin()
 def exist():

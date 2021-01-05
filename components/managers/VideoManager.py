@@ -30,3 +30,4 @@ class VideoManager:
     def add_comment_to_video(video_id: int, comment_text: str):
         video = VideoManager.get_video_by_id(video_id)
         video.comments.append(comment_text)
+        VideoManager.update_video_data(video)
