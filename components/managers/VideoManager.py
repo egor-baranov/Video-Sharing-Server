@@ -14,3 +14,14 @@ class VideoManager:
         for video in DatabaseWorker.read_videos():
             if video.video_id == video_id:
                 return video
+
+    @staticmethod
+    def update_video_data(v: Video):
+        videos = DatabaseWorker.read_videos()
+
+        for i in range(len(videos)):
+            if videos[i].video_id == v.video_id:
+                videos[i] = v
+                break
+
+        DatabaseWorker.write_videos(videos)

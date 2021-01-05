@@ -14,7 +14,8 @@ class Video:
     likes: int
     video_id: int
 
-    comments: typing.List[Comment] = []
+    # todo: should be refactored to List[Comment]
+    comments: typing.List[str] = []
 
     def __init__(self,
                  title: str = "",
@@ -25,7 +26,7 @@ class Video:
                  views: int = 0,
                  like_count: int = 0,
                  video_id: int = 0,
-                 comments: typing.List[Comment] = None):
+                 comments: typing.List[str] = None):
         self.title = title
         self.description = description
         self.tags = tags
@@ -34,7 +35,7 @@ class Video:
         self.views = views
         self.likes = like_count
         self.video_id = video_id
-        self.comments = comments
+        self.comments = comments if comments else []
 
     def to_dict(self):
         return {"title": self.title,
@@ -55,7 +56,7 @@ class VideoFactory:
 
     @staticmethod
     def new_video(title: str, description: str, tags: str, size: int, length: int, views: int, like_count: int,
-                  video_id: int, comments: typing.List[Comment]):
+                  video_id: int, comments: typing.List[str]):
         return Video(title, description, tags, size, length, views, like_count, video_id, comments)
 
     @staticmethod

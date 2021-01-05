@@ -10,6 +10,7 @@ from data.User import *
 from data.Video import *
 import random
 
+
 def get_comment_by_id(comment_id: int):
     for comment in DatabaseWorker.Comments:
         if comment.comment_id == comment_id:
@@ -237,7 +238,8 @@ def video_like_count():
     user = email_user if email_user.is_not_fake() else phone_user
 
     resp = make_response(
-        jsonify({"ok": True, "likeCount": VideoManager.get_video_by_id(video_id).likes, "isLiked": video_id in user.liked_videos}))
+        jsonify({"ok": True, "likeCount": VideoManager.get_video_by_id(video_id).likes,
+                 "isLiked": video_id in user.liked_videos}))
     resp.headers = headers
     return resp
 
