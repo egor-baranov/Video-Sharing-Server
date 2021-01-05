@@ -1,59 +1,57 @@
-{
-  "videos": [
-    {
-      "comments": [],
-      "description": "",
-      "length": 2374,
-      "likeCount": 0,
-      "size": 0,
-      "tags": "",
-      "title": "Debug video 1",
-      "videoId": 0,
-      "views": 0
-    },
-    {
-      "comments": [],
-      "description": "",
-      "length": 24,
-      "likeCount": 0,
-      "size": 0,
-      "tags": "",
-      "title": "Debug video 2",
-      "videoId": 0,
-      "views": 0
-    },
-    {
-      "comments": [],
-      "description": "",
-      "length": 123,
-      "likeCount": 0,
-      "size": 0,
-      "tags": "",
-      "title": "Debug video 3",
-      "videoId": 0,
-      "views": 0
-    },
-    {
-      "comments": null,
-      "description": "\u0421\u0438\u043d\u044f\u044f \u043b\u0430\u043c\u043f\u0430",
-      "length": 1,
-      "likeCount": 20,
-      "size": 3211164,
-      "tags": "",
-      "title": "\u0421\u0438\u043d\u044f\u044f \u043b\u0430\u043c\u043f\u0430 ",
-      "videoId": 7805751,
-      "views": 0
-    },
-    {
-      "comments": null,
-      "description": "\u0427\u0430\u0439\u043d\u0438\u043a",
-      "length": 8,
-      "likeCount": 1,
-      "size": 17815826,
-      "tags": "",
-      "title": "\u0427\u0430\u0439\u043d\u0438\u043a",
-      "videoId": 4308610,
-      "views": 0
-    }
-  ]
-}
+[
+  {
+    "comments": [],
+    "description": "",
+    "length": 2374,
+    "likeCount": 0,
+    "size": 0,
+    "tags": "",
+    "title": "Debug video 1",
+    "videoId": 0,
+    "views": 0
+  },
+  {
+    "comments": [],
+    "description": "",
+    "length": 24,
+    "likeCount": 0,
+    "size": 0,
+    "tags": "",
+    "title": "Debug video 2",
+    "videoId": 0,
+    "views": 0
+  },
+  {
+    "comments": [],
+    "description": "",
+    "length": 123,
+    "likeCount": 0,
+    "size": 0,
+    "tags": "",
+    "title": "Debug video 3",
+    "videoId": 0,
+    "views": 0
+  },
+  {
+    "comments": null,
+    "description": "\u0421\u0438\u043d\u044f\u044f \u043b\u0430\u043c\u043f\u0430",
+    "length": 1,
+    "likeCount": 20,
+    "size": 3211164,
+    "tags": "",
+    "title": "\u0421\u0438\u043d\u044f\u044f \u043b\u0430\u043c\u043f\u0430 ",
+    "videoId": 7805751,
+    "views": 0
+  },
+  {
+    "comments": null,
+    "description": "\u0427\u0430\u0439\u043d\u0438\u043a",
+    "length": 8,
+    "likeCount": 1,
+    "size": 17815826,
+    "tags": "",
+    "title": "\u0427\u0430\u0439\u043d\u0438\u043a",
+    "videoId": 4308610,
+    "views": 0
+  }
+]
