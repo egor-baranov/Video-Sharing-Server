@@ -194,6 +194,17 @@ def get_comments():
     return resp
 
 
+@app.route("/getViewCount")
+@cross_origin()
+def get_view_count():
+    video_id = int(request.args.get("videoId"))
+    video = VideoManager.get_video_by_id(video_id)
+
+    resp = make_response(jsonify({"ok": True, "viewCount": video.views}))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/exist")
 @cross_origin()
 def exist():
