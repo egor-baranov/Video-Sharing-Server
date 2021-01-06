@@ -267,6 +267,21 @@ def video_like_count():
     return resp
 
 
+@app.route("/openVideo")
+@cross_origin()
+def open_video():
+    video_id = int(request.args.get("videoId"))
+
+    video = VideoManager.get_video_by_id(video_id)
+    video.views += 1
+    VideoManager.update_video_data(video)
+
+    resp = make_response(
+        jsonify({"ok": True, "viewCount": video.views}))
+    resp.headers = headers
+    return resp
+
+
 # admin-panel functions
 @app.route("/blockUser")
 @cross_origin()
