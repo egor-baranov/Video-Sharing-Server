@@ -1,4 +1,4 @@
-users_path = "components/database/data/users.json"
-blocked_users_path = "components/database/data/blocked_users.json"
+users_path = "components/database/dto/users.json"
+blocked_users_path = "components/database/dto/blocked_users.json"
 
-videos_path = "components/database/data/videos.json"
+videos_path = "components/database/dto/videos.json"

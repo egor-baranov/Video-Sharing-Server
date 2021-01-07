@@ -1,6 +1,6 @@
 import typing
 import random
-from data.User import User
+from dto.User import User
 
 
 class Comment:

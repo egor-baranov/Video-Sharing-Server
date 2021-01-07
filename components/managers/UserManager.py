@@ -1,7 +1,7 @@
-import data
+import dto
 import json
 import components.config as config
-from data.User import UserFactory, User
+from dto.User import UserFactory, User
 from components.database.dbworker import DatabaseWorker
 
 
@@ -21,19 +21,19 @@ class UserManager:
         return User()
 
     @staticmethod
-    def add_user(u: data.User):
+    def add_user(u: dto.User):
         users = DatabaseWorker.read_users()
         users.append(u)
         DatabaseWorker.write_users(users)
 
     @staticmethod
-    def remove_user(u: data.User):
+    def remove_user(u: dto.User):
         users = DatabaseWorker.read_users()
         users.remove(u)
         DatabaseWorker.write_users(u)
 
     @staticmethod
-    def block_user(u: data.User):
+    def block_user(u: dto.User):
         users = DatabaseWorker.read_users()
         users.remove(u)
 
@@ -46,7 +46,7 @@ class UserManager:
             f.write(json.dumps([u.to_dict() for u in blocked_users]))
 
     @staticmethod
-    def update_user_data(u: data.User):
+    def update_user_data(u: dto.User):
         users = DatabaseWorker.read_users()
 
         for i in range(len(users)):

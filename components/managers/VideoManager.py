@@ -1,4 +1,4 @@
-from data.Video import *
+from dto.Video import *
 from components.database.dbworker import DatabaseWorker
 
 

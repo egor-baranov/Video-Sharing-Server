@@ -6,8 +6,8 @@ from components.core import headers
 from components.database.dbworker import DatabaseWorker
 from components.managers.UserManager import UserManager
 from components.managers.VideoManager import VideoManager
-from data.User import *
-from data.Video import *
+from dto.User import *
+from dto.Video import *
 import random
 
 

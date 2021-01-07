@@ -1,4 +1,4 @@
-from data.Comment import *
+from dto.Comment import *
 from components.database.dbworker import DatabaseWorker
 
 

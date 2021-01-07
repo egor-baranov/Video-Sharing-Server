@@ -1,7 +1,7 @@
 import random
 import typing
 
-from data.Comment import Comment
+from dto.Comment import Comment
 
 
 class Video:

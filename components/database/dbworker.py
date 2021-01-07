@@ -1,14 +1,14 @@
-from data.User import UserFactory
-from data.Video import Video, VideoFactory
+from dto.User import UserFactory
+from dto.Video import Video, VideoFactory
 
 import components.config as config
 import json
 import typing
-import data
+import dto
 
 
 class DatabaseWorker:
-    # user data methods
+    # user dto methods
     @staticmethod
     def read_users():
         with open(config.users_path, "rt") as f:
@@ -24,7 +24,7 @@ class DatabaseWorker:
         with open(config.blocked_users_path, "rt") as f:
             return [UserFactory.from_dict(d) for d in json.loads(f.read())]
 
-    # videos data methods
+    # videos dto methods
     @staticmethod
     def read_videos():
         with open(config.videos_path, "rt") as f:
