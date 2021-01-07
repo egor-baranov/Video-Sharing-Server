@@ -154,6 +154,40 @@ def get_videos():
     return resp
 
 
+@app.route("/getUploadedVideosStats")
+@cross_origin()
+def get_uploaded_video_stats():
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+
+    view_count = 0
+    video_count = len(user.uploaded_videos)
+    like_count = 0
+
+    for v_id in user.uploaded_videos:
+        video = VideoManager.get_video_by_id(v_id)
+        view_count += video.views
+        like_count += video.likes
+
+    resp = make_response(
+        jsonify({
+            "ok": True,
+            "viewCount": view_count,
+            "videoCount": video_count,
+            "likeCount": like_count
+        })
+    )
+    resp.headers = headers
+    return resp
+
+
 @app.route("/getFavourite")
 @cross_origin()
 def get_favourite():
