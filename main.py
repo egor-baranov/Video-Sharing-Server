@@ -171,6 +171,23 @@ def get_favourite():
     return resp
 
 
+@app.route("/getUploadedVideos")
+@cross_origin()
+def get_uploaded_videos():
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+    resp = make_response(jsonify({"ok": True, "result": user.uploaded_videos}))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/addComment")
 @cross_origin()
 def add_comment():
