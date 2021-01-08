@@ -11,7 +11,7 @@ Now it is being hosted at https://kepler88d.pythonanywhere.com
 
 ## What is going to be implemented soon
 * Maybe db will be refactored to MongoDB.
-* Some another function (etc SMS API).
+* Some another functionality (etc SMS API).
 
 # List of possible requests (server API description)
 
