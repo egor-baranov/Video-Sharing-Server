@@ -40,7 +40,20 @@ password | Password of logged-in user.
 
 ### commentList
 
-### addVideo 
+### addVideo
+Request that is used to add video with passed data by user with selected login (phone or email).  
+Very important thing is that videoId is generated on the user side.
+
+Parameter | Description
+----------|-------
+phone | Phone number of user to login.
+email | Email of user to login.
+title | Title of video. 
+descrirption | Description of video. 
+tags | Array with tags of video (array of strings). 
+size | Size of video in bytes (int). 
+length | Length of video in seconds (int). 
+videoId | Id of video (int). 
 
 ### getVideos
 
@@ -57,6 +70,12 @@ password | Password of logged-in user.
 ### getViewCount
 
 ### exist
+Returns true if user with passed login (phone or email) exist else false. 
+
+Parameter | Description
+----------|-------
+phone | Phone number of user.
+email | Email of user.
 
 ### likeVideo
 
