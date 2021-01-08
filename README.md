@@ -32,13 +32,50 @@ phone | Phone number of user to login.
 email | Email of user to login.
 password | Password of logged-in user. 
 
+### list
+
+### videoList
+
+### userList  
+
+### commentList
+
+### addVideo 
+
+### getVideos
+
+### getUploadedVideosStats
+
+### getFavourite
+
+### getUploadedVideos 
+
+### addComment
+
+### getComments
+
+### getViewCount
+
+### exist
+
+### likeVideo
+
+### videoLikeCount
+
+### openVideo
+
 ## Admin requests
+
+### blockUser
 Parameter | Description
 ----------|-------
 phone | Phone number of user to login.
 email | Email of user to login.
 password | Password of logged-in user. 
 
+### resetPassword
+
+### deleteComment
 
 ## Link to the app repository
 https://github.com/egor-baranov/Video-Sharing-App
