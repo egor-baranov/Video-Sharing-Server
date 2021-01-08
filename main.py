@@ -339,7 +339,7 @@ def open_video():
     VideoManager.update_video_data(video)
 
     resp = make_response(
-        jsonify({"ok": True, "viewCount": video.views}))
+        jsonify({"ok": True, "viewCount": video.views, "commentCount": len(video.comments)}))
     resp.headers = headers
     return resp
 
