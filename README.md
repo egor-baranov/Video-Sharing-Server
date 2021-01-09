@@ -18,6 +18,7 @@ Now it is being hosted at https://kepler88d.pythonanywhere.com
 ## App requests
 
 ### login
+
 Request that is used to login user that is already been registered in system using phone or email as login and password. 
 
 Parameter | Description
@@ -27,6 +28,7 @@ Parameter | Description
 ```password``` | Password of logged-in user. 
 
 ### register
+
 Registration of new user with selected parameters. 
 
 Parameter | Description
@@ -39,6 +41,7 @@ Parameter | Description
 ```birthDate``` | Birth date of new user,
 
 ### list
+
 Returns all the data including list of all users and list of all videos (videoList + userList requests) with this format:
 ```
 {
@@ -53,6 +56,7 @@ Returns all the data including list of all users and list of all videos (videoLi
 This request does not require any parameters.
 
 ### videoList
+
 Returns list of all videos with this format:
 ```
 {
@@ -64,6 +68,7 @@ Returns list of all videos with this format:
 This request does not require any parameters.
 
 ### userList  
+
 Returns list of all users with this format:
 ```
 {
@@ -76,7 +81,10 @@ This request does not require any parameters.
 
 ### commentList
 
+This request hasn't been implemented yet because comments needs refactoring to work with DatabaseWorker. 
+
 ### addVideo
+
 Request that is used to add video with passed data by user with selected login (phone or email).  
 Very important thing is that videoId is generated on the user side.
 
@@ -92,6 +100,18 @@ Parameter | Description
 ```videoId``` | Id of video (int). 
 
 ### getVideos
+
+Returns list of random videos serialized to JSON.
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user to login.
+```email``` | Email of user to login.
+```title``` | Title of video. 
+```descrirption``` | Description of video. 
+```tags``` | Array with tags of video (array of strings). 
+```size``` | Size of video in bytes (int). 
+```length``` | Length of video in seconds (int). 
+```videoId``` | Id of video (int). 
 
 ### getUploadedVideosStats
 
