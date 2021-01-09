@@ -19,6 +19,7 @@ Now it is being hosted at https://kepler88d.pythonanywhere.com
 
 ### login
 Request that is used to login user that is already been registered in system using phone or email as login and password. 
+
 Parameter | Description
 ----------|-------
 ```phone``` | Phone number of user to login.
@@ -26,17 +27,52 @@ Parameter | Description
 ```password``` | Password of logged-in user. 
 
 ### register
+Registration of new user with selected parameters. 
+
 Parameter | Description
 ----------|-------
-phone | Phone number of user to login.
-email | Email of user to login.
-password | Password of logged-in user. 
+```username``` | Username of new user.
+```phone``` | Phone number of new user.
+```password``` | Password of new user.  
+```email``` | Email of new user.
+```city``` | City of new user.
+```birthDate``` | Birth date of new user,
 
 ### list
+Returns all the data including list of all users and list of all videos (videoList + userList requests) with this format:
+```
+{
+  "users": [
+    // list of registered users data
+  ], 
+  "videos": [
+    // list of uploaded videos data
+  ]
+}
+```
+This request does not require any parameters.
 
 ### videoList
+Returns list of all videos with this format:
+```
+{
+  "videos": [
+    // list of uploaded videos data
+  ]
+}
+```
+This request does not require any parameters.
 
 ### userList  
+Returns list of all users with this format:
+```
+{
+  "users": [
+    // list of registered users data
+  ]
+}
+```
+This request does not require any parameters.
 
 ### commentList
 
@@ -46,14 +82,14 @@ Very important thing is that videoId is generated on the user side.
 
 Parameter | Description
 ----------|-------
-phone | Phone number of user to login.
-email | Email of user to login.
-title | Title of video. 
-descrirption | Description of video. 
-tags | Array with tags of video (array of strings). 
-size | Size of video in bytes (int). 
-length | Length of video in seconds (int). 
-videoId | Id of video (int). 
+```phone``` | Phone number of user to login.
+```email``` | Email of user to login.
+```title``` | Title of video. 
+```descrirption``` | Description of video. 
+```tags``` | Array with tags of video (array of strings). 
+```size``` | Size of video in bytes (int). 
+```length``` | Length of video in seconds (int). 
+```videoId``` | Id of video (int). 
 
 ### getVideos
 
@@ -74,8 +110,8 @@ Returns true if user with passed login (phone or email) exist else false.
 
 Parameter | Description
 ----------|-------
-phone | Phone number of user.
-email | Email of user.
+```phone``` | Phone number of user.
+```email``` | Email of user.
 
 ### likeVideo
 
@@ -88,11 +124,16 @@ email | Email of user.
 ### blockUser
 Parameter | Description
 ----------|-------
-phone | Phone number of user to login.
-email | Email of user to login.
-password | Password of logged-in user. 
+```phone``` | Phone number of user to block.
+```email``` | Email of user to block.
 
 ### resetPassword
+Admin request that is used to reset password of user with selected login (phone or email).
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
 
 ### deleteComment
 
