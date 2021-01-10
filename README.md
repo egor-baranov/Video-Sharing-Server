@@ -81,7 +81,7 @@ This request does not require any parameters.
 
 ### commentList
 
-This request hasn't been implemented yet because comments needs refactoring to work with DatabaseWorker. 
+This request doesn't work correct yet because comments needs refactoring to work with DatabaseWorker. 
 
 ### addVideo
 
@@ -115,6 +115,8 @@ Parameter | Description
 
 ### getUploadedVideosStats
 
+
+
 ### getFavourite
 
 ### getUploadedVideos 
@@ -126,6 +128,7 @@ Parameter | Description
 ### getViewCount
 
 ### exist
+
 Returns true if user with passed login (phone or email) exist else false. 
 
 Parameter | Description
@@ -142,6 +145,9 @@ Parameter | Description
 ## Admin requests
 
 ### blockUser
+
+Moves user from userList to blockedUsers list, after this noone can login with this data.
+
 Parameter | Description
 ----------|-------
 ```phone``` | Phone number of user to block.
