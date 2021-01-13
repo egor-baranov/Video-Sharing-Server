@@ -115,8 +115,6 @@ Parameter | Description
 
 ### getUploadedVideosStats
 
-
-
 ### getFavourite
 
 ### getUploadedVideos 
@@ -152,6 +150,18 @@ Parameter | Description
 ----------|-------
 ```phone``` | Phone number of user to block.
 ```email``` | Email of user to block.
+
+### blockedUserList
+
+Returns list of all blocked users with this format:
+```
+{
+  "users": [
+    // list of blocked users data
+  ]
+}
+```
+This request does not require any parameters.
 
 ### resetPassword
 Admin request that is used to reset password of user with selected login (phone or email).
