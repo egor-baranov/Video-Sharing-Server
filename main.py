@@ -353,11 +353,13 @@ def block_user():
 
     if phone_user.is_not_fake():
         UserManager.block_user(phone_user)
-        resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.read_blocked_users()}))
+        resp = make_response(
+            jsonify({"ok": True, "blockedUsers": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]}))
 
     elif email_user.is_not_fake():
         UserManager.block_user(email_user)
-        resp = make_response(jsonify({"ok": True, "blockedUsers": DatabaseWorker.read_blocked_users()}))
+        resp = make_response(
+            jsonify({"ok": True, "blockedUsers": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]}))
 
     else:
         resp = make_response(jsonify({"ok": False}))
@@ -377,12 +379,12 @@ def reset_password():
     for i in range(len(users)):
         if users[i].email == email or users[i].phone == phone:
             users[i].password = ""
-            resp = make_response(jsonify({"ok": True, "users": users}))
+            resp = make_response(jsonify({"ok": True, "users": [u.to_dict() for u in DatabaseWorker.read_users()]}))
             DatabaseWorker.write_users(users)
             resp.headers = headers
             return resp
 
-    resp = make_response(jsonify({"ok": False, "users": users}))
+    resp = make_response(jsonify({"ok": False, "users": [u.to_dict() for u in DatabaseWorker.read_users()]}))
     DatabaseWorker.write_users(users)
     resp.headers = headers
     return resp
