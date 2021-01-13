@@ -29,20 +29,26 @@ class UserManager:
     @staticmethod
     def remove_user(u: dto.User):
         users = DatabaseWorker.read_users()
-        users.remove(u)
-        DatabaseWorker.write_users(u)
+
+        new_users = []
+
+        for i in users:
+            if i.phone != u.phone and i.email != u.email:
+                new_users.append(i)
+
+        print([i.to_dict() for i in new_users])
+
+        DatabaseWorker.write_users(new_users)
 
     @staticmethod
     def block_user(u: dto.User):
-        users = DatabaseWorker.read_users()
-        users.remove(u)
-
         with open(config.blocked_users_path, "rt") as f:
             blocked_users = [UserFactory.from_dict(d) for d in json.loads(f.read())]
 
         blocked_users.append(u)
+        UserManager.remove_user(u)
 
-        with open(config.users_path, "wt") as f:
+        with open(config.blocked_users_path, "wt") as f:
             f.write(json.dumps([u.to_dict() for u in blocked_users]))
 
     @staticmethod
