@@ -70,8 +70,8 @@ class UserFactory:
 
     @staticmethod
     def new_user(username: str, phone: str, password: str, city: str, birth_date: str, email: str,
-                 uploaded_videos: typing.List[int], liked_videos: typing.List[int],
-                 liked_comments: typing.List[int]) -> User:
+                 uploaded_videos: typing.List[int] = None, liked_videos: typing.List[int] = None,
+                 liked_comments: typing.List[int] = None) -> User:
         return User(username, phone, password, city, birth_date, email, uploaded_videos, liked_videos, liked_comments)
 
     @staticmethod
