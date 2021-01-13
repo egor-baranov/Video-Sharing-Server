@@ -52,6 +52,10 @@ class UserManager:
             f.write(json.dumps([u.to_dict() for u in blocked_users]))
 
     @staticmethod
+    def restore_user(u: dto.User):
+        pass
+
+    @staticmethod
     def update_user_data(u: dto.User):
         users = DatabaseWorker.read_users()
 

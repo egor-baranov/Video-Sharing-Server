@@ -367,6 +367,11 @@ def block_user():
     resp.headers = headers
     return resp
 
+@app.route("/restoreUser")
+@cross_origin()
+def restore_user():
+    pass
+
 
 @app.route("/blockedUserList")
 @cross_origin()
