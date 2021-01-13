@@ -1,19 +1,20 @@
 [
   {
-    "username": "admin",
-    "phone": "89004445533",
-    "password": "password",
-    "city": "city",
     "birthDate": "31.12.2000",
+    "city": "city",
     "email": "admin@admin.com",
-    "uploadedVideos": [
-      1534532
-    ],
+    "likedComments": [],
     "likedVideos": [
-      0,
-      7805751,
-      1534532
+      1534532,
+      7650646,
+      4308610
     ],
-    "likedComments": []
+    "password": "password",
+    "phone": "89004445533",
+    "uploadedVideos": [
+      1534532,
+      7650646
+    ],
+    "username": "admin"
   }
 ]
