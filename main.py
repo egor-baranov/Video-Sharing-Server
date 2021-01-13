@@ -368,6 +368,16 @@ def block_user():
     return resp
 
 
+@app.route("/blockedUserList")
+@cross_origin()
+def blocked_user_list():
+    resp = make_response(jsonify({
+        "users": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]
+    }))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/resetPassword")
 @cross_origin()
 def reset_password():
