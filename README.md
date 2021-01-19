@@ -115,7 +115,35 @@ Parameter | Description
 
 ### getUploadedVideosStats
 
+Returns stats about videos uploaded by user with format:
+```
+{
+  "ok": *True or False depending on whether the user exists, type = bool*, 
+  "viewCount": *total number of views in videos uploaded by user, type = int*,
+  "videoCount": *count of videos uploaded by userm type = int*, 
+  "likeCount": *total number of likes in videos uploaded by user, type = int*
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+
 ### getFavourite
+
+Returns list of videos that was liked by user with format:
+```
+{
+  "ok": *True or False depending on whether the user exists, type = bool*, 
+  "result": *list of liked videos, type = list*
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
 
 ### getUploadedVideos 
 
