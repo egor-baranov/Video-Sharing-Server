@@ -149,6 +149,24 @@ def add_video():
     return resp
 
 
+@app.route("/getUser")
+@cross_origin()
+def get_user():
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+
+    resp = make_response(jsonify({"ok": True, "userData": user.to_dict()}))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/getVideos")
 @cross_origin()
 def get_videos():
