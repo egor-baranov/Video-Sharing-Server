@@ -115,15 +115,94 @@ Parameter | Description
 
 ### getUploadedVideosStats
 
+Returns stats about videos uploaded by user with format:
+```
+{
+  "ok": *True or False depending on whether the user exists, type = bool*, 
+  "viewCount": *total number of views in videos uploaded by user, type = int*,
+  "videoCount": *count of videos uploaded by userm type = int*, 
+  "likeCount": *total number of likes in videos uploaded by user, type = int*
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+
 ### getFavourite
+
+Returns list of videos that was liked by user with format:
+```
+{
+  "ok": *True or False depending on whether the user exists, type = bool*, 
+  "result": *list of liked videos, type = list*
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
 
 ### getUploadedVideos 
 
+Returns list of videos that was uploaded by user with format:
+```
+{
+  "ok": *True or False depending on whether the user exists, type = bool*, 
+  "result": *list of uploaded videos, type = list*
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+
 ### addComment
+
+Adds comment to selected video, response format:. 
+```
+{
+  "ok": *True or False, type = bool*, 
+  "result": *list of all comments under this video, type = list*
+}
+```
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of selected video.
+```commentText``` | Text of comment to add.
 
 ### getComments
 
+Returns list of all comments depending to video, response format:
+```
+{
+  "ok": *True or False, type = bool*, 
+  "result": *list of all comments under this video, type = list*
+}
+```
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of selected video.
+
 ### getViewCount
+
+Returns count of views under video, response format:
+```
+{
+  "ok": *True or False, type = bool*, 
+  "videoId": *list of all comments under this video, type = list*
+}
+```
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of selected video.
+
 
 ### exist
 
