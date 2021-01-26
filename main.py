@@ -364,7 +364,11 @@ def open_video():
     VideoManager.update_video_data(video)
 
     resp = make_response(
-        jsonify({"ok": True, "viewCount": video.views, "commentCount": len(video.comments)}))
+        jsonify({
+            "ok": True, "viewCount": video.views,
+            "commentCount": len(video.comments)
+        })
+    )
     resp.headers = headers
     return resp
 
@@ -389,6 +393,33 @@ def block_user():
     else:
         resp = make_response(jsonify({"ok": False}))
 
+    resp.headers = headers
+    return resp
+
+
+@app.route("/getStats")
+@cross_origin()
+def get_stats():
+    resp = make_response(
+        jsonify({
+            "ok": True,
+            "videosUploadedCount": {
+                "forLastDay": 0,
+                "forLastWeek": 0,
+                "forLastMonth": 0
+            },
+            "usersRegisteredCount": {
+                "forLastDay": 0,
+                "forLastWeek": 0,
+                "forLastMonth": 0
+            },
+            "commentsLeftCount": {
+                "forLastDay": 0,
+                "forLastWeek": 0,
+                "forLastMonth": 0
+            }
+        })
+    )
     resp.headers = headers
     return resp
 
