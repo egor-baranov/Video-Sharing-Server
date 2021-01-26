@@ -5,7 +5,8 @@ from dto.User import User
 
 class Comment:
     video_id: int
-    author: User
+    author_email: str
+    author_phone: str
     replies: typing.List = []
     likes: int
     text: str
@@ -22,8 +23,20 @@ class Comment:
     def to_dict(self):
         return {
             "video_id": self.video_id,
-            "author": self.author.to_dict(),
+            "authorEmail": self.author.to_dict()["email"],
+            "authorPhone": self.author.to_dict()["phone"],
             "replies": [r.to_dict() for r in self.replies],
+            "text": self.text,
             "likes": self.likes,
-            "text": self.text
+            "commentId": self.comment_id
         }
+
+
+class CommentFactory:
+    @staticmethod
+    def new_comment(video_id: int, author: User, replies, text: str):
+        return Comment()
+
+    @staticmethod
+    def from_dict(data: dict):
+        return CommentFactory.new_comment(data)
