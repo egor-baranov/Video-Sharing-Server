@@ -1,5 +1,7 @@
 import typing
 import random
+
+from components.managers.UserManager import UserManager
 from dto.User import User
 
 
@@ -30,6 +32,12 @@ class Comment:
             "likes": self.likes,
             "commentId": self.comment_id
         }
+
+    def get_author(self) -> User:
+        phone_user = UserManager.get_user_by_phone(self.author_phone)
+        email_user = UserManager.get_user_by_email(self.author_email)
+
+        return email_user if email_user.is_not_fake() else phone_user
 
 
 class CommentFactory:
