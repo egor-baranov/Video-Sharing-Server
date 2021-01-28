@@ -1,3 +1,4 @@
+from dto.Comment import CommentFactory, Comment
 from dto.User import UserFactory
 from dto.Video import Video, VideoFactory
 
@@ -35,4 +36,13 @@ class DatabaseWorker:
         with open(config.videos_path, "wt") as f:
             f.write(json.dumps([v.to_dict() for v in d]))
 
-    Comments = []
+    # comments dto methods
+    @staticmethod
+    def read_comments():
+        with open(config.comments_path, "rt") as f:
+            return [CommentFactory.from_dict(d) for d in json.loads(f.read())]
+
+    @staticmethod
+    def write_comments(d: typing.List[Comment]):
+        with open(config.comments_path, "wt") as f:
+            f.write(json.dumps([c.to_dict() for c in d]))
