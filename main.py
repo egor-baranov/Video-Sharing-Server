@@ -4,6 +4,7 @@ from components.core import *
 
 from components.core import headers
 from components.database.dbworker import DatabaseWorker
+from components.managers.CommentManager import CommentManager
 from components.managers.UserManager import UserManager
 from components.managers.VideoManager import VideoManager
 from dto.User import *
@@ -467,18 +468,14 @@ def reset_password():
 def delete_comment():
     comment_id = int(request.args.get("id"))
 
-    if all([c.comment_id != comment_id for c in DatabaseWorker.Comments]):
+    if not CommentManager.does_comment_exist(comment_id):
         resp = make_response(jsonify({"ok": False}))
         resp.headers = headers
         return resp
 
-    comment = get_comment_by_id(comment_id)
+    CommentManager.delete_comment(comment_id)
 
-    DatabaseWorker.Comments.remove(comment)
-    comment.text = "-Комментарий был удален администрацией-"
-    DatabaseWorker.Comments.append(comment)
-
-    resp = make_response(jsonify())
+    resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
     return resp
 

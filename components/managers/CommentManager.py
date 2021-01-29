@@ -36,7 +36,9 @@ class CommentManager:
 
     @staticmethod
     def delete_comment(comment_id: int):
-        pass
+        comment = CommentManager.get_comment_by_id(comment_id)
+        comment.text = "-Комментарий был удален администрацией-"
+        CommentManager.update_comment_data(comment)
 
     @staticmethod
     def update_comment_data(c: Comment):
@@ -47,3 +49,7 @@ class CommentManager:
                 comments[i] = c
 
         DatabaseWorker.write_comments(comments)
+
+    @staticmethod
+    def does_comment_exist(comment_id: int):
+        return any([c.comment_id == comment_id for c in DatabaseWorker.read_comments()])
