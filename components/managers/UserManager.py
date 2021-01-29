@@ -21,13 +21,13 @@ class UserManager:
         return User()
 
     @staticmethod
-    def add_user(u: dto.User):
+    def add_user(u: User):
         users = DatabaseWorker.read_users()
         users.append(u)
         DatabaseWorker.write_users(users)
 
     @staticmethod
-    def remove_user(u: dto.User):
+    def remove_user(u: User):
         users = DatabaseWorker.read_users()
 
         new_users = []

@@ -16,8 +16,7 @@ class Video:
     video_id: int
     upload_time: float
 
-    # todo: should be refactored to List[Comment]
-    comments: typing.List[str] = []
+    comments: typing.List[int] = []
 
     def __init__(self,
                  title: str = "",
@@ -28,7 +27,7 @@ class Video:
                  views: int = 0,
                  like_count: int = 0,
                  video_id: int = 0,
-                 comments: typing.List[str] = None,
+                 comments: typing.List[int] = None,
                  upload_time: float = 0):
         self.title = title
         self.description = description
@@ -62,8 +61,8 @@ class VideoFactory:
 
     @staticmethod
     def new_video(title: str, description: str, tags: str, size: int, length: int, views: int, like_count: int,
-                  video_id: int, comments: typing.List[str], upload_time: float):
-        return Video(title, description, tags, size, length, views, like_count, video_id, comments, upload_time)
+                  video_id: int):
+        return Video(title, description, tags, size, length, views, like_count, video_id)
 
     @staticmethod
     def from_dict(data: dict):
@@ -75,7 +74,5 @@ class VideoFactory:
             length=data["length"],
             views=data["views"],
             like_count=data["likeCount"],
-            video_id=data["videoId"],
-            comments=data["comments"],
-            upload_time=data["uploadTime"]
+            video_id=data["videoId"]
         )

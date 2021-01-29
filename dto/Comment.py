@@ -1,20 +1,21 @@
-import typing
+from typing import List
 import random
 
 from components.managers.UserManager import UserManager
 from dto.User import User
+from dto.Video import Video
 
 
 class Comment:
     video_id: int
     author_email: str
     author_phone: str
-    replies: typing.List = []
+    replies: List = []
     likes: int
     text: str
     comment_id: int
 
-    def __init__(self, video_id: int, author: User, replies: typing.List, text: str):
+    def __init__(self, video_id: int, author: User, replies: List, text: str):
         self.video_id = video_id
         self.author = author
         self.replies = replies
@@ -42,7 +43,7 @@ class Comment:
 
 class CommentFactory:
     @staticmethod
-    def new_comment(video_id: int, author: User, replies, text: str):
+    def new_comment(video: Video, author: User, replies: List[int], text: str):
         return Comment()
 
     @staticmethod
