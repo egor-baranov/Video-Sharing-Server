@@ -1,3 +1,4 @@
+import time
 from typing import List
 import random
 
@@ -15,13 +16,17 @@ class Comment:
     text: str
     comment_id: int
 
-    def __init__(self, video_id: int, author: User, replies: List, text: str):
+    creation_time: float
+
+    def __init__(self, video_id: int, author: User, replies: List, text: str, creation_time: float = 0):
         self.video_id = video_id
         self.author = author
         self.replies = replies
         self.text = text
         self.likes = 0
+
         self.comment_id = random.randint(100000, 999999)
+        self.creation_time = time.time() if creation_time == 0 else creation_time
 
     def to_dict(self):
         return {
@@ -31,7 +36,8 @@ class Comment:
             "replies": [r.to_dict() for r in self.replies],
             "text": self.text,
             "likes": self.likes,
-            "commentId": self.comment_id
+            "commentId": self.comment_id,
+            "creationTime": self.creation_time
         }
 
     def get_author(self) -> User:
