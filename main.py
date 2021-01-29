@@ -405,19 +405,28 @@ def get_stats():
         jsonify({
             "ok": True,
             "videosUploadedCount": {
-                "forLastDay": 0,
-                "forLastWeek": 0,
-                "forLastMonth": 0
+                "forLastDay": sum(
+                    [(v.upload_time - time.time()) <= SECONDS_IN_DAY for v in DatabaseWorker.read_videos()]),
+                "forLastWeek": sum(
+                    [(v.upload_time - time.time()) <= SECONDS_IN_WEEK for v in DatabaseWorker.read_videos()]),
+                "forLastMonth": sum(
+                    [(v.upload_time - time.time()) <= SECONDS_IN_MONTH for v in DatabaseWorker.read_videos()])
             },
             "usersRegisteredCount": {
-                "forLastDay": 0,
-                "forLastWeek": 0,
-                "forLastMonth": 0
+                "forLastDay": sum(
+                    [(u.register_time - time.time()) <= SECONDS_IN_DAY for u in DatabaseWorker.read_users()]),
+                "forLastWeek": sum(
+                    [(u.register_time - time.time()) <= SECONDS_IN_WEEK for u in DatabaseWorker.read_users()]),
+                "forLastMonth": sum(
+                    [(u.register_time - time.time()) <= SECONDS_IN_MONTH for u in DatabaseWorker.read_users()])
             },
             "commentsLeftCount": {
-                "forLastDay": 0,
-                "forLastWeek": 0,
-                "forLastMonth": 0
+                "forLastDay": sum(
+                    [(c.creation_time - time.time()) <= SECONDS_IN_DAY for c in DatabaseWorker.read_comments()]),
+                "forLastWeek": sum(
+                    [(c.creation_time - time.time()) <= SECONDS_IN_WEEK for c in DatabaseWorker.read_comments()]),
+                "forLastMonth": sum(
+                    [(c.creation_time - time.time()) <= SECONDS_IN_MONTH for c in DatabaseWorker.read_comments()])
             }
         })
     )
