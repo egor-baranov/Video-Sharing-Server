@@ -374,6 +374,25 @@ def open_video():
     return resp
 
 
+# user data editing
+@app.route("/editUserName")
+@cross_origin()
+def edit_user_name():
+    pass
+
+
+@app.route("/editUserBirthDate")
+@cross_origin()
+def edit_user_birth_date():
+    pass
+
+
+@app.route("/editUserCity")
+@cross_origin()
+def edit_user_city():
+    pass
+
+
 # admin-panel functions
 @app.route("/blockUser")
 @cross_origin()
