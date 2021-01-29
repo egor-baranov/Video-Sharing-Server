@@ -1,4 +1,5 @@
 import json
+import time
 import typing
 
 
@@ -14,6 +15,8 @@ class User:
     liked_videos: typing.List[int] = []
     liked_comments: typing.List[int] = []
 
+    register_time: float
+
     def __init__(self,
                  username: str = "",
                  phone: str = "",
@@ -23,16 +26,20 @@ class User:
                  email: str = "",
                  uploaded_videos: typing.List[int] = None,
                  liked_videos: typing.List[int] = None,
-                 liked_comments: typing.List[int] = None):
+                 liked_comments: typing.List[int] = None,
+                 register_time: int = 0):
         self.username = username
         self.phone = phone
         self.password = password
         self.city = city
         self.birth_date = birth_date
         self.email = email
+
         self.uploaded_videos = uploaded_videos if uploaded_videos is not None else []
         self.liked_videos = liked_videos if liked_videos is not None else []
         self.liked_comments = liked_comments if liked_comments is not None else []
+
+        self.register_time = time.time() if register_time == 0 else register_time
 
     def is_fake(self) -> bool:
         return not self.is_not_fake()
@@ -48,9 +55,12 @@ class User:
             "city": self.city,
             "birthDate": self.birth_date,
             "email": self.email,
+
             "uploadedVideos": self.uploaded_videos,
             "likedVideos": self.liked_videos,
-            "likedComments": self.liked_comments
+            "likedComments": self.liked_comments,
+
+            "registerTime": self.register_time
         }
 
     def upload_video(self, video_id: int):
