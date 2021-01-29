@@ -33,3 +33,17 @@ class CommentManager:
         comments = DatabaseWorker.read_comments()
         comments.append(c)
         DatabaseWorker.write_comments(comments)
+
+    @staticmethod
+    def delete_comment(comment_id: int):
+        pass
+
+    @staticmethod
+    def update_comment_data(c: Comment):
+        comments = DatabaseWorker.read_comments()
+
+        for i in range(len(comments)):
+            if comments[i].comment_id == c.comment_id:
+                comments[i] = c
+
+        DatabaseWorker.write_comments(comments)
