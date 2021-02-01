@@ -13,6 +13,51 @@ Now it is being hosted at https://kepler88d.pythonanywhere.com
 * Maybe db will be refactored to MongoDB.
 * Some another functionality (etc SMS API).
 
+# Project architecture
+```
+│   main.py
+│   README.md
+│   requirements.txt
+│
+├───components
+│   │   config.py
+│   │   core.py
+│   │
+│   ├───database
+│   │   │   dbworker.py
+│   │   │
+│   │   └───data
+│   │           blocked_users.json
+│   │           comments.json
+│   │           users.json
+│   │           videos.json
+│   │    
+│   └───managers
+│           CommentManager.py
+│           UserManager.py
+│           VideoManager.py
+│
+├───dto
+│       Comment.py
+│       User.py
+│       Video.py
+│    
+├───lib
+│       smsc_api.py
+│
+├───routes
+│   ├───admin_panel
+│   │       admin_requests.py
+│   │       user_editing.py
+│   │
+│   └───app_requests
+│           data_list.py
+│           regular_requests.py
+│       
+└───tests
+        test_dbworker.py
+```
+
 # List of possible requests (server API description)
 
 ## App requests
