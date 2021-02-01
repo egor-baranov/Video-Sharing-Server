@@ -15,8 +15,6 @@ Now it is being hosted at https://kepler88d.pythonanywhere.com
 
 # Project architecture
 ```
-│
-│
 │   main.py
 │   README.md
 │   requirements.txt
