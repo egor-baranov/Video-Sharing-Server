@@ -2,6 +2,8 @@ from flask import make_response, jsonify
 
 from components.core import *
 
+from routes.app_requests.data_list import *
+
 
 @app.route("/")
 @cross_origin()

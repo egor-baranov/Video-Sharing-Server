@@ -1,11 +1,11 @@
-from dto.Comment import CommentFactory, Comment
-from dto.User import UserFactory
-from dto.Video import Video, VideoFactory
-
-import components.config as config
 import json
 import typing
-import dto
+
+import components.config as config
+
+from dto.User import UserFactory
+from dto.Video import Video, VideoFactory
+from dto.Comment import CommentFactory, Comment
 
 
 class DatabaseWorker:

@@ -2,7 +2,6 @@ import time
 from typing import List
 import random
 
-from components.managers.UserManager import UserManager
 from dto.User import User
 from dto.Video import Video
 
@@ -39,12 +38,6 @@ class Comment:
             "commentId": self.comment_id,
             "creationTime": self.creation_time
         }
-
-    def get_author(self) -> User:
-        phone_user = UserManager.get_user_by_phone(self.author_phone)
-        email_user = UserManager.get_user_by_email(self.author_email)
-
-        return email_user if email_user.is_not_fake() else phone_user
 
 
 class CommentFactory:

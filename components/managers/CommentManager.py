@@ -1,6 +1,7 @@
 from multipledispatch import dispatch
 
 from components.database.dbworker import DatabaseWorker
+from components.managers.UserManager import UserManager
 from dto.Comment import Comment, CommentFactory
 from dto.User import User
 from dto.Video import Video
@@ -53,3 +54,10 @@ class CommentManager:
     @staticmethod
     def does_comment_exist(comment_id: int):
         return any([c.comment_id == comment_id for c in DatabaseWorker.read_comments()])
+
+    @staticmethod
+    def get_author(c: Comment) -> User:
+        phone_user = UserManager.get_user_by_phone(c.author_phone)
+        email_user = UserManager.get_user_by_email(c.author_email)
+
+        return email_user if email_user.is_not_fake() else phone_user

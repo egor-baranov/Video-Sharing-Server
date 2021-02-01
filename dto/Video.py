@@ -2,8 +2,6 @@ import random
 import typing
 import time
 
-from dto.Comment import Comment
-
 
 class Video:
     title: str
