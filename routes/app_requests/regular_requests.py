@@ -5,6 +5,7 @@ from flask import Blueprint
 
 from components.core import *
 from components.database.dbworker import DatabaseWorker
+from components.managers.CommentManager import CommentManager
 from components.managers.UserManager import UserManager
 from components.managers.VideoManager import VideoManager
 from dto.User import User, UserFactory

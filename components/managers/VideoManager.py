@@ -1,3 +1,4 @@
+from components.managers.CommentManager import CommentManager
 from dto.Comment import CommentFactory
 from dto.User import User
 from dto.Video import *
@@ -34,6 +35,8 @@ class VideoManager:
 
         comment = CommentFactory.new_comment(video_id=video_id, text=comment_text, author_phone=author.phone,
                                              author_email=author.email)
+
+        CommentManager.add_comment(comment)
 
         video.comments.append(comment.comment_id)
         VideoManager.update_video_data(video)

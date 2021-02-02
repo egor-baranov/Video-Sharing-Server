@@ -39,7 +39,7 @@ class Comment:
 
     def to_dict(self):
         return {
-            "video_id": self.video_id,
+            "videoId": self.video_id,
             "authorEmail": self.author_email,
             "authorPhone": self.author_phone,
             "replies": self.replies,
