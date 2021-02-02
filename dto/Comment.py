@@ -1,9 +1,6 @@
+import random
 import time
 from typing import List
-import random
-
-from dto.User import User
-from dto.Video import Video
 
 
 class Comment:

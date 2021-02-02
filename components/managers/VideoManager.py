@@ -1,3 +1,5 @@
+from dto.Comment import CommentFactory
+from dto.User import User
 from dto.Video import *
 from components.database.dbworker import DatabaseWorker
 
@@ -27,7 +29,11 @@ class VideoManager:
         DatabaseWorker.write_videos(videos)
 
     @staticmethod
-    def add_comment_to_video(video_id: int, comment_text: str):
+    def add_comment_to_video(video_id: int, author: User, comment_text: str):
         video = VideoManager.get_video_by_id(video_id)
-        video.comments.append(comment_text)
+
+        comment = CommentFactory.new_comment(video_id=video_id, text=comment_text, author_phone=author.phone,
+                                             author_email=author.email)
+
+        video.comments.append(comment.comment_id)
         VideoManager.update_video_data(video)

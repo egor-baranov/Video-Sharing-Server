@@ -233,7 +233,7 @@ def exist():
         jsonify(
             {
                 "ok": UserManager.get_user_by_email(email).is_not_fake()
-                or UserManager.get_user_by_phone(phone).is_not_fake()
+                      or UserManager.get_user_by_phone(phone).is_not_fake()
             }
         )
     )
@@ -279,6 +279,7 @@ def like_video():
             UserManager.update_user_data(user)
             resp.headers = headers
             return resp
+
     resp = make_response(jsonify({"ok": False}))
     DatabaseWorker.write_videos(videos)
     UserManager.update_user_data(user)
