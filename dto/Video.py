@@ -17,17 +17,17 @@ class Video:
     comments: typing.List[int] = []
 
     def __init__(
-        self,
-        title: str = "",
-        description: str = "",
-        tags: str = "",
-        size: int = 0,
-        length: int = 0,
-        views: int = 0,
-        like_count: int = 0,
-        video_id: int = 0,
-        comments: typing.List[int] = None,
-        upload_time: float = 0,
+            self,
+            title: str = "",
+            description: str = "",
+            tags: str = "",
+            size: int = 0,
+            length: int = 0,
+            views: int = 0,
+            like_count: int = 0,
+            video_id: int = 0,
+            comments: typing.List[int] = None,
+            upload_time: float = 0,
     ):
         self.title = title
         self.description = description
@@ -62,15 +62,16 @@ class VideoFactory:
 
     @staticmethod
     def new_video(
-        title: str,
-        description: str,
-        tags: str,
-        size: int,
-        length: int,
-        views: int,
-        like_count: int,
-        video_id: int,
-        upload_time: float = 0,
+            title: str,
+            description: str,
+            tags: str,
+            size: int,
+            length: int,
+            views: int,
+            like_count: int,
+            video_id: int,
+            comments=None,
+            upload_time: float = 0,
     ):
         return Video(
             title,
@@ -81,6 +82,7 @@ class VideoFactory:
             views,
             like_count,
             video_id,
+            comments=comments if comments is not None else [],
             upload_time=upload_time,
         )
 
@@ -95,5 +97,6 @@ class VideoFactory:
             views=data["views"],
             like_count=data["likeCount"],
             video_id=data["videoId"],
-            upload_time=0 if "uploadTime" not in data.keys() else data["uploadTime"],
+            comments=[] if "comments" not in data.keys() else data["comments"],
+            upload_time=0 if "uploadTime" not in data.keys() else data["uploadTime"]
         )
