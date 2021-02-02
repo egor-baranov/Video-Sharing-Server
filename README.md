@@ -126,7 +126,15 @@ This request does not require any parameters.
 
 ### commentList
 
-This request doesn't work correct yet because comments needs refactoring to work with DatabaseWorker. 
+Returns list of all comments with this format:
+```
+{
+  "comments": [
+    // list of comments data
+  ]
+}
+```
+This request does not require any parameters.
 
 ### addVideo
 
@@ -260,9 +268,69 @@ Parameter | Description
 
 ### likeVideo
 
+Request that is used to like or dislike (in case video is already liked) video.
+Response format:
+```
+{
+  "ok": true,
+  "likeCount": *number of likes for the video*,
+  "isLiked": *true or false depending on whether the video is now liked* 
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```videoId``` | Id of video that should be liked.
+
 ### videoLikeCount
 
+Request that returns number of likes of video and a flag indicating whether the video is liked .
+Response format:
+```
+{
+  "ok": true,
+  "likeCount": *number of likes for the video*,
+  "isLiked": *true or false depending on whether the video is now liked* 
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```videoId``` | Id of video.
+
 ### openVideo
+
+Adds view to video, returns view and comment count with fromat:
+```
+{
+  "ok": true,
+  "viewCount": *number of views for the video*,
+  "commentCount": *number of comments for the video*
+}
+```
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of video.
+
+### getUser
+
+Returns data of one used serialized to dictionary:
+```
+{
+  "ok": true,
+  "userData": *User object serialized to dictionary*
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
 
 ## Admin requests
 
@@ -288,6 +356,7 @@ Returns list of all blocked users with this format:
 This request does not require any parameters.
 
 ### resetPassword
+
 Admin request that is used to reset password of user with selected login (phone or email).
 
 Parameter | Description
@@ -296,6 +365,58 @@ Parameter | Description
 ```email``` | Email of user.
 
 ### deleteComment
+
+### getStats
+
+Returns app statistic (loaded videos, created comments and registered users), format:
+```
+{
+  "ok": true, 
+  "videosUploadedCount": {
+    "forLastDay": 0,
+    "forLastWeek": 0,
+    "forLastMonth": 0
+  },
+  "usersRegisteredCount": {
+    "forLastDay": 0,
+    "forLastWeek": 0,
+    "forLastMonth": 0
+  },
+  "commentsLeftCount": {
+    "forLastDay": 0,
+    "forLastWeek": 0,
+    "forLastMonth": 0
+  }
+}
+```
+
+This request does not require any parameters.
+
+## User data editing
+
+### editUserName
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```username``` | New username that will be set to user.
+
+### editUserBirthDate
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```birthDate``` | New birth date that will be set to user.
+
+### editUserCity
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```city``` | New city that will be set to user.
 
 ## Link to the app repository
 https://github.com/egor-baranov/Video-Sharing-App
