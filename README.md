@@ -296,7 +296,33 @@ Parameter | Description
 
 ### openVideo
 
+Adds view to video, returns view and comment count with fromat:
+```
+{
+  "ok": true,
+  "viewCount": *number of views for the video*,
+  "commentCount": *number of comments for the video*
+}
+```
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of video.
+
 ### getUser
+
+Returns data of one used serialized to dictionary:
+```
+{
+  "ok": true,
+  "userData": *User object serialized to dictionary*
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
 
 ## Admin requests
 
@@ -330,6 +356,14 @@ Parameter | Description
 ```email``` | Email of user.
 
 ### deleteComment
+
+## User data editing
+
+### editUserName
+
+### editUserBirthDate
+
+### editUserCity
 
 ## Link to the app repository
 https://github.com/egor-baranov/Video-Sharing-App
