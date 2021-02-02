@@ -396,6 +396,15 @@ This request does not require any parameters.
 
 ### editUserName
 
+Request that is user to set new username to user with selected login (email/phone).
+Response format:
+```
+{
+  "ok": true,
+  "userData": *User object serialized to dictionary*
+}
+```
+
 Parameter | Description
 ----------|-------
 ```phone``` | Phone number of user.
@@ -404,6 +413,15 @@ Parameter | Description
 
 ### editUserBirthDate
 
+Request that is user to set new birth date to user with selected login (email/phone).
+Response format:
+```
+{
+  "ok": true,
+  "userData": *User object serialized to dictionary*
+}
+```
+
 Parameter | Description
 ----------|-------
 ```phone``` | Phone number of user.
@@ -411,6 +429,15 @@ Parameter | Description
 ```birthDate``` | New birth date that will be set to user.
 
 ### editUserCity
+
+Request that is user to set new city to user with selected login (email/phone).
+Response format:
+```
+{
+  "ok": true,
+  "userData": *User object serialized to dictionary*
+}
+```
 
 Parameter | Description
 ----------|-------
