@@ -10,8 +10,8 @@ from components.managers.VideoManager import VideoManager
 from dto.User import User, UserFactory
 from dto.Video import Video
 
-
 regular_requests_blueprint = Blueprint("regular", __name__, template_folder="templates", static_folder="static")
+
 
 @app.route("/login")
 @cross_origin()

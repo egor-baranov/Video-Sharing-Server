@@ -73,5 +73,5 @@ class VideoFactory:
             views=data["views"],
             like_count=data["likeCount"],
             video_id=data["videoId"],
-            upload_time=data["uploadTime"]
+            upload_time=0 if "uploadTime" not in data.keys() else data["uploadTime"]
         )
