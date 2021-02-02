@@ -42,27 +42,27 @@ def get_stats():
             "ok": True,
             "videosUploadedCount": {
                 "forLastDay": sum(
-                    [(v.upload_time - time.time()) <= SECONDS_IN_DAY for v in DatabaseWorker.read_videos()]),
+                    [(time.time() - v.upload_time) <= SECONDS_IN_DAY for v in DatabaseWorker.read_videos()]),
                 "forLastWeek": sum(
-                    [(v.upload_time - time.time()) <= SECONDS_IN_WEEK for v in DatabaseWorker.read_videos()]),
+                    [(time.time() - v.upload_time) <= SECONDS_IN_WEEK for v in DatabaseWorker.read_videos()]),
                 "forLastMonth": sum(
-                    [(v.upload_time - time.time()) <= SECONDS_IN_MONTH for v in DatabaseWorker.read_videos()])
+                    [(time.time() - v.upload_time) <= SECONDS_IN_MONTH for v in DatabaseWorker.read_videos()])
             },
             "usersRegisteredCount": {
                 "forLastDay": sum(
-                    [(u.register_time - time.time()) <= SECONDS_IN_DAY for u in DatabaseWorker.read_users()]),
+                    [(time.time() - u.register_time) <= SECONDS_IN_DAY for u in DatabaseWorker.read_users()]),
                 "forLastWeek": sum(
-                    [(u.register_time - time.time()) <= SECONDS_IN_WEEK for u in DatabaseWorker.read_users()]),
+                    [(time.time() - u.register_time) <= SECONDS_IN_WEEK for u in DatabaseWorker.read_users()]),
                 "forLastMonth": sum(
-                    [(u.register_time - time.time()) <= SECONDS_IN_MONTH for u in DatabaseWorker.read_users()])
+                    [(time.time() - u.register_time) <= SECONDS_IN_MONTH for u in DatabaseWorker.read_users()])
             },
             "commentsLeftCount": {
                 "forLastDay": sum(
-                    [(c.creation_time - time.time()) <= SECONDS_IN_DAY for c in DatabaseWorker.read_comments()]),
+                    [(time.time() - c.creation_time) <= SECONDS_IN_DAY for c in DatabaseWorker.read_comments()]),
                 "forLastWeek": sum(
-                    [(c.creation_time - time.time()) <= SECONDS_IN_WEEK for c in DatabaseWorker.read_comments()]),
+                    [(time.time() - c.creation_time) <= SECONDS_IN_WEEK for c in DatabaseWorker.read_comments()]),
                 "forLastMonth": sum(
-                    [(c.creation_time - time.time()) <= SECONDS_IN_MONTH for c in DatabaseWorker.read_comments()])
+                    [(time.time() - c.creation_time) <= SECONDS_IN_MONTH for c in DatabaseWorker.read_comments()])
             }
         })
     )
