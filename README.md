@@ -396,9 +396,27 @@ This request does not require any parameters.
 
 ### editUserName
 
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```username``` | New username that will be set to user.
+
 ### editUserBirthDate
 
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```birthDate``` | New birth date that will be set to user.
+
 ### editUserCity
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```city``` | New city that will be set to user.
 
 ## Link to the app repository
 https://github.com/egor-baranov/Video-Sharing-App
