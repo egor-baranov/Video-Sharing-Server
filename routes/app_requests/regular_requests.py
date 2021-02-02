@@ -191,7 +191,17 @@ def add_comment():
     video_id = int(request.args.get("videoId"))
     comment_text = request.args.get("commentText")
 
-    VideoManager.add_comment_to_video(video_id, comment_text)
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+
+    VideoManager.add_comment_to_video(video_id=video_id, comment_text=comment_text, author=user)
 
     resp = make_response(
         jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments})
