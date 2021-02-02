@@ -24,6 +24,10 @@ def edit_user_name():
     user.username = request.args.get("username")
     UserManager.update_user_data(user)
 
+    resp = make_response(jsonify({"ok": True, "userData": user.to_dict()}))
+    resp.headers = headers
+    return resp
+
 
 @app.route("/editUserBirthDate")
 @cross_origin()
@@ -40,6 +44,10 @@ def edit_user_birth_date():
     user.birth_date = request.args.get("birthDate")
     UserManager.update_user_data(user)
 
+    resp = make_response(jsonify({"ok": True, "userData": user.to_dict()}))
+    resp.headers = headers
+    return resp
+
 
 @app.route("/editUserCity")
 @cross_origin()
@@ -55,3 +63,7 @@ def edit_user_city():
     user = email_user if email_user.is_not_fake() else phone_user
     user.city = request.args.get("city")
     UserManager.update_user_data(user)
+
+    resp = make_response(jsonify({"ok": True, "userData": user.to_dict()}))
+    resp.headers = headers
+    return resp
