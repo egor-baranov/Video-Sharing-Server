@@ -1,1 +1,85 @@
-[{"username": "admin", "phone": "89004445533", "password": "password", "city": "city", "birthDate": "31.12.2000", "email": "admin@admin.com", "uploadedVideos": [1534532, 7650646, 43214], "likedVideos": [1534532, 7650646, 4308610], "likedComments": [], "registerTime": 3}]
+[
+  {
+    "username": "admin",
+    "phone": "89004445533",
+    "password": "password",
+    "city": "city",
+    "birthDate": "31.12.2000",
+    "email": "admin@admin.com",
+    "uploadedVideos": [
+      1534532,
+      7650646,
+      893658,
+      2536346,
+      4588825,
+      1997380,
+      946366,
+      4433512,
+      1359421
+    ],
+    "likedVideos": [
+      7805751
+    ],
+    "likedComments": []
+  },
+  {
+    "username": "egor",
+    "phone": "88805553535",
+    "password": "123456",
+    "city": "shs",
+    "birthDate": "31.12.2000",
+    "email": "a@b.com",
+    "uploadedVideos": [],
+    "likedVideos": [
+      7805751,
+      7650646,
+      1534532
+    ],
+    "likedComments": []
+  },
+  {
+    "username": "\u0430\u043b\u0435\u043a\u0441",
+    "phone": "89161500314",
+    "password": "12345678",
+    "city": "\u041c\u043e\u0441\u043a\u0432\u0430",
+    "birthDate": "31.12.2000",
+    "email": "cosword@rambler.ru",
+    "uploadedVideos": [
+      3875204,
+      5485667,
+      8931796,
+      9944159,
+      4374201
+    ],
+    "likedVideos": [
+      7650646,
+      1534532,
+      0
+    ],
+    "likedComments": []
+  },
+  {
+    "username": "\u0422\u0438\u043c\u0443\u0440",
+    "phone": "89258618260",
+    "password": "tima1234",
+    "city": "\u0422\u0443\u043b\u0430",
+    "birthDate": "13.01.1995",
+    "email": "timur@p1atform.ru",
+    "uploadedVideos": [
+      5914593
+    ],
+    "likedVideos": [],
+    "likedComments": []
+  },
+  {
+    "username": "\u0422\u0438\u043c\u0443\u0440",
+    "phone": "89258618260",
+    "password": "tima1234",
+    "city": "\u0422\u0443\u043b\u0430",
+    "birthDate": "13.01.1995",
+    "email": "timur@p1atform.ru",
+    "uploadedVideos": [],
+    "likedVideos": [],
+    "likedComments": []
+  }
+]
