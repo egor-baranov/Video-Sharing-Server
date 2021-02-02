@@ -126,7 +126,15 @@ This request does not require any parameters.
 
 ### commentList
 
-This request doesn't work correct yet because comments needs refactoring to work with DatabaseWorker. 
+Returns list of all comments with this format:
+```
+{
+  "comments": [
+    // list of comments data
+  ]
+}
+```
+This request does not require any parameters.
 
 ### addVideo
 
@@ -348,6 +356,7 @@ Returns list of all blocked users with this format:
 This request does not require any parameters.
 
 ### resetPassword
+
 Admin request that is used to reset password of user with selected login (phone or email).
 
 Parameter | Description
@@ -356,6 +365,32 @@ Parameter | Description
 ```email``` | Email of user.
 
 ### deleteComment
+
+### getStats
+
+Returns app statistic (loaded videos, created comments and registered users), format:
+```
+{
+  "ok": true, 
+  "videosUploadedCount": {
+    "forLastDay": 0,
+    "forLastWeek": 0,
+    "forLastMonth": 0
+  },
+  "usersRegisteredCount": {
+    "forLastDay": 0,
+    "forLastWeek": 0,
+    "forLastMonth": 0
+  },
+  "commentsLeftCount": {
+    "forLastDay": 0,
+    "forLastWeek": 0,
+    "forLastMonth": 0
+  }
+}
+```
+
+This request does not require any parameters.
 
 ## User data editing
 
