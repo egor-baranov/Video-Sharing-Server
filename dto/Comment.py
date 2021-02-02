@@ -10,9 +10,9 @@ class Comment:
     video_id: int
     author_email: str
     author_phone: str
-    replies: List = []
-    likes: int
+    replies: List[int] = []
     text: str
+    likes: int
     comment_id: int
 
     creation_time: float
@@ -20,26 +20,32 @@ class Comment:
     def __init__(
         self,
         video_id: int,
-        author: User,
-        replies: List,
+        author_email: str,
+        author_phone: str,
+        replies: List[int],
         text: str,
+        likes: int = 0,
+        comment_id: int = 0,
         creation_time: float = 0,
     ):
         self.video_id = video_id
-        self.author = author
+        self.author_email = author_email
+        self.author_phone = author_phone
         self.replies = replies
         self.text = text
-        self.likes = 0
+        self.likes = likes
 
-        self.comment_id = random.randint(100000, 999999)
+        self.comment_id = (
+            random.randint(100000, 999999) if comment_id == 0 else comment_id
+        )
         self.creation_time = time.time() if creation_time == 0 else creation_time
 
     def to_dict(self):
         return {
             "video_id": self.video_id,
-            "authorEmail": self.author.to_dict()["email"],
-            "authorPhone": self.author.to_dict()["phone"],
-            "replies": [r.to_dict() for r in self.replies],
+            "authorEmail": self.author_email,
+            "authorPhone": self.author_phone,
+            "replies": self.replies,
             "text": self.text,
             "likes": self.likes,
             "commentId": self.comment_id,
@@ -49,9 +55,36 @@ class Comment:
 
 class CommentFactory:
     @staticmethod
-    def new_comment(video: Video, author: User, replies: List[int], text: str):
-        return Comment()
+    def new_comment(
+        video_id: int,
+        author_email: str,
+        author_phone: str,
+        replies: List[int],
+        text: str,
+        likes: int = 0,
+        creation_time: float = 0,
+        comment_id: int = 0,
+    ):
+        return Comment(
+            video_id,
+            author_email,
+            author_phone,
+            replies,
+            text,
+            likes=likes,
+            creation_time=creation_time,
+            comment_id=comment_id,
+        )
 
     @staticmethod
     def from_dict(data: dict):
-        return CommentFactory.new_comment(data)
+        return CommentFactory.new_comment(
+            video_id=data["videoId"],
+            author_email=data["authorEmail"],
+            author_phone=data["authorPhone"],
+            replies=data["replies"],
+            text=data["text"],
+            likes=data["likes"],
+            creation_time=data["creationTime"],
+            comment_id=data["commentId"],
+        )
