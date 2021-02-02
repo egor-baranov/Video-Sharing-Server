@@ -366,6 +366,12 @@ Parameter | Description
 
 ### deleteComment
 
+Replaces comment's text with comething like "-This comment was deleted by administration-".
+
+Parameter | Description
+----------|-------
+```id``` | Comment's identificator.
+
 ### getStats
 
 Returns app statistic (loaded videos, created comments and registered users), format:
