@@ -14,6 +14,6 @@ headers = {
     'Content-Type': "application/json; charset=utf-8"
 }
 
-SECONDS_IN_DAY: Final = 86400
+SECONDS_IN_DAY: Final = 3600 * 24
 SECONDS_IN_WEEK: Final = SECONDS_IN_DAY * 7
 SECONDS_IN_MONTH: Final = SECONDS_IN_DAY * 30

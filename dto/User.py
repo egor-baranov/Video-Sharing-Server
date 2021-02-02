@@ -27,7 +27,7 @@ class User:
                  uploaded_videos: typing.List[int] = None,
                  liked_videos: typing.List[int] = None,
                  liked_comments: typing.List[int] = None,
-                 register_time: int = 0):
+                 register_time: float = 0):
         self.username = username
         self.phone = phone
         self.password = password
@@ -81,8 +81,9 @@ class UserFactory:
     @staticmethod
     def new_user(username: str, phone: str, password: str, city: str, birth_date: str, email: str,
                  uploaded_videos: typing.List[int] = None, liked_videos: typing.List[int] = None,
-                 liked_comments: typing.List[int] = None) -> User:
-        return User(username, phone, password, city, birth_date, email, uploaded_videos, liked_videos, liked_comments)
+                 liked_comments: typing.List[int] = None, register_time: float = 0) -> User:
+        return User(username, phone, password, city, birth_date, email, uploaded_videos, liked_videos, liked_comments,
+                    register_time)
 
     @staticmethod
     def from_dict(data: dict):
@@ -95,7 +96,8 @@ class UserFactory:
             email=data["email"],
             uploaded_videos=data["uploadedVideos"],
             liked_videos=data["likedVideos"],
-            liked_comments=data["likedComments"]
+            liked_comments=data["likedComments"],
+            register_time=data["registerTime"]
         )
 
     @staticmethod
