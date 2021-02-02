@@ -59,8 +59,8 @@ class VideoFactory:
 
     @staticmethod
     def new_video(title: str, description: str, tags: str, size: int, length: int, views: int, like_count: int,
-                  video_id: int):
-        return Video(title, description, tags, size, length, views, like_count, video_id)
+                  video_id: int, upload_time: float = 0):
+        return Video(title, description, tags, size, length, views, like_count, video_id, upload_time=upload_time)
 
     @staticmethod
     def from_dict(data: dict):
@@ -72,5 +72,6 @@ class VideoFactory:
             length=data["length"],
             views=data["views"],
             like_count=data["likeCount"],
-            video_id=data["videoId"]
+            video_id=data["videoId"],
+            upload_time=data["uploadTime"]
         )
