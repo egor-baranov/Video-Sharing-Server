@@ -1,6 +1,7 @@
 import random
 
 from flask import make_response, jsonify, request
+from flask import Blueprint
 
 from components.core import *
 from components.database.dbworker import DatabaseWorker
@@ -9,6 +10,8 @@ from components.managers.VideoManager import VideoManager
 from dto.User import User, UserFactory
 from dto.Video import Video
 
+
+regular_requests_blueprint = Blueprint("regular", __name__, template_folder="templates", static_folder="static")
 
 @app.route("/login")
 @cross_origin()

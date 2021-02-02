@@ -1,12 +1,14 @@
 import time
 
-from components.core import *
 from flask import make_response, jsonify, request
-from flask_cors import cross_origin
+from flask import Blueprint
 
+from components.core import *
 from components.database.dbworker import DatabaseWorker
 from components.managers.CommentManager import CommentManager
 from components.managers.UserManager import UserManager
+
+admin_requests_blueprint = Blueprint("admin", __name__, template_folder="templates", static_folder="static")
 
 
 @app.route("/blockUser")

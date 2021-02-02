@@ -1,8 +1,10 @@
-from components.core import *
 from flask import make_response, jsonify, request
-from flask_cors import cross_origin
+from flask import Blueprint
 
+from components.core import *
 from components.managers.UserManager import UserManager
+
+user_editing_blueprint = Blueprint("edit", __name__, template_folder="templates", static_folder="static")
 
 
 @app.route("/editUserName")

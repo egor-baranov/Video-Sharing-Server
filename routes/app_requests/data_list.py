@@ -1,7 +1,10 @@
 from flask import make_response, jsonify, request
+from flask import Blueprint
 
-from components.core import *
 from components.database.dbworker import DatabaseWorker
+from components.core import *
+
+data_list_blueprint = Blueprint("list", __name__, template_folder="templates", static_folder="static")
 
 
 @app.route("/list")

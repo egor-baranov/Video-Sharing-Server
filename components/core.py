@@ -1,8 +1,6 @@
 from flask import Flask
 from flask_cors import *
 
-from typing import Final
-
 from components.config import *
 
 app = Flask(__name__)
