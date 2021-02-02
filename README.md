@@ -260,9 +260,43 @@ Parameter | Description
 
 ### likeVideo
 
+Request that is used to like or dislike (in case video is already liked) video.
+Response format:
+```
+{
+  "ok": true,
+  "likeCount": *number of likes for the video*,
+  "isLiked": *true or false depending on whether the video is now liked* 
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```videoId``` | Id of video that should be liked.
+
 ### videoLikeCount
 
+Request that returns number of likes of video and a flag indicating whether the video is liked .
+Response format:
+```
+{
+  "ok": true,
+  "likeCount": *number of likes for the video*,
+  "isLiked": *true or false depending on whether the video is now liked* 
+}
+```
+
+Parameter | Description
+----------|-------
+```phone``` | Phone number of user.
+```email``` | Email of user.
+```videoId``` | Id of video.
+
 ### openVideo
+
+### getUser
 
 ## Admin requests
 
