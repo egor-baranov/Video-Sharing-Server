@@ -22,8 +22,8 @@ class Comment:
         video_id: int,
         author_email: str,
         author_phone: str,
-        replies: List[int],
         text: str,
+        replies: List[int] = None,
         likes: int = 0,
         comment_id: int = 0,
         creation_time: float = 0,
@@ -31,10 +31,10 @@ class Comment:
         self.video_id = video_id
         self.author_email = author_email
         self.author_phone = author_phone
-        self.replies = replies
         self.text = text
         self.likes = likes
 
+        self.replies = replies if replies is not None else []
         self.comment_id = (
             random.randint(100000, 999999) if comment_id == 0 else comment_id
         )
@@ -59,8 +59,8 @@ class CommentFactory:
         video_id: int,
         author_email: str,
         author_phone: str,
-        replies: List[int],
         text: str,
+        replies: List[int] = None,
         likes: int = 0,
         creation_time: float = 0,
         comment_id: int = 0,
@@ -69,8 +69,8 @@ class CommentFactory:
             video_id,
             author_email,
             author_phone,
-            replies,
-            text,
+            text=text,
+            replies=replies,
             likes=likes,
             creation_time=creation_time,
             comment_id=comment_id,
@@ -82,8 +82,8 @@ class CommentFactory:
             video_id=data["videoId"],
             author_email=data["authorEmail"],
             author_phone=data["authorPhone"],
-            replies=data["replies"],
             text=data["text"],
+            replies=data["replies"],
             likes=data["likes"],
             creation_time=data["creationTime"],
             comment_id=data["commentId"],
