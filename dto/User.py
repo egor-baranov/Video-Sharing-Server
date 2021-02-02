@@ -18,17 +18,17 @@ class User:
     register_time: float
 
     def __init__(
-        self,
-        username: str = "",
-        phone: str = "",
-        password: str = "",
-        city: str = "",
-        birth_date: str = "",
-        email: str = "",
-        uploaded_videos: typing.List[int] = None,
-        liked_videos: typing.List[int] = None,
-        liked_comments: typing.List[int] = None,
-        register_time: float = 0,
+            self,
+            username: str = "",
+            phone: str = "",
+            password: str = "",
+            city: str = "",
+            birth_date: str = "",
+            email: str = "",
+            uploaded_videos: typing.List[int] = None,
+            liked_videos: typing.List[int] = None,
+            liked_comments: typing.List[int] = None,
+            register_time: float = 0,
     ):
         self.username = username
         self.phone = phone
@@ -80,16 +80,16 @@ class UserFactory:
 
     @staticmethod
     def new_user(
-        username: str,
-        phone: str,
-        password: str,
-        city: str,
-        birth_date: str,
-        email: str,
-        uploaded_videos: typing.List[int] = None,
-        liked_videos: typing.List[int] = None,
-        liked_comments: typing.List[int] = None,
-        register_time: float = 0,
+            username: str,
+            phone: str,
+            password: str,
+            city: str,
+            birth_date: str,
+            email: str,
+            uploaded_videos: typing.List[int] = None,
+            liked_videos: typing.List[int] = None,
+            liked_comments: typing.List[int] = None,
+            register_time: float = 0,
     ) -> User:
         return User(
             username,
@@ -116,7 +116,7 @@ class UserFactory:
             uploaded_videos=data["uploadedVideos"],
             liked_videos=data["likedVideos"],
             liked_comments=data["likedComments"],
-            register_time=data["registerTime"],
+            register_time=0 if "registerTime" not in data.keys() else data["registerTime"],
         )
 
     @staticmethod
