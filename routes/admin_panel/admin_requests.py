@@ -8,7 +8,9 @@ from components.database.dbworker import DatabaseWorker
 from components.managers.CommentManager import CommentManager
 from components.managers.UserManager import UserManager
 
-admin_requests_blueprint = Blueprint("admin", __name__, template_folder="templates", static_folder="static")
+admin_requests_blueprint = Blueprint(
+    "admin", __name__, template_folder="templates", static_folder="static"
+)
 
 
 @app.route("/blockUser")
@@ -20,12 +22,28 @@ def block_user():
     if phone_user.is_not_fake():
         UserManager.block_user(phone_user)
         resp = make_response(
-            jsonify({"ok": True, "blockedUsers": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]}))
+            jsonify(
+                {
+                    "ok": True,
+                    "blockedUsers": [
+                        u.to_dict() for u in DatabaseWorker.read_blocked_users()
+                    ],
+                }
+            )
+        )
 
     elif email_user.is_not_fake():
         UserManager.block_user(email_user)
         resp = make_response(
-            jsonify({"ok": True, "blockedUsers": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]}))
+            jsonify(
+                {
+                    "ok": True,
+                    "blockedUsers": [
+                        u.to_dict() for u in DatabaseWorker.read_blocked_users()
+                    ],
+                }
+            )
+        )
 
     else:
         resp = make_response(jsonify({"ok": False}))
@@ -38,33 +56,71 @@ def block_user():
 @cross_origin()
 def get_stats():
     resp = make_response(
-        jsonify({
-            "ok": True,
-            "videosUploadedCount": {
-                "forLastDay": sum(
-                    [(time.time() - v.upload_time) <= SECONDS_IN_DAY for v in DatabaseWorker.read_videos()]),
-                "forLastWeek": sum(
-                    [(time.time() - v.upload_time) <= SECONDS_IN_WEEK for v in DatabaseWorker.read_videos()]),
-                "forLastMonth": sum(
-                    [(time.time() - v.upload_time) <= SECONDS_IN_MONTH for v in DatabaseWorker.read_videos()])
-            },
-            "usersRegisteredCount": {
-                "forLastDay": sum(
-                    [(time.time() - u.register_time) <= SECONDS_IN_DAY for u in DatabaseWorker.read_users()]),
-                "forLastWeek": sum(
-                    [(time.time() - u.register_time) <= SECONDS_IN_WEEK for u in DatabaseWorker.read_users()]),
-                "forLastMonth": sum(
-                    [(time.time() - u.register_time) <= SECONDS_IN_MONTH for u in DatabaseWorker.read_users()])
-            },
-            "commentsLeftCount": {
-                "forLastDay": sum(
-                    [(time.time() - c.creation_time) <= SECONDS_IN_DAY for c in DatabaseWorker.read_comments()]),
-                "forLastWeek": sum(
-                    [(time.time() - c.creation_time) <= SECONDS_IN_WEEK for c in DatabaseWorker.read_comments()]),
-                "forLastMonth": sum(
-                    [(time.time() - c.creation_time) <= SECONDS_IN_MONTH for c in DatabaseWorker.read_comments()])
+        jsonify(
+            {
+                "ok": True,
+                "videosUploadedCount": {
+                    "forLastDay": sum(
+                        [
+                            (time.time() - v.upload_time) <= SECONDS_IN_DAY
+                            for v in DatabaseWorker.read_videos()
+                        ]
+                    ),
+                    "forLastWeek": sum(
+                        [
+                            (time.time() - v.upload_time) <= SECONDS_IN_WEEK
+                            for v in DatabaseWorker.read_videos()
+                        ]
+                    ),
+                    "forLastMonth": sum(
+                        [
+                            (time.time() - v.upload_time) <= SECONDS_IN_MONTH
+                            for v in DatabaseWorker.read_videos()
+                        ]
+                    ),
+                },
+                "usersRegisteredCount": {
+                    "forLastDay": sum(
+                        [
+                            (time.time() - u.register_time) <= SECONDS_IN_DAY
+                            for u in DatabaseWorker.read_users()
+                        ]
+                    ),
+                    "forLastWeek": sum(
+                        [
+                            (time.time() - u.register_time) <= SECONDS_IN_WEEK
+                            for u in DatabaseWorker.read_users()
+                        ]
+                    ),
+                    "forLastMonth": sum(
+                        [
+                            (time.time() - u.register_time) <= SECONDS_IN_MONTH
+                            for u in DatabaseWorker.read_users()
+                        ]
+                    ),
+                },
+                "commentsLeftCount": {
+                    "forLastDay": sum(
+                        [
+                            (time.time() - c.creation_time) <= SECONDS_IN_DAY
+                            for c in DatabaseWorker.read_comments()
+                        ]
+                    ),
+                    "forLastWeek": sum(
+                        [
+                            (time.time() - c.creation_time) <= SECONDS_IN_WEEK
+                            for c in DatabaseWorker.read_comments()
+                        ]
+                    ),
+                    "forLastMonth": sum(
+                        [
+                            (time.time() - c.creation_time) <= SECONDS_IN_MONTH
+                            for c in DatabaseWorker.read_comments()
+                        ]
+                    ),
+                },
             }
-        })
+        )
     )
     resp.headers = headers
     return resp
@@ -79,9 +135,9 @@ def restore_user():
 @app.route("/blockedUserList")
 @cross_origin()
 def blocked_user_list():
-    resp = make_response(jsonify({
-        "users": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]
-    }))
+    resp = make_response(
+        jsonify({"users": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]})
+    )
     resp.headers = headers
     return resp
 
@@ -97,12 +153,23 @@ def reset_password():
     for i in range(len(users)):
         if users[i].email == email or users[i].phone == phone:
             users[i].password = ""
-            resp = make_response(jsonify({"ok": True, "users": [u.to_dict() for u in DatabaseWorker.read_users()]}))
+            resp = make_response(
+                jsonify(
+                    {
+                        "ok": True,
+                        "users": [u.to_dict() for u in DatabaseWorker.read_users()],
+                    }
+                )
+            )
             DatabaseWorker.write_users(users)
             resp.headers = headers
             return resp
 
-    resp = make_response(jsonify({"ok": False, "users": [u.to_dict() for u in DatabaseWorker.read_users()]}))
+    resp = make_response(
+        jsonify(
+            {"ok": False, "users": [u.to_dict() for u in DatabaseWorker.read_users()]}
+        )
+    )
     DatabaseWorker.write_users(users)
     resp.headers = headers
     return resp

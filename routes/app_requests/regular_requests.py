@@ -10,7 +10,9 @@ from components.managers.VideoManager import VideoManager
 from dto.User import User, UserFactory
 from dto.Video import Video
 
-regular_requests_blueprint = Blueprint("regular", __name__, template_folder="templates", static_folder="static")
+regular_requests_blueprint = Blueprint(
+    "regular", __name__, template_folder="templates", static_folder="static"
+)
 
 
 @app.route("/login")
@@ -21,16 +23,10 @@ def login():
     password = request.args.get("password")
 
     if phone_user.is_not_fake() and phone_user.password == password:
-        resp = make_response(jsonify({
-            "ok": True,
-            "user": phone_user.to_dict()
-        }))
+        resp = make_response(jsonify({"ok": True, "user": phone_user.to_dict()}))
 
     elif email_user.is_not_fake() and email_user.password == password:
-        resp = make_response(jsonify({
-            "ok": True,
-            "user": email_user.to_dict()
-        }))
+        resp = make_response(jsonify({"ok": True, "user": email_user.to_dict()}))
 
     else:
         resp = make_response(jsonify({"ok": False, "user": User().to_dict()}))
@@ -48,7 +44,7 @@ def register():
         password=request.args.get("password"),
         email=request.args.get("email"),
         city=request.args.get("city"),
-        birth_date=request.args.get("birthDate")
+        birth_date=request.args.get("birthDate"),
     )
 
     UserManager.add_user(user)
@@ -142,12 +138,14 @@ def get_uploaded_video_stats():
         like_count += video.likes
 
     resp = make_response(
-        jsonify({
-            "ok": True,
-            "viewCount": view_count,
-            "videoCount": video_count,
-            "likeCount": like_count
-        })
+        jsonify(
+            {
+                "ok": True,
+                "viewCount": view_count,
+                "videoCount": video_count,
+                "likeCount": like_count,
+            }
+        )
     )
     resp.headers = headers
     return resp
@@ -195,7 +193,9 @@ def add_comment():
 
     VideoManager.add_comment_to_video(video_id, comment_text)
 
-    resp = make_response(jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments}))
+    resp = make_response(
+        jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments})
+    )
     resp.headers = headers
     return resp
 
@@ -205,7 +205,9 @@ def add_comment():
 def get_comments():
     video_id = int(request.args.get("videoId"))
 
-    resp = make_response(jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments}))
+    resp = make_response(
+        jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments})
+    )
     resp.headers = headers
     return resp
 
@@ -228,8 +230,13 @@ def exist():
     email = request.args.get("email")
 
     resp = make_response(
-        jsonify({"ok": UserManager.get_user_by_email(email).is_not_fake() or UserManager.get_user_by_phone(
-            phone).is_not_fake()}))
+        jsonify(
+            {
+                "ok": UserManager.get_user_by_email(email).is_not_fake()
+                or UserManager.get_user_by_phone(phone).is_not_fake()
+            }
+        )
+    )
     resp.headers = headers
     return resp
 
@@ -260,8 +267,14 @@ def like_video():
                 videos[i].likes += 1
 
             resp = make_response(
-                jsonify({"ok": True, "likeCount": videos[i].likes,
-                         "isLiked": video_id in user.liked_videos}))
+                jsonify(
+                    {
+                        "ok": True,
+                        "likeCount": videos[i].likes,
+                        "isLiked": video_id in user.liked_videos,
+                    }
+                )
+            )
             DatabaseWorker.write_videos(videos)
             UserManager.update_user_data(user)
             resp.headers = headers
@@ -288,8 +301,14 @@ def video_like_count():
     user = email_user if email_user.is_not_fake() else phone_user
 
     resp = make_response(
-        jsonify({"ok": True, "likeCount": VideoManager.get_video_by_id(video_id).likes,
-                 "isLiked": video_id in user.liked_videos}))
+        jsonify(
+            {
+                "ok": True,
+                "likeCount": VideoManager.get_video_by_id(video_id).likes,
+                "isLiked": video_id in user.liked_videos,
+            }
+        )
+    )
     resp.headers = headers
     return resp
 
@@ -304,10 +323,9 @@ def open_video():
     VideoManager.update_video_data(video)
 
     resp = make_response(
-        jsonify({
-            "ok": True, "viewCount": video.views,
-            "commentCount": len(video.comments)
-        })
+        jsonify(
+            {"ok": True, "viewCount": video.views, "commentCount": len(video.comments)}
+        )
     )
     resp.headers = headers
     return resp

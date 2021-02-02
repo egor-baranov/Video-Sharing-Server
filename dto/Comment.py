@@ -17,7 +17,14 @@ class Comment:
 
     creation_time: float
 
-    def __init__(self, video_id: int, author: User, replies: List, text: str, creation_time: float = 0):
+    def __init__(
+        self,
+        video_id: int,
+        author: User,
+        replies: List,
+        text: str,
+        creation_time: float = 0,
+    ):
         self.video_id = video_id
         self.author = author
         self.replies = replies
@@ -36,7 +43,7 @@ class Comment:
             "text": self.text,
             "likes": self.likes,
             "commentId": self.comment_id,
-            "creationTime": self.creation_time
+            "creationTime": self.creation_time,
         }
 
 

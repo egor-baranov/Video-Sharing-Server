@@ -18,10 +18,7 @@ class CommentManager:
     @dispatch(User, Video, str)
     def add_comment(author: User, video: Video, comment_text: str):
         new_comment = CommentFactory.new_comment(
-            video=video,
-            author=author,
-            replies=[],
-            text=comment_text
+            video=video, author=author, replies=[], text=comment_text
         )
 
         comments = DatabaseWorker.read_comments()

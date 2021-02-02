@@ -17,17 +17,19 @@ class User:
 
     register_time: float
 
-    def __init__(self,
-                 username: str = "",
-                 phone: str = "",
-                 password: str = "",
-                 city: str = "",
-                 birth_date: str = "",
-                 email: str = "",
-                 uploaded_videos: typing.List[int] = None,
-                 liked_videos: typing.List[int] = None,
-                 liked_comments: typing.List[int] = None,
-                 register_time: float = 0):
+    def __init__(
+        self,
+        username: str = "",
+        phone: str = "",
+        password: str = "",
+        city: str = "",
+        birth_date: str = "",
+        email: str = "",
+        uploaded_videos: typing.List[int] = None,
+        liked_videos: typing.List[int] = None,
+        liked_comments: typing.List[int] = None,
+        register_time: float = 0,
+    ):
         self.username = username
         self.phone = phone
         self.password = password
@@ -55,12 +57,10 @@ class User:
             "city": self.city,
             "birthDate": self.birth_date,
             "email": self.email,
-
             "uploadedVideos": self.uploaded_videos,
             "likedVideos": self.liked_videos,
             "likedComments": self.liked_comments,
-
-            "registerTime": self.register_time
+            "registerTime": self.register_time,
         }
 
     def upload_video(self, video_id: int):
@@ -79,11 +79,30 @@ class UserFactory:
         return User()
 
     @staticmethod
-    def new_user(username: str, phone: str, password: str, city: str, birth_date: str, email: str,
-                 uploaded_videos: typing.List[int] = None, liked_videos: typing.List[int] = None,
-                 liked_comments: typing.List[int] = None, register_time: float = 0) -> User:
-        return User(username, phone, password, city, birth_date, email, uploaded_videos, liked_videos, liked_comments,
-                    register_time)
+    def new_user(
+        username: str,
+        phone: str,
+        password: str,
+        city: str,
+        birth_date: str,
+        email: str,
+        uploaded_videos: typing.List[int] = None,
+        liked_videos: typing.List[int] = None,
+        liked_comments: typing.List[int] = None,
+        register_time: float = 0,
+    ) -> User:
+        return User(
+            username,
+            phone,
+            password,
+            city,
+            birth_date,
+            email,
+            uploaded_videos,
+            liked_videos,
+            liked_comments,
+            register_time,
+        )
 
     @staticmethod
     def from_dict(data: dict):
@@ -97,7 +116,7 @@ class UserFactory:
             uploaded_videos=data["uploadedVideos"],
             liked_videos=data["likedVideos"],
             liked_comments=data["likedComments"],
-            register_time=data["registerTime"]
+            register_time=data["registerTime"],
         )
 
     @staticmethod
