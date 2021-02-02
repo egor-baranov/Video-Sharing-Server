@@ -18,7 +18,7 @@ class DatabaseWorker:
     @staticmethod
     def write_users(d):
         with open(config.users_path, "wt") as f:
-            f.write(json.dumps([u.to_dict() for u in d]))
+            f.write(json.dumps([u.to_dict() for u in d], ident=2))
 
     @staticmethod
     def read_blocked_users():
@@ -34,7 +34,7 @@ class DatabaseWorker:
     @staticmethod
     def write_videos(d: typing.List[Video]):
         with open(config.videos_path, "wt") as f:
-            f.write(json.dumps([v.to_dict() for v in d]))
+            f.write(json.dumps([v.to_dict() for v in d], ident=2))
 
     # comments dto methods
     @staticmethod
@@ -45,4 +45,4 @@ class DatabaseWorker:
     @staticmethod
     def write_comments(d: typing.List[Comment]):
         with open(config.comments_path, "wt") as f:
-            f.write(json.dumps([c.to_dict() for c in d]))
+            f.write(json.dumps([c.to_dict() for c in d], ident=2))
