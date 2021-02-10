@@ -34,7 +34,7 @@ class VideoManager:
         video = VideoManager.get_video_by_id(video_id)
 
         comment = CommentFactory.new_comment(video_id=video_id, text=comment_text, author_phone=author.phone,
-                                             author_email=author.email)
+                                             author_email=author.email, author_username=author.username)
 
         CommentManager.add_comment(comment)
 
