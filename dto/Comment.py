@@ -5,6 +5,7 @@ from typing import List
 
 class Comment:
     video_id: int
+    author_username: str
     author_email: str
     author_phone: str
     replies: List[int] = []
@@ -15,17 +16,19 @@ class Comment:
     creation_time: float
 
     def __init__(
-        self,
-        video_id: int,
-        author_email: str,
-        author_phone: str,
-        text: str,
-        replies: List[int] = None,
-        likes: int = 0,
-        comment_id: int = 0,
-        creation_time: float = 0,
+            self,
+            video_id: int,
+            author_username: str,
+            author_email: str,
+            author_phone: str,
+            text: str,
+            replies: List[int] = None,
+            likes: int = 0,
+            comment_id: int = 0,
+            creation_time: float = 0,
     ):
         self.video_id = video_id
+        self.author_username = author_username
         self.author_email = author_email
         self.author_phone = author_phone
         self.text = text
@@ -40,6 +43,7 @@ class Comment:
     def to_dict(self):
         return {
             "videoId": self.video_id,
+            "authorUsername": self.author_username,
             "authorEmail": self.author_email,
             "authorPhone": self.author_phone,
             "replies": self.replies,
@@ -53,17 +57,19 @@ class Comment:
 class CommentFactory:
     @staticmethod
     def new_comment(
-        video_id: int,
-        author_email: str,
-        author_phone: str,
-        text: str,
-        replies: List[int] = None,
-        likes: int = 0,
-        creation_time: float = 0,
-        comment_id: int = 0,
+            video_id: int,
+            author_username: str,
+            author_email: str,
+            author_phone: str,
+            text: str,
+            replies: List[int] = None,
+            likes: int = 0,
+            creation_time: float = 0,
+            comment_id: int = 0,
     ):
         return Comment(
             video_id,
+            author_username,
             author_email,
             author_phone,
             text=text,
@@ -77,6 +83,7 @@ class CommentFactory:
     def from_dict(data: dict):
         return CommentFactory.new_comment(
             video_id=data["videoId"],
+            author_username=data["authorUsername"],
             author_email=data["authorEmail"],
             author_phone=data["authorPhone"],
             text=data["text"],
