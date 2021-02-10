@@ -341,3 +341,29 @@ def open_video():
     )
     resp.headers = headers
     return resp
+
+
+@app.route("/likedComments")
+@cross_origin()
+def liked_comments():
+    comment_id = int(request.args.get("commentId"))
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+
+    resp = make_response(
+        jsonify(
+            {
+                "ok": True,
+                "isLiked": comment_id in user.liked_comments,
+            }
+        )
+    )
+    resp.headers = headers
+    return resp
