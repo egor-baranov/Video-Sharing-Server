@@ -20,7 +20,8 @@
     "likedVideos": [
       7805751
     ],
-    "likedComments": []
+    "likedComments": [],
+    "registerTime": 1612815838.8063781
   },
   {
     "username": "egor",
@@ -35,13 +36,14 @@
       7650646,
       1534532
     ],
-    "likedComments": []
+    "likedComments": [],
+    "registerTime": 1612815838.8063836
   },
   {
-    "username": "\u0430\u043b\u0435\u043a\u0441",
+    "username": "алекс",
     "phone": "89161500314",
     "password": "12345678",
-    "city": "\u041c\u043e\u0441\u043a\u0432\u0430",
+    "city": "Москва",
     "birthDate": "31.12.2000",
     "email": "cosword@rambler.ru",
     "uploadedVideos": [
@@ -56,30 +58,45 @@
       1534532,
       0
     ],
-    "likedComments": []
+    "likedComments": [],
+    "registerTime": 1612815838.8063908
   },
   {
-    "username": "\u0422\u0438\u043c\u0443\u0440",
+    "username": "Тимур",
     "phone": "89258618260",
     "password": "tima1234",
-    "city": "\u0422\u0443\u043b\u0430",
+    "city": "Тула",
     "birthDate": "13.01.1995",
     "email": "timur@p1atform.ru",
     "uploadedVideos": [
       5914593
     ],
     "likedVideos": [],
-    "likedComments": []
+    "likedComments": [],
+    "registerTime": 1612815838.806395
   },
   {
-    "username": "\u0422\u0438\u043c\u0443\u0440",
+    "username": "Тимур",
     "phone": "89258618260",
     "password": "tima1234",
-    "city": "\u0422\u0443\u043b\u0430",
+    "city": "Тула",
     "birthDate": "13.01.1995",
     "email": "timur@p1atform.ru",
     "uploadedVideos": [],
     "likedVideos": [],
-    "likedComments": []
+    "likedComments": [],
+    "registerTime": 1612815838.8063984
+  },
+  {
+    "username": "profigrok",
+    "phone": "77074455312",
+    "password": "profigrok",
+    "city": "profigrok",
+    "birthDate": null,
+    "email": "asd@a.d",
+    "uploadedVideos": [],
+    "likedVideos": [],
+    "likedComments": [],
+    "registerTime": 1612815838.8055007
   }
 ]
