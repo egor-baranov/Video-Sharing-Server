@@ -1,7 +1,7 @@
 from flask import make_response, jsonify, request
 from flask import Blueprint
 
-from components.database.dbworker import DatabaseWorker
+from components.database.DatabaseWorker import DatabaseWorker
 from components.core import *
 from dto.User import UserFactory
 

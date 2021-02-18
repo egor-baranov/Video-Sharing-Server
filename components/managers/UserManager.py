@@ -2,7 +2,7 @@ import dto
 import json
 import components.config as config
 from dto.User import UserFactory, User
-from components.database.dbworker import DatabaseWorker
+from components.database.DatabaseWorker import DatabaseWorker
 
 
 class UserManager:

@@ -1,6 +1,6 @@
 from multipledispatch import dispatch
 
-from components.database.dbworker import DatabaseWorker
+from components.database.DatabaseWorker import DatabaseWorker
 from components.managers.UserManager import UserManager
 from dto.Comment import Comment, CommentFactory
 from dto.User import User

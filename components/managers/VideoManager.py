@@ -2,7 +2,7 @@ from components.managers.CommentManager import CommentManager
 from dto.Comment import CommentFactory
 from dto.User import User
 from dto.Video import *
-from components.database.dbworker import DatabaseWorker
+from components.database.DatabaseWorker import DatabaseWorker
 
 
 class VideoManager:

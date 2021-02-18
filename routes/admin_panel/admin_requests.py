@@ -4,7 +4,7 @@ from flask import make_response, jsonify, request
 from flask import Blueprint
 
 from components.core import *
-from components.database.dbworker import DatabaseWorker
+from components.database.DatabaseWorker import DatabaseWorker
 from components.managers.CommentManager import CommentManager
 from components.managers.UserManager import UserManager
 
