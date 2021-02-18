@@ -12,8 +12,8 @@ except ImportError:
     from urllib.parse import quote
 
 # Константы для настройки библиотеки
-SMSC_LOGIN = "login"  # логин клиента
-SMSC_PASSWORD = "password"  # пароль
+SMSC_LOGIN = "odin78"  # логин клиента
+SMSC_PASSWORD = "cd45Mg963"  # пароль
 SMSC_POST = False  # использовать метод POST
 SMSC_HTTPS = False  # использовать HTTPS протокол
 SMSC_CHARSET = "utf-8"  # кодировка сообщения (windows-1251 или koi8-r), по умолчанию используется utf-8
@@ -24,6 +24,7 @@ SMTP_FROM = "api@smsc.ru"  # e-mail адрес отправителя
 SMTP_SERVER = "send.smsc.ru"  # адрес smtp сервера
 SMTP_LOGIN = ""  # логин для smtp сервера
 SMTP_PASSWORD = ""  # пароль для smtp сервера
+
 
 # Вспомогательная функция, эмуляция тернарной операции ?:
 def ifs(cond, val1, val2):
@@ -58,15 +59,15 @@ class SMSC(object):
     # либо массив (<id>, -<код ошибки>) в случае ошибки
 
     def send_sms(
-        self,
-        phones,
-        message,
-        translit=0,
-        time="",
-        id=0,
-        format=0,
-        sender=False,
-        query="",
+            self,
+            phones,
+            message,
+            translit=0,
+            time="",
+            id=0,
+            format=0,
+            sender=False,
+            query="",
     ):
         formats = [
             "flash=1",
@@ -120,7 +121,7 @@ class SMSC(object):
     # SMTP версия метода отправки SMS
 
     def send_sms_mail(
-        self, phones, message, translit=0, time="", id=0, format=0, sender=""
+            self, phones, message, translit=0, time="", id=0, format=0, sender=""
     ):
         server = smtplib.SMTP(SMTP_SERVER)
 
@@ -173,7 +174,7 @@ class SMSC(object):
     # возвращает массив (<стоимость>, <количество sms>) либо массив (0, -<код ошибки>) в случае ошибки
 
     def get_sms_cost(
-        self, phones, message, translit=0, format=0, sender=False, query=""
+            self, phones, message, translit=0, format=0, sender=False, query=""
     ):
         formats = [
             "flash=1",
@@ -278,14 +279,14 @@ class SMSC(object):
         url = ifs(SMSC_HTTPS, "https", "http") + "://smsc.ru/sys/" + cmd + ".php"
         _url = url
         arg = (
-            "login="
-            + quote(SMSC_LOGIN)
-            + "&psw="
-            + quote(SMSC_PASSWORD)
-            + "&fmt=1&charset="
-            + SMSC_CHARSET
-            + "&"
-            + arg
+                "login="
+                + quote(SMSC_LOGIN)
+                + "&psw="
+                + quote(SMSC_PASSWORD)
+                + "&fmt=1&charset="
+                + SMSC_CHARSET
+                + "&"
+                + arg
         )
 
         i = 0
@@ -315,7 +316,6 @@ class SMSC(object):
             ret = ","  # фиктивный ответ
 
         return ret.split(",")
-
 
 # Examples:
 # smsc = SMSC()
