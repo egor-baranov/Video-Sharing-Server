@@ -18,11 +18,16 @@
       1359421
     ],
     "likedVideos": [
-      7805751
+      7805751,
+      4308610,
+      3875204,
+      5914593,
+      4588825,
+      4433512,
+      2536346
     ],
     "likedComments": [],
-    "registerTime": 1612815838.8063781,
-    "confirmCode": 0
+    "registerTime": 1612815838.8063781
   },
   {
     "username": "egor",
@@ -38,8 +43,7 @@
       1534532
     ],
     "likedComments": [],
-    "registerTime": 1612815838.8063836,
-    "confirmCode": 0
+    "registerTime": 1612815838.8063836
   },
   {
     "username": "алекс",
@@ -61,8 +65,7 @@
       0
     ],
     "likedComments": [],
-    "registerTime": 1612815838.8063908,
-    "confirmCode": 0
+    "registerTime": 1612815838.8063908
   },
   {
     "username": "Тимур",
@@ -76,8 +79,7 @@
     ],
     "likedVideos": [],
     "likedComments": [],
-    "registerTime": 1612815838.806395,
-    "confirmCode": 0
+    "registerTime": 1612815838.806395
   },
   {
     "username": "Тимур",
@@ -89,8 +91,7 @@
     "uploadedVideos": [],
     "likedVideos": [],
     "likedComments": [],
-    "registerTime": 1612815838.8063984,
-    "confirmCode": 0
+    "registerTime": 1612815838.8063984
   },
   {
     "username": "profigrok",
@@ -102,7 +103,6 @@
     "uploadedVideos": [],
     "likedVideos": [],
     "likedComments": [],
-    "registerTime": 1612815838.8055007,
-    "confirmCode": 0
+    "registerTime": 1612815838.8055007
   }
 ]
