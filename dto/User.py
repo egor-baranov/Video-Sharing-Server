@@ -16,6 +16,7 @@ class User:
     liked_comments: typing.List[int] = []
 
     register_time: float
+    confirm_code: int
 
     def __init__(
             self,
@@ -29,6 +30,7 @@ class User:
             liked_videos: typing.List[int] = None,
             liked_comments: typing.List[int] = None,
             register_time: float = 0,
+            confirm_code: int = 0
     ):
         self.username = username
         self.phone = phone
@@ -42,6 +44,7 @@ class User:
         self.liked_comments = liked_comments if liked_comments is not None else []
 
         self.register_time = time.time() if register_time == 0 else register_time
+        self.confirm_code = confirm_code
 
     def is_fake(self) -> bool:
         return not self.is_not_fake()
@@ -61,6 +64,7 @@ class User:
             "likedVideos": self.liked_videos,
             "likedComments": self.liked_comments,
             "registerTime": self.register_time,
+            "confirmCode": self.confirm_code
         }
 
     def upload_video(self, video_id: int):
@@ -90,6 +94,7 @@ class UserFactory:
             liked_videos: typing.List[int] = None,
             liked_comments: typing.List[int] = None,
             register_time: float = 0,
+            confirm_code: int = 0
     ) -> User:
         return User(
             username,
@@ -102,6 +107,7 @@ class UserFactory:
             liked_videos,
             liked_comments,
             register_time,
+            confirm_code
         )
 
     @staticmethod
@@ -117,6 +123,7 @@ class UserFactory:
             liked_videos=data["likedVideos"],
             liked_comments=data["likedComments"],
             register_time=0 if "registerTime" not in data.keys() else data["registerTime"],
+            confirm_code=0 if "confirmCode" not in data.keys() else data["confirmCode"]
         )
 
     @staticmethod
