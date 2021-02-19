@@ -52,6 +52,25 @@ def block_user():
     return resp
 
 
+@app.route("/removeUser")
+@cross_origin()
+def remove_user():
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+    UserManager.remove_user(user)
+
+    resp = make_response(jsonify({"ok": True}))
+    resp.headers = headers
+    return resp
+
+
 @app.route("/getStats")
 @cross_origin()
 def get_stats():
