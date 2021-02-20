@@ -235,7 +235,8 @@ def add_comment():
     VideoManager.add_comment_to_video(video_id=video_id, comment_text=comment_text, author=user)
 
     resp = make_response(
-        jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments})
+        jsonify({"ok": True, "result": [CommentManager.get_comment_by_id(i).to_dict() for i in
+                                        VideoManager.get_video_by_id(video_id).comments]})
     )
     resp.headers = headers
     return resp
@@ -247,7 +248,8 @@ def get_comments():
     video_id = int(request.args.get("videoId"))
 
     resp = make_response(
-        jsonify({"ok": True, "result": VideoManager.get_video_by_id(video_id).comments})
+        jsonify({"ok": True, "result": [CommentManager.get_comment_by_id(i).to_dict() for i in
+                                        VideoManager.get_video_by_id(video_id).comments]})
     )
     resp.headers = headers
     return resp

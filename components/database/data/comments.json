@@ -1,12 +1,1 @@
-[
-  {
-    "videoId": 7650646,
-    "authorEmail": "admin@admin.com",
-    "authorPhone": "89004445533",
-    "replies": [],
-    "text": "a",
-    "likes": 0,
-    "commentId": 131927,
-    "creationTime": 1612256509.2741642
-  }
-]
+[{"videoId": 7650646, "authorUsername": "admin", "authorEmail": "admin@admin.com", "authorPhone": "89004445533", "replies": [], "text": "a", "likes": 0, "commentId": 131927, "creationTime": 1612256509.2741642}, {"videoId": 893658, "authorUsername": "егор", "authorEmail": "enterskylife@gmail.com", "authorPhone": "89773349795", "replies": [], "text": "Ладно", "likes": 0, "commentId": 805912, "creationTime": 1613768286.6420503}, {"videoId": 893658, "authorUsername": "егор", "authorEmail": "enterskylife@gmail.com", "authorPhone": "89773349795", "replies": [], "text": "Ладно", "likes": 0, "commentId": 330661, "creationTime": 1613768709.878142}, {"videoId": 893658, "authorUsername": "егор", "authorEmail": "enterskylife@gmail.com", "authorPhone": "89773349795", "replies": [], "text": "Ладно", "likes": 0, "commentId": 621048, "creationTime": 1613768715.0900154}, {"videoId": 893658, "authorUsername": "егор", "authorEmail": "enterskylife@gmail.com", "authorPhone": "89773349795", "replies": [], "text": "Ладно", "likes": 0, "commentId": 397131, "creationTime": 1613768891.1758478}]
