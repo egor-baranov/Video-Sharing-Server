@@ -50,7 +50,7 @@ class User:
         return not self.is_not_fake()
 
     def is_not_fake(self) -> bool:
-        return len(self.username) > 0
+        return len(self.username) > 0 and self.confirm_code != 0
 
     def to_dict(self) -> dict:
         return {
