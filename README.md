@@ -24,7 +24,7 @@ Now it is being hosted at https://kepler88d.pythonanywhere.com
 │   │   core.py
 │   │
 │   ├───database
-│   │   │   dbworker.py
+│   │   │   DatabaseWorker.py
 │   │   │
 │   │   └───data
 │   │           blocked_users.json
