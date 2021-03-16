@@ -97,6 +97,7 @@ def get_stats():
                             for v in DatabaseWorker.read_videos()
                         ]
                     ),
+                    "overall": len(DatabaseWorker.read_videos())
                 },
                 "usersRegisteredCount": {
                     "forLastDay": sum(
@@ -117,6 +118,7 @@ def get_stats():
                             for u in DatabaseWorker.read_users()
                         ]
                     ),
+                    "overall": len(DatabaseWorker.read_users())
                 },
                 "commentsLeftCount": {
                     "forLastDay": sum(
@@ -137,6 +139,7 @@ def get_stats():
                             for c in DatabaseWorker.read_comments()
                         ]
                     ),
+                    "overall": len(DatabaseWorker.read_comments())
                 },
             }
         )
