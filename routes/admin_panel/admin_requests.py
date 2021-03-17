@@ -143,8 +143,15 @@ def get_stats():
                 },
                 "usedDiscSpace": {
                     "dataServer": str(float("{:.2f}".format(DatabaseWorker.get_used_disc_space() / 10 ** 6))) + " MB",
-                    "mediaServer": "? MB"
-                }
+                    "mediaServer": str(
+                        float("{:.2f}".format(sum([v.size for v in DatabaseWorker.read_videos()]) / 10 ** 6))
+                    ) + " MB",
+                    "overall":
+                        str(float("{:.2f}".format(
+                            (sum([v.size for v in DatabaseWorker.read_videos()]) +
+                             DatabaseWorker.get_used_disc_space()) / 10 ** 6))) + " MB",
+                },
+                "userLocations": [u.coordinates for u in DatabaseWorker.read_users()]
             }
         )
     )
@@ -156,6 +163,7 @@ def get_stats():
 @cross_origin()
 def restore_user():
     pass
+
 
 @app.route("/resetPassword")
 @cross_origin()
