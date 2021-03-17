@@ -18,6 +18,9 @@ class User:
     register_time: float
     confirm_code: int
 
+    coordinates: str
+    role: str
+
     def __init__(
             self,
             username: str = "",
@@ -30,7 +33,8 @@ class User:
             liked_videos: typing.List[int] = None,
             liked_comments: typing.List[int] = None,
             register_time: float = 0,
-            confirm_code: int = 0
+            confirm_code: int = 0,
+            role: str = "user"
     ):
         self.username = username
         self.phone = phone
@@ -46,11 +50,13 @@ class User:
         self.register_time = time.time() if register_time == 0 else register_time
         self.confirm_code = confirm_code
 
+        self.role = role
+
     def is_fake(self) -> bool:
         return not self.is_not_fake()
 
     def is_not_fake(self) -> bool:
-        return len(self.username) > 0 and self.confirm_code != 0
+        return len(self.username) > 0 and self.confirm_code == 0
 
     def to_dict(self) -> dict:
         return {
@@ -64,7 +70,8 @@ class User:
             "likedVideos": self.liked_videos,
             "likedComments": self.liked_comments,
             "registerTime": self.register_time,
-            "confirmCode": self.confirm_code
+            "confirmCode": self.confirm_code,
+            "role": self.role
         }
 
     def upload_video(self, video_id: int):
@@ -94,7 +101,8 @@ class UserFactory:
             liked_videos: typing.List[int] = None,
             liked_comments: typing.List[int] = None,
             register_time: float = 0,
-            confirm_code: int = 0
+            confirm_code: int = 0,
+            role: str = "user"
     ) -> User:
         return User(
             username,
@@ -107,7 +115,8 @@ class UserFactory:
             liked_videos,
             liked_comments,
             register_time,
-            confirm_code
+            confirm_code,
+            role
         )
 
     @staticmethod
@@ -123,7 +132,8 @@ class UserFactory:
             liked_videos=data["likedVideos"],
             liked_comments=data["likedComments"],
             register_time=0 if "registerTime" not in data.keys() else data["registerTime"],
-            confirm_code=0 if "confirmCode" not in data.keys() else data["confirmCode"]
+            confirm_code=0 if "confirmCode" not in data.keys() else data["confirmCode"],
+            role="user" if "role" not in data.keys() else data["role"]
         )
 
     @staticmethod
