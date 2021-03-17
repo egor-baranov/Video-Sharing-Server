@@ -28,18 +28,44 @@ def full_list():
 @app.route("/videoList")
 @cross_origin()
 def video_list():
-    resp = make_response(
-        jsonify({"videos": [v.to_dict() for v in DatabaseWorker.read_videos()]})
+    limit = int(
+        request.args.get("limit") if request.args.get("limit") is not None else 100
     )
-    resp.headers = headers
-    return resp
+    page = int(
+        request.args.get("page") if request.args.get("page") is not None else 1
+    )
+    sort_type = (
+        request.args.get("sortType")
+        if request.args.get("sortType") is not None
+        else "title"
+    )
+
+    resp_list = [v.to_dict() for v in DatabaseWorker.read_videos()]
+    resp_list.sort(key=lambda x: x[sort_type])
+
+    try:
+        resp_list = resp_list[limit * (page - 1):limit * page]
+        resp = make_response(
+            jsonify({"videos": resp_list})
+        )
+        resp.headers = headers
+        return resp
+    except():
+        resp = make_response(
+            jsonify({"videos": resp_list})
+        )
+        resp.headers = headers
+        return resp
 
 
 @app.route("/userList")
 @cross_origin()
 def user_list():
-    count = int(
-        request.args.get("count") if request.args.get("count") is not None else 100
+    limit = int(
+        request.args.get("limit") if request.args.get("limit") is not None else 100
+    )
+    page = int(
+        request.args.get("page") if request.args.get("page") is not None else 1
     )
 
     sort_type = (
@@ -52,13 +78,25 @@ def user_list():
         sort_type = "username"
 
     resp_list = [u.to_dict() for u in DatabaseWorker.read_users()]
-
-    if len(resp_list) > count:
-        resp_list = resp_list[:count]
-
     resp_list.sort(key=lambda x: x[sort_type])
 
-    resp = make_response(jsonify({"users": resp_list}))
+    try:
+        resp_list = resp_list[limit * (page - 1):limit * page]
+        resp = make_response(jsonify({"users": resp_list}))
+        resp.headers = headers
+        return resp
+    except():
+        resp = make_response(jsonify({"users": resp_list}))
+        resp.headers = headers
+        return resp
+
+
+@app.route("/blockedUserList")
+@cross_origin()
+def blocked_user_list():
+    resp = make_response(
+        jsonify({"users": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]})
+    )
     resp.headers = headers
     return resp
 
