@@ -34,6 +34,7 @@ class User:
             liked_comments: typing.List[int] = None,
             register_time: float = 0,
             confirm_code: int = 0,
+            coordinates: str = "0:0",
             role: str = "user"
     ):
         self.username = username
@@ -50,6 +51,7 @@ class User:
         self.register_time = time.time() if register_time == 0 else register_time
         self.confirm_code = confirm_code
 
+        self.coordinates = coordinates
         self.role = role
 
     def is_fake(self) -> bool:
@@ -71,6 +73,7 @@ class User:
             "likedComments": self.liked_comments,
             "registerTime": self.register_time,
             "confirmCode": self.confirm_code,
+            "coordinates": self.coordinates,
             "role": self.role
         }
 
@@ -102,6 +105,7 @@ class UserFactory:
             liked_comments: typing.List[int] = None,
             register_time: float = 0,
             confirm_code: int = 0,
+            coordinates: str = "0:0",
             role: str = "user"
     ) -> User:
         return User(
@@ -116,6 +120,7 @@ class UserFactory:
             liked_comments,
             register_time,
             confirm_code,
+            coordinates,
             role
         )
 
@@ -133,6 +138,7 @@ class UserFactory:
             liked_comments=data["likedComments"],
             register_time=0 if "registerTime" not in data.keys() else data["registerTime"],
             confirm_code=0 if "confirmCode" not in data.keys() else data["confirmCode"],
+            coordinates="0:0" if "coordinates" not in data.keys() else data["coordinates"],
             role="user" if "role" not in data.keys() else data["role"]
         )
 
