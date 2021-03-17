@@ -12,7 +12,7 @@ from components.sms.SmsWorker import SmsWorker
 from dto.User import User, UserFactory
 from dto.Video import Video
 
-regular_requests_blueprint = Blueprint( 
+regular_requests_blueprint = Blueprint(
     "regular", __name__, template_folder="templates", static_folder="static"
 )
 
@@ -392,5 +392,25 @@ def liked_comments():
             }
         )
     )
+    resp.headers = headers
+    return resp
+
+
+@app.route("/updateCoordinates")
+@cross_origin()
+def update_coordinates():
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+    user.coordinates = request.args.get("coordinates")
+    UserManager.update_user_data(user)
+
+    resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
     return resp
