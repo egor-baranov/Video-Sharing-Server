@@ -141,6 +141,10 @@ def get_stats():
                     ),
                     "overall": len(DatabaseWorker.read_comments())
                 },
+                "usedDiscSpace": {
+                    "dataServer": str(float("{:.2f}".format(DatabaseWorker.get_used_disc_space() / 10 ** 6))) + " MB",
+                    "mediaServer": "? MB"
+                }
             }
         )
     )
@@ -152,17 +156,6 @@ def get_stats():
 @cross_origin()
 def restore_user():
     pass
-
-
-@app.route("/blockedUserList")
-@cross_origin()
-def blocked_user_list():
-    resp = make_response(
-        jsonify({"users": [u.to_dict() for u in DatabaseWorker.read_blocked_users()]})
-    )
-    resp.headers = headers
-    return resp
-
 
 @app.route("/resetPassword")
 @cross_origin()
@@ -208,6 +201,44 @@ def delete_comment():
         return resp
 
     CommentManager.delete_comment(comment_id)
+
+    resp = make_response(jsonify({"ok": True}))
+    resp.headers = headers
+    return resp
+
+
+@app.route("/getRole")
+@cross_origin()
+def get_role():
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+
+    resp = make_response(jsonify({"ok": True, "role": user.role}))
+    resp.headers = headers
+    return resp
+
+
+@app.route("/setRole")
+@cross_origin()
+def set_role():
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+
+    if email_user.is_fake() and phone_user.is_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
+    user = email_user if email_user.is_not_fake() else phone_user
+    user.role = request.args.get("role")
+    UserManager.update_user_data(user)
 
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
