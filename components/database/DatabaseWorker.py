@@ -1,5 +1,6 @@
 import json
 import typing
+import os
 
 import components.config as config
 
@@ -46,3 +47,10 @@ class DatabaseWorker:
     def write_comments(d: typing.List[Comment]):
         with open(config.comments_path, "wt", encoding="utf-8") as f:
             f.write(json.dumps([c.to_dict() for c in d], ensure_ascii=False))
+
+    @staticmethod
+    def get_used_disc_space() -> int:
+        return sum(os.stat(i).st_size for i in [config.users_path,
+                                                config.blocked_users_path,
+                                                config.comments_path,
+                                                config.videos_path])
