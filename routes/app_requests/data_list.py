@@ -52,7 +52,7 @@ def video_list():
         return resp
     except():
         resp = make_response(
-            jsonify({"videos": resp_list})
+            jsonify({"videos": resp_list, "totalCount": len(resp_list)})
         )
         resp.headers = headers
         return resp
@@ -82,11 +82,11 @@ def user_list():
 
     try:
         resp_list = resp_list[limit * (page - 1):limit * page]
-        resp = make_response(jsonify({"users": resp_list}))
+        resp = make_response(jsonify({"users": resp_list, "totalCount": len(resp_list)}))
         resp.headers = headers
         return resp
     except():
-        resp = make_response(jsonify({"users": resp_list}))
+        resp = make_response(jsonify({"users": resp_list, "totalCount": len(resp_list)}))
         resp.headers = headers
         return resp
 
