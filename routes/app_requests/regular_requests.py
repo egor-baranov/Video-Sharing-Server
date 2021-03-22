@@ -95,6 +95,11 @@ def add_video():
     user = email_user if email_user.is_not_fake() else phone_user
 
     video.title = request.args.get("title")
+
+    video.author_username = user.username
+    video.author_phone = user.phone
+    video.author_email = user.email
+
     video.description = request.args.get("description")
     video.tags = request.args.get("tags")
     video.size = int(request.args.get("size"))

@@ -5,6 +5,11 @@ import time
 
 class Video:
     title: str
+
+    author_username: str
+    author_email: str
+    author_phone: str
+
     description: str
     tags: str
     size: int
@@ -17,19 +22,25 @@ class Video:
     comments: typing.List[int] = []
 
     def __init__(
-        self,
-        title: str = "",
-        description: str = "",
-        tags: str = "",
-        size: int = 0,
-        length: int = 0,
-        views: int = 0,
-        like_count: int = 0,
-        video_id: int = 0,
-        comments: typing.List[int] = None,
-        upload_time: float = 0,
+            self,
+            title: str = "",
+            author_username: str = "",
+            author_email: str = "",
+            author_phone: str = "",
+            description: str = "",
+            tags: str = "",
+            size: int = 0,
+            length: int = 0,
+            views: int = 0,
+            like_count: int = 0,
+            video_id: int = 0,
+            comments: typing.List[int] = None,
+            upload_time: float = 0,
     ):
         self.title = title
+        self.author_username: str = author_username
+        self.author_email: str = author_email
+        self.author_phone: str = author_phone
         self.description = description
         self.tags = tags
         self.size = size
@@ -43,6 +54,9 @@ class Video:
     def to_dict(self):
         return {
             "title": self.title,
+            "authorUsername": self.author_username,
+            "authorEmail": self.author_email,
+            "authorPhone": self.author_phone,
             "description": self.description,
             "tags": self.tags,
             "size": self.size,
@@ -52,6 +66,7 @@ class Video:
             "videoId": self.video_id,
             "comments": self.comments,
             "uploadTime": self.upload_time,
+            "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/" + str(self.video_id) + ".mp4"
         }
 
 
@@ -62,19 +77,25 @@ class VideoFactory:
 
     @staticmethod
     def new_video(
-        title: str,
-        description: str,
-        tags: str,
-        size: int,
-        length: int,
-        views: int,
-        like_count: int,
-        video_id: int,
-        comments=None,
-        upload_time: float = 0,
+            title: str,
+            author_username: str,
+            author_email: str,
+            author_phone: str,
+            description: str,
+            tags: str,
+            size: int,
+            length: int,
+            views: int,
+            like_count: int,
+            video_id: int,
+            comments=None,
+            upload_time: float = 0,
     ):
         return Video(
             title,
+            author_username,
+            author_email,
+            author_phone,
             description,
             tags,
             size,
@@ -90,6 +111,9 @@ class VideoFactory:
     def from_dict(data: dict):
         return VideoFactory.new_video(
             title=data["title"],
+            author_username=data["authorUsername"],
+            author_email=data["authorEmail"],
+            author_phone=data["authorPhone"],
             description=data["description"],
             tags=data["tags"],
             size=data["size"],
