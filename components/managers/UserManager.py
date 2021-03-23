@@ -65,3 +65,10 @@ class UserManager:
                 break
 
         DatabaseWorker.write_users(users)
+
+    @staticmethod
+    def get_video_owner(video_id: int) -> User:
+        for u in DatabaseWorker.read_users():
+            if video_id in u.uploaded_videos:
+                return u
+        return UserFactory.new_fake_user()
