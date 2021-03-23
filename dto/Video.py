@@ -1,6 +1,5 @@
-import random
-import typing
 import time
+import typing
 
 
 class Video:
@@ -111,9 +110,9 @@ class VideoFactory:
     def from_dict(data: dict):
         return VideoFactory.new_video(
             title=data["title"],
-            author_username=data["authorUsername"],
-            author_email=data["authorEmail"],
-            author_phone=data["authorPhone"],
+            author_username="" if "authorUsername" not in data.keys() else data["authorUsername"],
+            author_email="" if "authorEmail" not in data.keys() else data["authorEmail"],
+            author_phone="" if "authorPhone" not in data.keys() else data["authorPhone"],
             description=data["description"],
             tags=data["tags"],
             size=data["size"],
