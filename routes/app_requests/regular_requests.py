@@ -40,6 +40,14 @@ def login():
 @app.route("/register")
 @cross_origin()
 def register():
+    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    email_user = UserManager.get_user_by_email(request.args.get("email"))
+
+    if phone_user.is_not_fake() or email_user.is_not_fake():
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
+
     user = UserFactory.new_user(
         username=request.args.get("username"),
         phone=request.args.get("phone"),
@@ -48,6 +56,11 @@ def register():
         city=request.args.get("city"),
         birth_date=request.args.get("birthDate"),
     )
+
+    if not is_email_valid(user.email) or not is_phone_valid(user.phone):
+        resp = make_response(jsonify({"ok": False}))
+        resp.headers = headers
+        return resp
 
     UserManager.add_user(user)
     SmsWorker.send_sms(user, random.randint(1000, 9999))
@@ -280,6 +293,7 @@ def exist():
             }
         )
     )
+
     resp.headers = headers
     return resp
 
