@@ -3,6 +3,7 @@ from flask import Blueprint
 
 from components.database.DatabaseWorker import DatabaseWorker
 from components.core import *
+from components.managers.UserManager import UserManager
 from dto.User import UserFactory
 
 data_list_blueprint = Blueprint(
@@ -41,6 +42,14 @@ def video_list():
     )
 
     resp_list = [v.to_dict() for v in DatabaseWorker.read_videos()]
+
+    for i in range(len(resp_list)):
+        d = resp_list[i]
+        d["authorUsername"] = UserManager.get_video_owner(d["videoId"]).username
+        d["authorPhone"] = UserManager.get_video_owner(d["videoId"]).phone
+        d["authorEmail"] = UserManager.get_video_owner(d["videoId"]).email
+        resp_list[i] = d
+
     resp_list.sort(key=lambda x: x[sort_type])
 
     try:
