@@ -63,7 +63,10 @@ def register():
         return resp
 
     UserManager.add_user(user)
-    SmsWorker.send_sms(user, random.randint(1000, 9999))
+
+    confirm_phone = request.args.get("confirmPhone")
+    if confirm_phone == "true":
+        SmsWorker.send_sms(user, random.randint(1000, 9999))
 
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
