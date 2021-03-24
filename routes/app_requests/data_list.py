@@ -86,7 +86,11 @@ def user_list():
     if sort_type not in UserFactory.new_fake_user().to_dict().keys():
         sort_type = "username"
 
-    resp_list = [u.to_dict() for u in DatabaseWorker.read_users()]
+    resp_list = []
+    for u in DatabaseWorker.read_users():
+        if u.is_not_fake():
+            resp_list.append(u.to_dict())
+
     resp_list.sort(key=lambda x: x[sort_type])
 
     try:
