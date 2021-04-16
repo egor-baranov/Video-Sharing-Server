@@ -7,6 +7,8 @@ from components.core import *
 from components.database.DatabaseWorker import DatabaseWorker
 from components.managers.CommentManager import CommentManager
 from components.managers.UserManager import UserManager
+from components.managers.VideoManager import VideoManager
+from dto.Video import Video
 
 admin_requests_blueprint = Blueprint(
     "admin", __name__, template_folder="templates", static_folder="static"
@@ -247,6 +249,23 @@ def set_role():
     user = email_user if email_user.is_not_fake() else phone_user
     user.role = request.args.get("role")
     UserManager.update_user_data(user)
+
+    resp = make_response(jsonify({"ok": True}))
+    resp.headers = headers
+    return resp
+
+
+@app.route("/addPromotionalVideo")
+@cross_origin()
+def add_promotional_video():
+    video = Video()
+    video.title = request.args.get("title")
+    video.size = int(request.args.get("size"))
+    video.length = int(request.args.get("length"))
+    video.video_id = int(request.args.get("videoId"))
+    video.is_promotional = True
+
+    VideoManager.add_video(video)
 
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
