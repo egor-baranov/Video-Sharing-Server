@@ -20,6 +20,8 @@ class Video:
 
     comments: typing.List[int] = []
 
+    is_promotional: bool
+
     def __init__(
             self,
             title: str = "",
@@ -35,6 +37,7 @@ class Video:
             video_id: int = 0,
             comments: typing.List[int] = None,
             upload_time: float = 0,
+            is_promotional: bool = False
     ):
         self.title = title
         self.author_username: str = author_username
@@ -49,6 +52,7 @@ class Video:
         self.video_id = video_id
         self.comments = comments if comments else []
         self.upload_time = time.time() if upload_time == 0 else upload_time
+        self.is_promotional = is_promotional
 
     def to_dict(self):
         return {
@@ -65,7 +69,8 @@ class Video:
             "videoId": self.video_id,
             "comments": self.comments,
             "uploadTime": self.upload_time,
-            "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/" + str(self.video_id) + ".mp4"
+            "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/" + str(self.video_id) + ".mp4",
+            "isPromotional": self.is_promotional
         }
 
 
@@ -89,6 +94,7 @@ class VideoFactory:
             video_id: int,
             comments=None,
             upload_time: float = 0,
+            is_promotional: bool = False
     ):
         return Video(
             title,
@@ -104,6 +110,7 @@ class VideoFactory:
             video_id,
             comments=comments if comments is not None else [],
             upload_time=upload_time,
+            is_promotional=is_promotional
         )
 
     @staticmethod
@@ -122,4 +129,5 @@ class VideoFactory:
             video_id=data["videoId"],
             comments=[] if "comments" not in data.keys() else data["comments"],
             upload_time=0 if "uploadTime" not in data.keys() else data["uploadTime"],
+            is_promotional=False if "isPromotional" not in data.keys() else data["isPromotional"]
         )
