@@ -398,6 +398,18 @@ Returns app statistic (loaded videos, created comments and registered users), fo
 
 This request does not require any parameters.
 
+### addPromotionalVideo
+
+Adds promotional video that wil 
+
+Parameter | Description
+----------|-------
+```title``` | Promotional video title.
+```size``` | Size of promo video.
+```length``` | Length of video.
+```videoId``` | Id of video.
+```maxShowCount``` | Max show count of video.
+
 ## User data editing
 
 ### editUserName
@@ -450,6 +462,28 @@ Parameter | Description
 ```phone``` | Phone number of user.
 ```email``` | Email of user.
 ```city``` | New city that will be set to user.
+
+## System parameters
+
+### getParameters
+
+Returns system configuration parameters, format:
+```
+{
+  "ok": true, 
+  "promotionalVideoFrequency": 0
+}
+```
+
+This request does not require any parameters.
+
+### setParameters
+
+Sets system configuration parameters.
+
+Parameter | Description
+----------|-------
+```promotionalVideoFrequency``` | A number equal to how many videos the ad will play.
 
 ## Link to the app repository
 https://github.com/egor-baranov/Video-Sharing-App
