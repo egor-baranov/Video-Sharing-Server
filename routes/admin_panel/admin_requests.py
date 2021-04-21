@@ -263,6 +263,8 @@ def add_promotional_video():
     video.size = int(request.args.get("size"))
     video.length = int(request.args.get("length"))
     video.video_id = int(request.args.get("videoId"))
+    video.max_show_count = int(request.args.get("maxShowCount"))
+
     video.is_promotional = True
 
     VideoManager.add_video(video)
