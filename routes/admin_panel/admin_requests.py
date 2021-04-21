@@ -286,3 +286,12 @@ def get_parameters():
     )
     resp.headers = headers
     return resp
+
+
+@app.route("/setParameters")
+@cross_origin()
+def set_parameters():
+    app.config["promotionalVideoFrequency"] = int(request.args.get("promotionalVideoFrequency"))
+    resp = make_response(jsonify({"ok": True}))
+    resp.headers = headers
+    return resp
