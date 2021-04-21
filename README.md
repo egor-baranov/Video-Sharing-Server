@@ -400,7 +400,7 @@ This request does not require any parameters.
 
 ### addPromotionalVideo
 
-Adds promotional video that wil 
+Adds promotional video.
 
 Parameter | Description
 ----------|-------
@@ -409,6 +409,7 @@ Parameter | Description
 ```length``` | Length of video.
 ```videoId``` | Id of video.
 ```maxShowCount``` | Max show count of video.
+```displayOption``` | The way video will be shown: feed, openVideo, all
 
 ## User data editing
 
