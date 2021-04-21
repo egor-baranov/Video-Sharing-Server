@@ -272,3 +272,17 @@ def add_promotional_video():
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
     return resp
+
+
+@app.route("/getParameters")
+@cross_origin()
+def get_parameters():
+    resp = make_response(
+        jsonify({
+            "ok": True,
+            "promotionalVideoFrequency":
+                app.config.get("promotionalVideoFrequency") if "promotionalVideoFrequency" in app.config.keys() else -1
+        })
+    )
+    resp.headers = headers
+    return resp
