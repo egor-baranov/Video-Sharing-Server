@@ -18,35 +18,18 @@ admin_requests_blueprint = Blueprint(
 @app.route("/blockUser")
 @cross_origin()
 def block_user():
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
+    user = UserManager.get_user_by_id(request.args.get("userId"))
 
-    if phone_user.is_not_fake():
-        UserManager.block_user(phone_user)
+    if user.is_not_fake():
+        UserManager.block_user(user)
         resp = make_response(
-            jsonify(
-                {
-                    "ok": True,
-                    "blockedUsers": [
-                        u.to_dict() for u in DatabaseWorker.read_blocked_users()
-                    ],
-                }
-            )
+            jsonify({
+                "ok": True,
+                "blockedUsers": [
+                    u.to_dict() for u in DatabaseWorker.read_blocked_users()
+                ],
+            })
         )
-
-    elif email_user.is_not_fake():
-        UserManager.block_user(email_user)
-        resp = make_response(
-            jsonify(
-                {
-                    "ok": True,
-                    "blockedUsers": [
-                        u.to_dict() for u in DatabaseWorker.read_blocked_users()
-                    ],
-                }
-            )
-        )
-
     else:
         resp = make_response(jsonify({"ok": False}))
 
@@ -57,15 +40,13 @@ def block_user():
 @app.route("/removeUser")
 @cross_origin()
 def remove_user():
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    user = UserManager.get_user_by_id(request.args.get("userId"))
 
-    if email_user.is_fake() and phone_user.is_fake():
+    if user.is_fake():
         resp = make_response(jsonify({"ok": False}))
         resp.headers = headers
         return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
     UserManager.remove_user(user)
 
     resp = make_response(jsonify({"ok": True}))
@@ -170,32 +151,14 @@ def restore_user():
 @app.route("/resetPassword")
 @cross_origin()
 def reset_password():
-    phone = request.args.get("phone")
-    email = request.args.get("email")
-
-    users = DatabaseWorker.read_users()
-
-    for i in range(len(users)):
-        if users[i].email == email or users[i].phone == phone:
-            users[i].password = ""
-            resp = make_response(
-                jsonify(
-                    {
-                        "ok": True,
-                        "users": [u.to_dict() for u in DatabaseWorker.read_users()],
-                    }
-                )
-            )
-            DatabaseWorker.write_users(users)
-            resp.headers = headers
-            return resp
+    user = UserManager.get_user_by_id(request.args.get("userId"))
+    if user.is_not_fake():
+        user.password = ""
+        UserManager.update_user_data(user)
 
     resp = make_response(
-        jsonify(
-            {"ok": False, "users": [u.to_dict() for u in DatabaseWorker.read_users()]}
-        )
+        jsonify({"ok": user.is_not_fake(), "users": [u.to_dict() for u in DatabaseWorker.read_users()]})
     )
-    DatabaseWorker.write_users(users)
     resp.headers = headers
     return resp
 
@@ -220,15 +183,12 @@ def delete_comment():
 @app.route("/getRole")
 @cross_origin()
 def get_role():
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    user = UserManager.get_user_by_id(request.args.get("userId"))
 
-    if email_user.is_fake() and phone_user.is_fake():
+    if user.is_fake():
         resp = make_response(jsonify({"ok": False}))
         resp.headers = headers
         return resp
-
-    user = email_user if email_user.is_not_fake() else phone_user
 
     resp = make_response(jsonify({"ok": True, "role": user.role}))
     resp.headers = headers
@@ -238,15 +198,13 @@ def get_role():
 @app.route("/setRole")
 @cross_origin()
 def set_role():
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    user = UserManager.get_user_by_id(request.args.get("userId"))
 
-    if email_user.is_fake() and phone_user.is_fake():
+    if user.is_fake():
         resp = make_response(jsonify({"ok": False}))
         resp.headers = headers
         return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
     user.role = request.args.get("role")
     UserManager.update_user_data(user)
 
