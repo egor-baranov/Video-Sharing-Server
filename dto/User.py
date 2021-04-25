@@ -1,6 +1,7 @@
 import json
 import time
 import typing
+import random
 
 
 class User:
@@ -20,6 +21,7 @@ class User:
 
     coordinates: str
     role: str
+    user_id: int
 
     def __init__(
             self,
@@ -35,7 +37,8 @@ class User:
             register_time: float = 0,
             confirm_code: int = 0,
             coordinates: str = "0:0",
-            role: str = "user"
+            role: str = "user",
+            user_id: int = 0
     ):
         self.username = username
         self.phone = phone
@@ -53,6 +56,7 @@ class User:
 
         self.coordinates = coordinates
         self.role = role
+        self.user_id = user_id if user_id != 0 else random.randint(100000, 999999)
 
     def is_fake(self) -> bool:
         return not self.is_not_fake()
@@ -74,7 +78,8 @@ class User:
             "registerTime": self.register_time,
             "confirmCode": self.confirm_code,
             "coordinates": self.coordinates,
-            "role": self.role
+            "role": self.role,
+            "userId": self.user_id
         }
 
     def upload_video(self, video_id: int):
@@ -106,7 +111,8 @@ class UserFactory:
             register_time: float = 0,
             confirm_code: int = 0,
             coordinates: str = "0:0",
-            role: str = "user"
+            role: str = "user",
+            user_id: int = 0
     ) -> User:
         return User(
             username,
@@ -121,7 +127,8 @@ class UserFactory:
             register_time,
             confirm_code,
             coordinates,
-            role
+            role,
+            user_id
         )
 
     @staticmethod
@@ -139,7 +146,8 @@ class UserFactory:
             register_time=0 if "registerTime" not in data.keys() else data["registerTime"],
             confirm_code=0 if "confirmCode" not in data.keys() else data["confirmCode"],
             coordinates="0:0" if "coordinates" not in data.keys() else data["coordinates"],
-            role="user" if "role" not in data.keys() else data["role"]
+            role="user" if "role" not in data.keys() else data["role"],
+            user_id=random.randint(100000, 999999) if "userId" not in data.keys() else data["userId"]
         )
 
     @staticmethod
