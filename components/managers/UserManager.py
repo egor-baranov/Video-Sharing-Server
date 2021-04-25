@@ -21,6 +21,13 @@ class UserManager:
         return User()
 
     @staticmethod
+    def get_user_by_id(user_id: int):
+        for user in DatabaseWorker.read_users():
+            if user.user_id == user_id:
+                return user
+        return User()
+
+    @staticmethod
     def add_user(u: User):
         users = DatabaseWorker.read_users()
         users.append(u)
