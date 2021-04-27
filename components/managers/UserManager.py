@@ -67,7 +67,7 @@ class UserManager:
         users = DatabaseWorker.read_users()
 
         for i in range(len(users)):
-            if users[i].phone == u.phone or users[i].email == u.email:
+            if users[i].user_id == u.user_id:
                 users[i] = u
                 break
 
