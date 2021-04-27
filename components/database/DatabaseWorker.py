@@ -4,7 +4,7 @@ import os
 
 import components.config as config
 
-from dto.User import UserFactory
+from dto.User import UserFactory, User
 from dto.Video import Video, VideoFactory
 from dto.Comment import CommentFactory, Comment
 
@@ -12,23 +12,23 @@ from dto.Comment import CommentFactory, Comment
 class DatabaseWorker:
     # user dto methods
     @staticmethod
-    def read_users():
+    def read_users() -> typing.List[User]:
         with open(config.users_path, "rt", encoding="utf-8") as f:
             return [UserFactory.from_dict(d) for d in json.loads(f.read())]
 
     @staticmethod
-    def write_users(d):
+    def write_users(d: typing.List[User]):
         with open(config.users_path, "wt", encoding="utf-8") as f:
             f.write(json.dumps([u.to_dict() for u in d], ensure_ascii=False))
 
     @staticmethod
-    def read_blocked_users():
+    def read_blocked_users() -> typing.List[User]:
         with open(config.blocked_users_path, "rt", encoding="utf-8") as f:
             return [UserFactory.from_dict(d) for d in json.loads(f.read())]
 
     # videos dto methods
     @staticmethod
-    def read_videos():
+    def read_videos() -> typing.List[Video]:
         with open(config.videos_path, "rt", encoding="utf-8") as f:
             return [VideoFactory.from_dict(d) for d in json.loads(f.read())]
 
@@ -39,7 +39,7 @@ class DatabaseWorker:
 
     # comments dto methods
     @staticmethod
-    def read_comments():
+    def read_comments() -> typing.List[Comment]:
         with open(config.comments_path, "rt", encoding="utf-8") as f:
             return [CommentFactory.from_dict(d) for d in json.loads(f.read())]
 
