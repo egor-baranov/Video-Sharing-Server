@@ -12,7 +12,7 @@ user_editing_blueprint = Blueprint(
 @app.route("/editUserName")
 @cross_origin()
 def edit_user_name():
-    user = UserManager.get_user_by_id(request.args.get("userId"))
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
 
     if user.is_fake():
         resp = make_response(jsonify({"ok": False}))
@@ -30,7 +30,7 @@ def edit_user_name():
 @app.route("/editUserBirthDate")
 @cross_origin()
 def edit_user_birth_date():
-    user = UserManager.get_user_by_id(request.args.get("userId"))
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
 
     if user.is_fake():
         resp = make_response(jsonify({"ok": False}))
@@ -48,7 +48,7 @@ def edit_user_birth_date():
 @app.route("/editUserCity")
 @cross_origin()
 def edit_user_city():
-    user = UserManager.get_user_by_id(request.args.get("userId"))
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
 
     if user.is_fake():
         resp = make_response(jsonify({"ok": False}))

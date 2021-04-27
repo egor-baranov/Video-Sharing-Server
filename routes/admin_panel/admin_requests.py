@@ -18,7 +18,7 @@ admin_requests_blueprint = Blueprint(
 @app.route("/blockUser")
 @cross_origin()
 def block_user():
-    user = UserManager.get_user_by_id(request.args.get("userId"))
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
 
     if user.is_not_fake():
         UserManager.block_user(user)
@@ -40,7 +40,7 @@ def block_user():
 @app.route("/removeUser")
 @cross_origin()
 def remove_user():
-    user = UserManager.get_user_by_id(request.args.get("userId"))
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
 
     if user.is_fake():
         resp = make_response(jsonify({"ok": False}))
@@ -151,7 +151,7 @@ def restore_user():
 @app.route("/resetPassword")
 @cross_origin()
 def reset_password():
-    user = UserManager.get_user_by_id(request.args.get("userId"))
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
     if user.is_not_fake():
         user.password = ""
         UserManager.update_user_data(user)
@@ -183,7 +183,7 @@ def delete_comment():
 @app.route("/getRole")
 @cross_origin()
 def get_role():
-    user = UserManager.get_user_by_id(request.args.get("userId"))
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
 
     if user.is_fake():
         resp = make_response(jsonify({"ok": False}))
@@ -198,7 +198,7 @@ def get_role():
 @app.route("/setRole")
 @cross_origin()
 def set_role():
-    user = UserManager.get_user_by_id(request.args.get("userId"))
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
 
     if user.is_fake():
         resp = make_response(jsonify({"ok": False}))

@@ -101,7 +101,7 @@ def add_video():
     video = Video()
 
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -139,7 +139,7 @@ def add_video():
 @cross_origin()
 def get_user():
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -172,7 +172,7 @@ def get_videos():
 @cross_origin()
 def get_uploaded_video_stats():
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -211,7 +211,7 @@ def get_uploaded_video_stats():
 @cross_origin()
 def get_favourite():
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -232,7 +232,7 @@ def get_favourite():
 @cross_origin()
 def get_uploaded_videos():
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -256,7 +256,7 @@ def add_comment():
     comment_text = request.args.get("commentText")
 
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -327,7 +327,7 @@ def like_video():
     video_id = int(request.args.get("videoId"))
 
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -377,7 +377,7 @@ def video_like_count():
     video_id = int(request.args.get("videoId"))
 
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -426,7 +426,7 @@ def liked_comments():
     comment_id = int(request.args.get("commentId"))
 
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
@@ -454,7 +454,7 @@ def liked_comments():
 @cross_origin()
 def update_coordinates():
     if "userId" in request.args:
-        user = UserManager.get_user_by_id(request.args.get("userId"))
+        user = UserManager.get_user_by_id(int(request.args.get("userId")))
     else:
         email_user = UserManager.get_user_by_email(request.args.get("email"))
         phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
