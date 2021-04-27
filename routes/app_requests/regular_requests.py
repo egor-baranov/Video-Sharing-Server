@@ -100,15 +100,18 @@ def sms_confirmation():
 def add_video():
     video = Video()
 
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        user = email_user if email_user.is_not_fake() else phone_user
 
     video.title = request.args.get("title")
 
@@ -135,15 +138,18 @@ def add_video():
 @app.route("/getUser")
 @cross_origin()
 def get_user():
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        user = email_user if email_user.is_not_fake() else phone_user
 
     resp = make_response(jsonify({"ok": True, "userData": user.to_dict()}))
     resp.headers = headers
@@ -165,15 +171,18 @@ def get_videos():
 @app.route("/getUploadedVideosStats")
 @cross_origin()
 def get_uploaded_video_stats():
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        user = email_user if email_user.is_not_fake() else phone_user
 
     view_count = 0
     video_count = len(user.uploaded_videos)
@@ -201,15 +210,19 @@ def get_uploaded_video_stats():
 @app.route("/getFavourite")
 @cross_origin()
 def get_favourite():
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        user = email_user if email_user.is_not_fake() else phone_user
+
     resp = make_response(jsonify({"ok": True, "result": user.liked_videos}))
     resp.headers = headers
     return resp
@@ -218,15 +231,19 @@ def get_favourite():
 @app.route("/getUploadedVideos")
 @cross_origin()
 def get_uploaded_videos():
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        user = email_user if email_user.is_not_fake() else phone_user
+
     resp = make_response(jsonify({"ok": True, "result": user.uploaded_videos}))
     resp.headers = headers
     return resp
@@ -238,15 +255,18 @@ def add_comment():
     video_id = int(request.args.get("videoId"))
     comment_text = request.args.get("commentText")
 
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        user = email_user if email_user.is_not_fake() else phone_user
 
     VideoManager.add_comment_to_video(video_id=video_id, comment_text=comment_text, author=user)
 
@@ -305,15 +325,19 @@ def exist():
 @cross_origin()
 def like_video():
     video_id = int(request.args.get("videoId"))
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
+
+        user = email_user if email_user.is_not_fake() else phone_user
 
     videos = DatabaseWorker.read_videos()
 
@@ -351,15 +375,19 @@ def like_video():
 @cross_origin()
 def video_like_count():
     video_id = int(request.args.get("videoId"))
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
+
+        user = email_user if email_user.is_not_fake() else phone_user
 
     resp = make_response(
         jsonify(
@@ -396,15 +424,19 @@ def open_video():
 @cross_origin()
 def liked_comments():
     comment_id = int(request.args.get("commentId"))
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
+
+        user = email_user if email_user.is_not_fake() else phone_user
 
     resp = make_response(
         jsonify(
@@ -421,15 +453,19 @@ def liked_comments():
 @app.route("/updateCoordinates")
 @cross_origin()
 def update_coordinates():
-    email_user = UserManager.get_user_by_email(request.args.get("email"))
-    phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
+    if "userId" in request.args:
+        user = UserManager.get_user_by_id(request.args.get("userId"))
+    else:
+        email_user = UserManager.get_user_by_email(request.args.get("email"))
+        phone_user = UserManager.get_user_by_phone(request.args.get("phone"))
 
-    if email_user.is_fake() and phone_user.is_fake():
-        resp = make_response(jsonify({"ok": False}))
-        resp.headers = headers
-        return resp
+        if email_user.is_fake() and phone_user.is_fake():
+            resp = make_response(jsonify({"ok": False}))
+            resp.headers = headers
+            return resp
 
-    user = email_user if email_user.is_not_fake() else phone_user
+        user = email_user if email_user.is_not_fake() else phone_user
+
     user.coordinates = request.args.get("coordinates")
     UserManager.update_user_data(user)
 
