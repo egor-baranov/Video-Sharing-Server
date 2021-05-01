@@ -16,7 +16,10 @@ smsc = SMSC()
 
 
 def is_phone_valid(phone_number):
-    pattern = re.compile("^[\dA-Z]{3}-[\dA-Z]{3}-[\dA-Z]{4}$", re.IGNORECASE)
+    pattern = re.compile(
+        "\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?",
+        re.IGNORECASE
+    )
     return pattern.match(phone_number) is not None
 
 
