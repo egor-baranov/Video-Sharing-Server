@@ -34,7 +34,7 @@
     "likedComments": [],
     "registerTime": 1612815838.8063781,
     "confirmCode": 0,
-    "coordinates": "55.8442752:37.6689533",
+    "coordinates": "57.6944912:34.745153",
     "role": "admin",
     "userId": 643673
   },
@@ -55,7 +55,7 @@
     "registerTime": 1612815838.8063836,
     "confirmCode": 0,
     "coordinates": "0:0",
-    "role": "user",
+    "role": "admin",
     "userId": 102966
   },
   {
@@ -124,22 +124,6 @@
     "userId": 359667
   },
   {
-    "username": "profigrok",
-    "phone": "707-445-5313",
-    "password": "",
-    "city": "Moscow",
-    "birthDate": "",
-    "email": "profigrok@gmail.com",
-    "uploadedVideos": [],
-    "likedVideos": [],
-    "likedComments": [],
-    "registerTime": 1619263337.0532632,
-    "confirmCode": 5211,
-    "coordinates": "0:0",
-    "role": "user",
-    "userId": 281235
-  },
-  {
     "username": "а",
     "phone": "89773349792",
     "password": "123456",
@@ -202,21 +186,5 @@
     "coordinates": "0:0",
     "role": "user",
     "userId": 833219
-  },
-  {
-    "username": "profigrok",
-    "phone": "707-445-5313",
-    "password": "",
-    "city": "Moscow",
-    "birthDate": "",
-    "email": "profigrok@gmail.com",
-    "uploadedVideos": [],
-    "likedVideos": [],
-    "likedComments": [],
-    "registerTime": 1619263337.0532632,
-    "confirmCode": 0,
-    "coordinates": "0:0",
-    "role": "user",
-    "userId": 730699
   }
 ]
