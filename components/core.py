@@ -5,6 +5,7 @@ from flask_cors import *
 
 from components.config import *
 from lib.smsc_api import *
+from phonenumbers import is_valid_number, parse
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -15,14 +16,10 @@ app.config["JSON_AS_ASCII"] = False
 smsc = SMSC()
 
 
-def is_phone_valid(phone_number):
-    pattern = re.compile(
-        "\(?\+[0-9]{1,3}\)? ?-?[0-9]{1,3} ?-?[0-9]{3,5} ?-?[0-9]{4}( ?-?[0-9]{3})? ?(\w{1,10}\s?\d{1,6})?",
-        re.IGNORECASE
-    )
-    return pattern.match(phone_number) is not None
+def is_phone_valid(phone_number: str) -> bool:
+    return is_valid_number(parse(phone_number))
 
 
-def is_email_valid(email):
+def is_email_valid(email: str) -> bool:
     pattern = re.compile(r"[^@\s]+@[^@\s]+\.[a-zA-Z0-9]+$")
     return pattern.match(email) is not None
