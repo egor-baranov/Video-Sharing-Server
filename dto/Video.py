@@ -22,6 +22,7 @@ class Video:
 
     is_promotional: bool
     max_show_count: int
+    display_option: str
 
     def __init__(
             self,
@@ -39,7 +40,8 @@ class Video:
             comments: typing.List[int] = None,
             upload_time: float = 0,
             is_promotional: bool = False,
-            max_show_count: int = -1
+            max_show_count: int = -1,
+            display_option: str = "all"
     ):
         self.title = title
         self.author_username: str = author_username
@@ -56,6 +58,7 @@ class Video:
         self.upload_time = time.time() if upload_time == 0 else upload_time
         self.is_promotional = is_promotional
         self.max_show_count = max_show_count
+        self.display_option = display_option
 
     def to_dict(self):
         return {
@@ -74,7 +77,8 @@ class Video:
             "uploadTime": self.upload_time,
             "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/" + str(self.video_id) + ".mp4",
             "isPromotional": self.is_promotional,
-            "maxShowCount": self.max_show_count
+            "maxShowCount": self.max_show_count,
+            "displayOption": self.display_option
         }
 
 
@@ -99,7 +103,8 @@ class VideoFactory:
             comments=None,
             upload_time: float = 0,
             is_promotional: bool = False,
-            max_show_count: int = -1
+            max_show_count: int = -1,
+            display_option: str = "all"
     ):
         return Video(
             title,
@@ -116,7 +121,8 @@ class VideoFactory:
             comments=comments if comments is not None else [],
             upload_time=upload_time,
             is_promotional=is_promotional,
-            max_show_count=max_show_count
+            max_show_count=max_show_count,
+            display_option=display_option
         )
 
     @staticmethod
@@ -136,5 +142,6 @@ class VideoFactory:
             comments=[] if "comments" not in data.keys() else data["comments"],
             upload_time=0 if "uploadTime" not in data.keys() else data["uploadTime"],
             is_promotional=False if "isPromotional" not in data.keys() else data["isPromotional"],
-            max_show_count=-1 if "maxShowCount" not in data.keys() else data["maxShowCount"]
+            max_show_count=-1 if "maxShowCount" not in data.keys() else data["maxShowCount"],
+            display_option="all" if "displayOption" not in data.keys() else data["displayOption"]
         )
