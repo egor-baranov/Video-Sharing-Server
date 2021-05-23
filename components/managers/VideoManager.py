@@ -40,3 +40,9 @@ class VideoManager:
 
         video.comments.append(comment.comment_id)
         VideoManager.update_video_data(video)
+
+    @staticmethod
+    def delete_video(video_id: int):
+        videos = DatabaseWorker.read_videos()
+        videos.remove(list(filter(lambda it: it.video_id == video_id, videos))[0])
+        DatabaseWorker.write_videos(videos)
