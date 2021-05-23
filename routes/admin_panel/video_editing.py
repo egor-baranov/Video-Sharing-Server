@@ -3,6 +3,7 @@ from flask import Blueprint
 
 from components.core import *
 from components.managers.VideoManager import VideoManager
+from components.managers.VideoManager import Video
 
 video_editing_blueprint = Blueprint(
     "edit", __name__, template_folder="templates", static_folder="static"
@@ -21,7 +22,31 @@ def edit_video_description():
     pass
 
 
-@app.route("/editVideoTegs")
+@app.route("/editVideoTags")
 @cross_origin()
-def edit_video_tegs():
+def edit_video_tags():
     pass
+
+
+@app.route("/updatePromotionalVideo")
+@cross_origin()
+def update_promotional_video():
+    video_id: int = int(request.args.get("videoId"))
+    video: Video = VideoManager.get_video_by_id(video_id)
+
+    resp = make_response(jsonify({"ok": True, "video": video.to_dict()}))
+    resp.headers = headers
+    return resp
+
+
+@app.route("/deletePromotionalVideo")
+@cross_origin()
+def delete_promotional_video():
+    video_id: int = int(request.args.get("videoId"))
+    VideoManager.delete_video(video_id)
+
+    resp = make_response(jsonify({"ok": True}))
+    resp.headers = headers
+    return resp
+
+
