@@ -472,3 +472,15 @@ def update_coordinates():
     resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
     return resp
+
+
+@app.route("/openPromotionalVideo")
+@cross_origin()
+def open_promotional_video():
+    video = random.choice(VideoManager.promotional_video_list())
+    video.views += 1
+    VideoManager.update_video_data(video)
+
+    resp = make_response(jsonify({"ok": True, "video": video.to_dict()}))
+    resp.headers = headers
+    return resp
