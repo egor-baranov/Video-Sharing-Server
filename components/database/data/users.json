@@ -83,7 +83,7 @@
     "likedComments": [],
     "registerTime": 1612815838.8063908,
     "confirmCode": 0,
-    "coordinates": "55.8924138:37.672818",
+    "coordinates": "55.8924095:37.6727659",
     "role": "user",
     "userId": 695619
   },
@@ -94,7 +94,10 @@
     "city": "profigrok",
     "birthDate": null,
     "email": "asd@a.d",
-    "uploadedVideos": [],
+    "uploadedVideos": [
+      162884,
+      643927
+    ],
     "likedVideos": [],
     "likedComments": [],
     "registerTime": 1612815838.8055007,

@@ -22,7 +22,6 @@ class VideoManager:
 
         return promotional_videos
 
-
     @staticmethod
     def get_video_by_id(video_id: int):
         for video in DatabaseWorker.read_videos():
