@@ -4,6 +4,7 @@ from flask import Blueprint
 from components.database.DatabaseWorker import DatabaseWorker
 from components.core import *
 from components.managers.UserManager import UserManager
+from components.managers.VideoManager import VideoManager
 from dto.User import UserFactory
 
 data_list_blueprint = Blueprint(
@@ -65,6 +66,16 @@ def video_list():
         )
         resp.headers = headers
         return resp
+
+
+@app.route("/promotionalVideoList")
+@cross_origin()
+def promotional_video_list():
+    resp = make_response(
+        jsonify({"promotionalVideos": [v.to_dict() for v in VideoManager.promotional_video_list()]})
+    )
+    resp.headers = headers
+    return resp
 
 
 @app.route("/userList")
