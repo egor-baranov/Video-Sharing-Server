@@ -161,8 +161,14 @@ def get_user():
 def get_videos():
     count = int(request.args.get("count"))
     ret_videos = []
+
+    videos = []
+    for v in DatabaseWorker.read_videos():
+        if not v.is_promotional:
+            videos.append(v)
+
     for i in range(count):
-        ret_videos.append(random.choice(DatabaseWorker.read_videos()).to_dict())
+        ret_videos.append(random.choice(videos).to_dict())
     resp = make_response(jsonify({"videos": ret_videos}))
     resp.headers = headers
     return resp
