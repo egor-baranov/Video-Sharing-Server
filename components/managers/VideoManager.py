@@ -13,6 +13,17 @@ class VideoManager:
         DatabaseWorker.write_videos(videos)
 
     @staticmethod
+    def promotional_video_list():
+        promotional_videos = []
+
+        for v in DatabaseWorker.read_videos():
+            if v.is_promotional and (v.max_show_count == -1 or v.max_show_count > v.views):
+                promotional_videos.append(v)
+
+        return promotional_videos
+
+
+    @staticmethod
     def get_video_by_id(video_id: int):
         for video in DatabaseWorker.read_videos():
             if video.video_id == video_id:
