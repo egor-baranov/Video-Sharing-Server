@@ -17,7 +17,8 @@ class VideoManager:
         promotional_videos = []
 
         for v in DatabaseWorker.read_videos():
-            if v.is_promotional and (v.max_show_count == -1 or v.max_show_count > v.views):
+            if v.is_promotional and (
+                    v.max_show_count == -1 or v.max_show_count > v.views) and v.display_option == "none":
                 promotional_videos.append(v)
 
         return promotional_videos

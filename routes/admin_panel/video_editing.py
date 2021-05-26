@@ -34,6 +34,10 @@ def update_promotional_video():
     video_id: int = int(request.args.get("videoId"))
     video: Video = VideoManager.get_video_by_id(video_id)
 
+    video.max_show_count = int(request.args.get("maxShowCount"))
+    video.display_option = request.args.get("displayOption")
+    video.title = request.args.get("title")
+
     resp = make_response(jsonify({"ok": True, "video": video.to_dict()}))
     resp.headers = headers
     return resp
