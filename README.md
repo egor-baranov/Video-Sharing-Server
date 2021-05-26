@@ -422,6 +422,14 @@ Parameter | Description
 ```maxShowCount``` | Max show count of video.
 ```displayOption``` | The way video will be shown: feed, openVideo, all, none (if none selected video will be hidden)
 
+### deletePromotionalVideo
+
+Request for promotional video deleting.
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of video we are going to delete.
+
 ## User data editing
 
 ### editUserName
