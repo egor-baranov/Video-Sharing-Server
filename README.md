@@ -409,7 +409,18 @@ Parameter | Description
 ```length``` | Length of video.
 ```videoId``` | Id of video.
 ```maxShowCount``` | Max show count of video.
-```displayOption``` | The way video will be shown: feed, openVideo, all
+```displayOption``` | The way video will be shown: feed, openVideo, all, none (if none selected video will be hidden)
+
+### updatePromotionalVideo
+
+Updates promotional video (implementation of changing video title, maxShowCount and displayOption).
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of video we are going to update.
+```title``` | Promotional video title.
+```maxShowCount``` | Max show count of video.
+```displayOption``` | The way video will be shown: feed, openVideo, all, none (if none selected video will be hidden)
 
 ## User data editing
 
