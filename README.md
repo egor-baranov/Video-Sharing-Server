@@ -94,7 +94,7 @@ Returns all the data including list of all users and list of all videos (videoLi
     // list of registered users data
   ], 
   "videos": [
-    // list of uploaded videos data
+    // list of uploaded videos 
   ]
 }
 ```
@@ -106,7 +106,19 @@ Returns list of all videos with this format:
 ```
 {
   "videos": [
-    // list of uploaded videos data
+    // list of uploaded videos 
+  ]
+}
+```
+This request does not require any parameters.
+
+### promotionalVideoList
+
+Returns list of promotional videos with this format:
+```
+{
+  "promotionalVideos": [
+    // list of promotional videos 
   ]
 }
 ```
@@ -118,7 +130,7 @@ Returns list of all users with this format:
 ```
 {
   "users": [
-    // list of registered users data
+    // list of registered users 
   ]
 }
 ```
@@ -130,7 +142,7 @@ Returns list of all comments with this format:
 ```
 {
   "comments": [
-    // list of comments data
+    // list of comments 
   ]
 }
 ```
