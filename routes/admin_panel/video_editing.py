@@ -38,6 +38,8 @@ def update_promotional_video():
     video.display_option = request.args.get("displayOption")
     video.title = request.args.get("title")
 
+    VideoManager.update_video_data(video)
+
     resp = make_response(jsonify({"ok": True, "video": video.to_dict()}))
     resp.headers = headers
     return resp
