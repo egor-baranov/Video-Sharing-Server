@@ -94,7 +94,7 @@ Returns all the data including list of all users and list of all videos (videoLi
     // list of registered users data
   ], 
   "videos": [
-    // list of uploaded videos data
+    // list of uploaded videos 
   ]
 }
 ```
@@ -106,7 +106,19 @@ Returns list of all videos with this format:
 ```
 {
   "videos": [
-    // list of uploaded videos data
+    // list of uploaded videos 
+  ]
+}
+```
+This request does not require any parameters.
+
+### promotionalVideoList
+
+Returns list of promotional videos with this format:
+```
+{
+  "promotionalVideos": [
+    // list of promotional videos 
   ]
 }
 ```
@@ -118,7 +130,7 @@ Returns list of all users with this format:
 ```
 {
   "users": [
-    // list of registered users data
+    // list of registered users 
   ]
 }
 ```
@@ -130,7 +142,7 @@ Returns list of all comments with this format:
 ```
 {
   "comments": [
-    // list of comments data
+    // list of comments 
   ]
 }
 ```
@@ -409,7 +421,26 @@ Parameter | Description
 ```length``` | Length of video.
 ```videoId``` | Id of video.
 ```maxShowCount``` | Max show count of video.
-```displayOption``` | The way video will be shown: feed, openVideo, all
+```displayOption``` | The way video will be shown: feed, openVideo, all, none (if none selected video will be hidden)
+
+### updatePromotionalVideo
+
+Updates promotional video (implementation of changing video title, maxShowCount and displayOption).
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of video we are going to update.
+```title``` | Promotional video title.
+```maxShowCount``` | Max show count of video.
+```displayOption``` | The way video will be shown: feed, openVideo, all, none (if none selected video will be hidden)
+
+### deletePromotionalVideo
+
+Request for promotional video deleting.
+
+Parameter | Description
+----------|-------
+```videoId``` | Id of video we are going to delete.
 
 ## User data editing
 
