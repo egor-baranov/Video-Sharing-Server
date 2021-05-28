@@ -8,7 +8,7 @@
     "tags": "",
     "size": 3211164,
     "length": 1,
-    "views": 523,
+    "views": 525,
     "likeCount": 23,
     "videoId": 7805751,
     "comments": [
@@ -18,7 +18,8 @@
     "uploadTime": 1612695626.7054837,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/7805751.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Чайник",
@@ -38,7 +39,8 @@
     "uploadTime": 1612695626.7054863,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/4308610.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Елка",
@@ -60,7 +62,8 @@
     "uploadTime": 1612695626.7054884,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/1534532.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Мышка",
@@ -80,7 +83,8 @@
     "uploadTime": 1612695626.7054904,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/7650646.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Экран компьютера ",
@@ -101,7 +105,8 @@
     "uploadTime": 1612695626.7054925,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/893658.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "название",
@@ -121,7 +126,8 @@
     "uploadTime": 1612695626.7054942,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/5914593.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Обогреватель",
@@ -141,7 +147,8 @@
     "uploadTime": 1612695626.7054963,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/2536346.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Мышка ",
@@ -152,7 +159,7 @@
     "tags": "",
     "size": 10208623,
     "length": 5,
-    "views": 335,
+    "views": 336,
     "likeCount": 1,
     "videoId": 4588825,
     "comments": [
@@ -161,7 +168,8 @@
     "uploadTime": 1612695626.7054985,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/4588825.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "SVID_20210119_134320_1",
@@ -172,7 +180,7 @@
     "tags": "",
     "size": 11596163,
     "length": 26,
-    "views": 318,
+    "views": 665,
     "likeCount": 1,
     "videoId": 1997380,
     "comments": [
@@ -188,8 +196,9 @@
     ],
     "uploadTime": 1612695626.7055004,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/1997380.mp4",
-    "isPromotional": false,
-    "maxShowCount": -1
+    "isPromotional": true,
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Приложение",
@@ -200,7 +209,7 @@
     "tags": "",
     "size": 1897777,
     "length": 11,
-    "views": 338,
+    "views": 456,
     "likeCount": 0,
     "videoId": 946366,
     "comments": [
@@ -209,7 +218,8 @@
     "uploadTime": 1612695626.7055027,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/946366.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID_20200730_131316",
@@ -232,7 +242,8 @@
     "uploadTime": 1612695626.7055047,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/4433512.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "avatar_chat_3_ny_2021",
@@ -243,7 +254,7 @@
     "tags": "теги",
     "size": 10394500,
     "length": 12,
-    "views": 403,
+    "views": 404,
     "likeCount": 2,
     "videoId": 1359421,
     "comments": [
@@ -253,7 +264,8 @@
     "uploadTime": 1612695626.7055068,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/1359421.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID-20210119-WA0078",
@@ -264,7 +276,7 @@
     "tags": "как Путин",
     "size": 2813706,
     "length": 32,
-    "views": 289,
+    "views": 290,
     "likeCount": 1,
     "videoId": 3875204,
     "comments": [
@@ -273,7 +285,8 @@
     "uploadTime": 1612695626.705509,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/3875204.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID-20210121-WA0048",
@@ -284,7 +297,7 @@
     "tags": "зима",
     "size": 4214872,
     "length": 27,
-    "views": 294,
+    "views": 557,
     "likeCount": 0,
     "videoId": 5485667,
     "comments": [
@@ -295,7 +308,8 @@
     "uploadTime": 1612695626.7048712,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/5485667.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID-20210121-WA0049",
@@ -306,7 +320,7 @@
     "tags": "крысята",
     "size": 355149,
     "length": 2,
-    "views": 384,
+    "views": 573,
     "likeCount": 1,
     "videoId": 8931796,
     "comments": [
@@ -315,7 +329,8 @@
     "uploadTime": 1612695626.705513,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/8931796.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID-20210121-WA0049",
@@ -335,7 +350,8 @@
     "uploadTime": 1612695626.705515,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/9944159.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID-20210122-WA0009",
@@ -346,14 +362,15 @@
     "tags": "море профи",
     "size": 8607174,
     "length": 75,
-    "views": 324,
+    "views": 325,
     "likeCount": 1,
     "videoId": 4374201,
     "comments": [],
     "uploadTime": 1612695626.705517,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/4374201.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID-20200107-WA0000",
@@ -364,14 +381,15 @@
     "tags": "",
     "size": 80379,
     "length": 0,
-    "views": 77,
-    "likeCount": 0,
+    "views": 336,
+    "likeCount": 1,
     "videoId": 8885413,
     "comments": [],
     "uploadTime": 1613916138.160309,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/8885413.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID-20210222-WA0299",
@@ -382,14 +400,15 @@
     "tags": "авария",
     "size": 13289488,
     "length": 80,
-    "views": 62,
+    "views": 63,
     "likeCount": 1,
     "videoId": 5574265,
     "comments": [],
     "uploadTime": 1614139179.6199145,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/5574265.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "VID-20210224-WA0200",
@@ -410,7 +429,8 @@
     "uploadTime": 1614161912.669173,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/3382095.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Тест",
@@ -428,7 +448,8 @@
     "uploadTime": 1621015570.646757,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/162884.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
   },
   {
     "title": "Видосик",
@@ -446,6 +467,47 @@
     "uploadTime": 1621016234.8069675,
     "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/643927.mp4",
     "isPromotional": false,
-    "maxShowCount": -1
+    "maxShowCount": -1,
+    "displayOption": "all"
+  },
+  {
+    "title": "VID-20210530-WA0003",
+    "authorUsername": "алекс",
+    "authorEmail": "cosword@rambler.ru",
+    "authorPhone": "89161500314",
+    "description": "видео",
+    "tags": "машина",
+    "size": 2518053,
+    "length": 9,
+    "views": 3,
+    "likeCount": 0,
+    "videoId": 2626218,
+    "comments": [
+      325022
+    ],
+    "uploadTime": 1622235875.260819,
+    "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/2626218.mp4",
+    "isPromotional": false,
+    "maxShowCount": -1,
+    "displayOption": "all"
+  },
+  {
+    "title": "авария",
+    "authorUsername": "алекс",
+    "authorEmail": "cosword@rambler.ru",
+    "authorPhone": "89161500314",
+    "description": "машина",
+    "tags": "авто",
+    "size": 2518053,
+    "length": 9,
+    "views": 0,
+    "likeCount": 0,
+    "videoId": 9053957,
+    "comments": [],
+    "uploadTime": 1622236324.2188187,
+    "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/9053957.mp4",
+    "isPromotional": false,
+    "maxShowCount": -1,
+    "displayOption": "all"
   }
 ]
