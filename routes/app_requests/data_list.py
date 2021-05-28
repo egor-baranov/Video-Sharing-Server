@@ -71,8 +71,17 @@ def video_list():
 @app.route("/promotionalVideoList")
 @cross_origin()
 def promotional_video_list():
+    sort_type = (
+        request.args.get("sortType")
+        if request.args.get("sortType") is not None
+        else "title"
+    )
+
+    resp_list = [v.to_dict() for v in VideoManager.promotional_video_list()]
+    resp_list.sort(key=lambda x: x[sort_type])
+
     resp = make_response(
-        jsonify({"promotionalVideos": [v.to_dict() for v in VideoManager.promotional_video_list()]})
+        jsonify({"promotionalVideos": resp_list})
     )
     resp.headers = headers
     return resp
