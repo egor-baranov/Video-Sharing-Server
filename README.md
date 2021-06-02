@@ -110,7 +110,11 @@ Returns list of all videos with this format:
   ]
 }
 ```
-This request does not require any parameters.
+Parameter | Description
+----------|-------
+```limit``` | Count of video per page.
+```page``` | Index of page.
+```sortType``` | Sort type (any field of Video class in camel case).
 
 ### promotionalVideoList
 
@@ -122,7 +126,9 @@ Returns list of promotional videos with this format:
   ]
 }
 ```
-This request does not require any parameters.
+Parameter | Description
+----------|-------
+```sortType``` | Sort type (any field of Video class in camel case).
 
 ### userList  
 
