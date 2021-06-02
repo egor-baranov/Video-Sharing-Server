@@ -232,7 +232,6 @@ def add_promotional_video():
     resp.headers = headers
     return resp
 
-
 @app.route("/getParameters")
 @cross_origin()
 def get_parameters():

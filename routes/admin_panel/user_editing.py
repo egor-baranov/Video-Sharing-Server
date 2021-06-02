@@ -5,7 +5,7 @@ from components.core import *
 from components.managers.UserManager import UserManager
 
 user_editing_blueprint = Blueprint(
-    "edit", __name__, template_folder="templates", static_folder="static"
+    "userEditing", __name__, template_folder="templates", static_folder="static"
 )
 
 
