@@ -28,6 +28,7 @@ class VideoManager:
         for video in DatabaseWorker.read_videos():
             if video.video_id == video_id:
                 return video
+        return None
 
     @staticmethod
     def update_video_data(v: Video):
