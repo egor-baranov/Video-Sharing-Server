@@ -225,7 +225,7 @@
     "authorEmail": "admin@admin.com",
     "authorPhone": "89004445533",
     "replies": [],
-    "text": "Комментарий 5",
+    "text": "-Комментарий был удален администрацией-",
     "likes": 0,
     "commentId": 444749,
     "creationTime": 1615754016.5444326
@@ -394,5 +394,16 @@
     "likes": 0,
     "commentId": 181537,
     "creationTime": 1616911227.5762465
+  },
+  {
+    "videoId": 946366,
+    "authorUsername": "admin",
+    "authorEmail": "admin@admin.com",
+    "authorPhone": "89004445533",
+    "replies": [],
+    "text": "Вроде нормальный видос",
+    "likes": 0,
+    "commentId": 920640,
+    "creationTime": 1622313708.9196405
   }
 ]
