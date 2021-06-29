@@ -30,16 +30,10 @@ def full_list():
 @app.route("/videoList")
 @cross_origin()
 def video_list():
-    limit = int(
-        request.args.get("limit") if request.args.get("limit") is not None else 100
-    )
-    page = int(
-        request.args.get("page") if request.args.get("page") is not None else 1
-    )
+    limit = int(request.args.get("limit") if request.args.get("limit") is not None else 100)
+    page = int(request.args.get("page") if request.args.get("page") is not None else 1)
     sort_type = (
-        request.args.get("sortType")
-        if request.args.get("sortType") is not None
-        else "title"
+        request.args.get("sortType") if request.args.get("sortType") is not None else "title"
     )
 
     resp_list = [v.to_dict() for v in DatabaseWorker.read_videos()]
@@ -54,16 +48,12 @@ def video_list():
     resp_list.sort(key=lambda x: x[sort_type])
 
     try:
-        resp_list = resp_list[limit * (page - 1):limit * page]
-        resp = make_response(
-            jsonify({"videos": resp_list})
-        )
+        resp_list = resp_list[limit * (page - 1) : limit * page]
+        resp = make_response(jsonify({"videos": resp_list}))
         resp.headers = headers
         return resp
-    except():
-        resp = make_response(
-            jsonify({"videos": resp_list, "totalCount": len(resp_list)})
-        )
+    except ():
+        resp = make_response(jsonify({"videos": resp_list, "totalCount": len(resp_list)}))
         resp.headers = headers
         return resp
 
@@ -72,17 +62,13 @@ def video_list():
 @cross_origin()
 def promotional_video_list():
     sort_type = (
-        request.args.get("sortType")
-        if request.args.get("sortType") is not None
-        else "title"
+        request.args.get("sortType") if request.args.get("sortType") is not None else "title"
     )
 
     resp_list = [v.to_dict() for v in VideoManager.promotional_video_list()]
     resp_list.sort(key=lambda x: x[sort_type])
 
-    resp = make_response(
-        jsonify({"promotionalVideos": resp_list})
-    )
+    resp = make_response(jsonify({"promotionalVideos": resp_list}))
     resp.headers = headers
     return resp
 
@@ -90,17 +76,11 @@ def promotional_video_list():
 @app.route("/userList")
 @cross_origin()
 def user_list():
-    limit = int(
-        request.args.get("limit") if request.args.get("limit") is not None else 100
-    )
-    page = int(
-        request.args.get("page") if request.args.get("page") is not None else 1
-    )
+    limit = int(request.args.get("limit") if request.args.get("limit") is not None else 100)
+    page = int(request.args.get("page") if request.args.get("page") is not None else 1)
 
     sort_type = (
-        request.args.get("sortType")
-        if request.args.get("sortType") is not None
-        else "username"
+        request.args.get("sortType") if request.args.get("sortType") is not None else "username"
     )
 
     if sort_type not in UserFactory.new_fake_user().to_dict().keys():
@@ -114,11 +94,11 @@ def user_list():
     resp_list.sort(key=lambda x: x[sort_type])
 
     try:
-        resp_list = resp_list[limit * (page - 1):limit * page]
+        resp_list = resp_list[limit * (page - 1) : limit * page]
         resp = make_response(jsonify({"users": resp_list, "totalCount": len(resp_list)}))
         resp.headers = headers
         return resp
-    except():
+    except ():
         resp = make_response(jsonify({"users": resp_list, "totalCount": len(resp_list)}))
         resp.headers = headers
         return resp

@@ -277,8 +277,15 @@ def add_comment():
     VideoManager.add_comment_to_video(video_id=video_id, comment_text=comment_text, author=user)
 
     resp = make_response(
-        jsonify({"ok": True, "result": [CommentManager.get_comment_by_id(i).to_dict() for i in
-                                        VideoManager.get_video_by_id(video_id).comments]})
+        jsonify(
+            {
+                "ok": True,
+                "result": [
+                    CommentManager.get_comment_by_id(i).to_dict()
+                    for i in VideoManager.get_video_by_id(video_id).comments
+                ],
+            }
+        )
     )
     resp.headers = headers
     return resp
@@ -290,8 +297,15 @@ def get_comments():
     video_id = int(request.args.get("videoId"))
 
     resp = make_response(
-        jsonify({"ok": True, "result": [CommentManager.get_comment_by_id(i).to_dict() for i in
-                                        VideoManager.get_video_by_id(video_id).comments]})
+        jsonify(
+            {
+                "ok": True,
+                "result": [
+                    CommentManager.get_comment_by_id(i).to_dict()
+                    for i in VideoManager.get_video_by_id(video_id).comments
+                ],
+            }
+        )
     )
     resp.headers = headers
     return resp
@@ -318,7 +332,7 @@ def exist():
         jsonify(
             {
                 "ok": UserManager.get_user_by_email(email).is_not_fake()
-                      or UserManager.get_user_by_phone(phone).is_not_fake()
+                or UserManager.get_user_by_phone(phone).is_not_fake()
             }
         )
     )
@@ -418,9 +432,7 @@ def open_video():
     VideoManager.update_video_data(video)
 
     resp = make_response(
-        jsonify(
-            {"ok": True, "viewCount": video.views, "commentCount": len(video.comments)}
-        )
+        jsonify({"ok": True, "viewCount": video.views, "commentCount": len(video.comments)})
     )
     resp.headers = headers
     return resp

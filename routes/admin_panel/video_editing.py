@@ -42,7 +42,9 @@ def update_promotional_video():
 
     if not video.is_promotional:
         if VideoManager.get_video_by_id(video_id) is None:
-            resp = make_response(jsonify({"ok": False, "error": "Video with this id is not promotional."}))
+            resp = make_response(
+                jsonify({"ok": False, "error": "Video with this id is not promotional."})
+            )
             resp.headers = headers
             return resp
 
@@ -69,7 +71,9 @@ def delete_promotional_video():
 
     if not VideoManager.get_video_by_id(video_id).is_promotional:
         if VideoManager.get_video_by_id(video_id) is None:
-            resp = make_response(jsonify({"ok": False, "error": "Video with this id is not promotional."}))
+            resp = make_response(
+                jsonify({"ok": False, "error": "Video with this id is not promotional."})
+            )
             resp.headers = headers
             return resp
 

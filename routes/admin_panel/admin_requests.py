@@ -23,12 +23,12 @@ def block_user():
     if user.is_not_fake():
         UserManager.block_user(user)
         resp = make_response(
-            jsonify({
-                "ok": True,
-                "blockedUsers": [
-                    u.to_dict() for u in DatabaseWorker.read_blocked_users()
-                ],
-            })
+            jsonify(
+                {
+                    "ok": True,
+                    "blockedUsers": [u.to_dict() for u in DatabaseWorker.read_blocked_users()],
+                }
+            )
         )
     else:
         resp = make_response(jsonify({"ok": False}))
@@ -80,7 +80,7 @@ def get_stats():
                             for v in DatabaseWorker.read_videos()
                         ]
                     ),
-                    "overall": len(DatabaseWorker.read_videos())
+                    "overall": len(DatabaseWorker.read_videos()),
                 },
                 "usersRegisteredCount": {
                     "forLastDay": sum(
@@ -101,7 +101,7 @@ def get_stats():
                             for u in DatabaseWorker.read_users()
                         ]
                     ),
-                    "overall": len(DatabaseWorker.read_users())
+                    "overall": len(DatabaseWorker.read_users()),
                 },
                 "commentsLeftCount": {
                     "forLastDay": sum(
@@ -122,19 +122,35 @@ def get_stats():
                             for c in DatabaseWorker.read_comments()
                         ]
                     ),
-                    "overall": len(DatabaseWorker.read_comments())
+                    "overall": len(DatabaseWorker.read_comments()),
                 },
                 "usedDiscSpace": {
-                    "dataServer": str(float("{:.2f}".format(DatabaseWorker.get_used_disc_space() / 10 ** 6))) + " MB",
+                    "dataServer": str(
+                        float("{:.2f}".format(DatabaseWorker.get_used_disc_space() / 10 ** 6))
+                    )
+                    + " MB",
                     "mediaServer": str(
-                        float("{:.2f}".format(sum([v.size for v in DatabaseWorker.read_videos()]) / 10 ** 6))
-                    ) + " MB",
-                    "overall":
-                        str(float("{:.2f}".format(
-                            (sum([v.size for v in DatabaseWorker.read_videos()]) +
-                             DatabaseWorker.get_used_disc_space()) / 10 ** 6))) + " MB",
+                        float(
+                            "{:.2f}".format(
+                                sum([v.size for v in DatabaseWorker.read_videos()]) / 10 ** 6
+                            )
+                        )
+                    )
+                    + " MB",
+                    "overall": str(
+                        float(
+                            "{:.2f}".format(
+                                (
+                                    sum([v.size for v in DatabaseWorker.read_videos()])
+                                    + DatabaseWorker.get_used_disc_space()
+                                )
+                                / 10 ** 6
+                            )
+                        )
+                    )
+                    + " MB",
                 },
-                "userLocations": [u.coordinates for u in DatabaseWorker.read_users()]
+                "userLocations": [u.coordinates for u in DatabaseWorker.read_users()],
             }
         )
     )
@@ -157,7 +173,12 @@ def reset_password():
         UserManager.update_user_data(user)
 
     resp = make_response(
-        jsonify({"ok": user.is_not_fake(), "users": [u.to_dict() for u in DatabaseWorker.read_users()]})
+        jsonify(
+            {
+                "ok": user.is_not_fake(),
+                "users": [u.to_dict() for u in DatabaseWorker.read_users()],
+            }
+        )
     )
     resp.headers = headers
     return resp
@@ -232,15 +253,19 @@ def add_promotional_video():
     resp.headers = headers
     return resp
 
+
 @app.route("/getParameters")
 @cross_origin()
 def get_parameters():
     resp = make_response(
-        jsonify({
-            "ok": True,
-            "promotionalVideoFrequency":
-                app.config.get("promotionalVideoFrequency") if "promotionalVideoFrequency" in app.config.keys() else -1
-        })
+        jsonify(
+            {
+                "ok": True,
+                "promotionalVideoFrequency": app.config.get("promotionalVideoFrequency")
+                if "promotionalVideoFrequency" in app.config.keys()
+                else -1,
+            }
+        )
     )
     resp.headers = headers
     return resp
