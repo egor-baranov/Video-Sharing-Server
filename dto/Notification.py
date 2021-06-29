@@ -23,13 +23,15 @@ class Notification:
             "text": self.text,
             "userId": self.user_id,
             "notificationType": self.notification_type,
-            "creationTime": self.creation_time
+            "creationTime": self.creation_time,
         }
 
 
 class NotificationFactory:
     @staticmethod
-    def new_notification(text: str, user_id: int, notification_type: int, creation_time: float) -> Notification:
+    def new_notification(
+        text: str, user_id: int, notification_type: int, creation_time: float
+    ) -> Notification:
         return Notification(text, user_id, notification_type, creation_time)
 
     @staticmethod
@@ -38,5 +40,5 @@ class NotificationFactory:
             text=data["text"],
             user_id=data["userId"],
             notification_type=data["notificationType"],
-            creation_time=data["creationTime"]
+            creation_time=data["creationTime"],
         )

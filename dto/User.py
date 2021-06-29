@@ -12,9 +12,9 @@ class User:
     birth_date: str
     email: str
 
-    uploaded_videos: typing.List[int] = []
-    liked_videos: typing.List[int] = []
-    liked_comments: typing.List[int] = []
+    uploaded_videos: typing.List[int]
+    liked_videos: typing.List[int]
+    liked_comments: typing.List[int]
 
     register_time: float
     confirm_code: int
@@ -24,21 +24,21 @@ class User:
     user_id: int
 
     def __init__(
-            self,
-            username: str = "",
-            phone: str = "",
-            password: str = "",
-            city: str = "",
-            birth_date: str = "",
-            email: str = "",
-            uploaded_videos: typing.List[int] = None,
-            liked_videos: typing.List[int] = None,
-            liked_comments: typing.List[int] = None,
-            register_time: float = 0,
-            confirm_code: int = 0,
-            coordinates: str = "0:0",
-            role: str = "user",
-            user_id: int = 0
+        self,
+        username: str = "",
+        phone: str = "",
+        password: str = "",
+        city: str = "",
+        birth_date: str = "",
+        email: str = "",
+        uploaded_videos: typing.List[int] = None,
+        liked_videos: typing.List[int] = None,
+        liked_comments: typing.List[int] = None,
+        register_time: float = 0,
+        confirm_code: int = 0,
+        coordinates: str = "0:0",
+        role: str = "user",
+        user_id: int = 0,
     ):
         self.username = username
         self.phone = phone
@@ -79,7 +79,7 @@ class User:
             "confirmCode": self.confirm_code,
             "coordinates": self.coordinates,
             "role": self.role,
-            "userId": self.user_id
+            "userId": self.user_id,
         }
 
     def upload_video(self, video_id: int):
@@ -99,20 +99,20 @@ class UserFactory:
 
     @staticmethod
     def new_user(
-            username: str,
-            phone: str,
-            password: str,
-            city: str,
-            birth_date: str,
-            email: str,
-            uploaded_videos: typing.List[int] = None,
-            liked_videos: typing.List[int] = None,
-            liked_comments: typing.List[int] = None,
-            register_time: float = 0,
-            confirm_code: int = 0,
-            coordinates: str = "0:0",
-            role: str = "user",
-            user_id: int = 0
+        username: str,
+        phone: str,
+        password: str,
+        city: str,
+        birth_date: str,
+        email: str,
+        uploaded_videos: typing.List[int] = None,
+        liked_videos: typing.List[int] = None,
+        liked_comments: typing.List[int] = None,
+        register_time: float = 0,
+        confirm_code: int = 0,
+        coordinates: str = "0:0",
+        role: str = "user",
+        user_id: int = 0,
     ) -> User:
         return User(
             username,
@@ -128,7 +128,7 @@ class UserFactory:
             confirm_code,
             coordinates,
             role,
-            user_id
+            user_id,
         )
 
     @staticmethod
@@ -147,7 +147,9 @@ class UserFactory:
             confirm_code=0 if "confirmCode" not in data.keys() else data["confirmCode"],
             coordinates="0:0" if "coordinates" not in data.keys() else data["coordinates"],
             role="user" if "role" not in data.keys() else data["role"],
-            user_id=random.randint(100000, 999999) if "userId" not in data.keys() else data["userId"]
+            user_id=random.randint(100000, 999999)
+            if "userId" not in data.keys()
+            else data["userId"],
         )
 
     @staticmethod

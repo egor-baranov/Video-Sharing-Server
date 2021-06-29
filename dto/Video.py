@@ -18,30 +18,30 @@ class Video:
     video_id: int
     upload_time: float
 
-    comments: typing.List[int] = []
+    comments: typing.List[int]
 
     is_promotional: bool
     max_show_count: int
     display_option: str
 
     def __init__(
-            self,
-            title: str = "",
-            author_username: str = "",
-            author_email: str = "",
-            author_phone: str = "",
-            description: str = "",
-            tags: str = "",
-            size: int = 0,
-            length: int = 0,
-            views: int = 0,
-            like_count: int = 0,
-            video_id: int = 0,
-            comments: typing.List[int] = None,
-            upload_time: float = 0,
-            is_promotional: bool = False,
-            max_show_count: int = -1,
-            display_option: str = "all"
+        self,
+        title: str = "",
+        author_username: str = "",
+        author_email: str = "",
+        author_phone: str = "",
+        description: str = "",
+        tags: str = "",
+        size: int = 0,
+        length: int = 0,
+        views: int = 0,
+        like_count: int = 0,
+        video_id: int = 0,
+        comments: typing.List[int] = None,
+        upload_time: float = 0,
+        is_promotional: bool = False,
+        max_show_count: int = -1,
+        display_option: str = "all",
     ):
         self.title = title
         self.author_username: str = author_username
@@ -75,10 +75,12 @@ class Video:
             "videoId": self.video_id,
             "comments": self.comments,
             "uploadTime": self.upload_time,
-            "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/" + str(self.video_id) + ".mp4",
+            "url": "https://res.cloudinary.com/kepler88d/video/upload/fl_attachment/"
+            + str(self.video_id)
+            + ".mp4",
             "isPromotional": self.is_promotional,
             "maxShowCount": self.max_show_count,
-            "displayOption": self.display_option
+            "displayOption": self.display_option,
         }
 
 
@@ -89,23 +91,23 @@ class VideoFactory:
 
     @staticmethod
     def new_video(
-            title: str,
-            author_username: str,
-            author_email: str,
-            author_phone: str,
-            description: str,
-            tags: str,
-            size: int,
-            length: int,
-            views: int,
-            like_count: int,
-            video_id: int,
-            comments=None,
-            upload_time: float = 0,
-            is_promotional: bool = False,
-            max_show_count: int = -1,
-            display_option: str = "all"
-    ):
+        title: str,
+        author_username: str,
+        author_email: str,
+        author_phone: str,
+        description: str,
+        tags: str,
+        size: int,
+        length: int,
+        views: int,
+        like_count: int,
+        video_id: int,
+        comments=None,
+        upload_time: float = 0,
+        is_promotional: bool = False,
+        max_show_count: int = -1,
+        display_option: str = "all",
+    ) -> Video:
         return Video(
             title,
             author_username,
@@ -122,11 +124,11 @@ class VideoFactory:
             upload_time=upload_time,
             is_promotional=is_promotional,
             max_show_count=max_show_count,
-            display_option=display_option
+            display_option=display_option,
         )
 
     @staticmethod
-    def from_dict(data: dict):
+    def from_dict(data: dict) -> Video:
         return VideoFactory.new_video(
             title=data["title"],
             author_username="" if "authorUsername" not in data.keys() else data["authorUsername"],
@@ -143,5 +145,5 @@ class VideoFactory:
             upload_time=0 if "uploadTime" not in data.keys() else data["uploadTime"],
             is_promotional=False if "isPromotional" not in data.keys() else data["isPromotional"],
             max_show_count=-1 if "maxShowCount" not in data.keys() else data["maxShowCount"],
-            display_option="all" if "displayOption" not in data.keys() else data["displayOption"]
+            display_option="all" if "displayOption" not in data.keys() else data["displayOption"],
         )

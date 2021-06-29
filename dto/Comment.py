@@ -16,16 +16,16 @@ class Comment:
     creation_time: float
 
     def __init__(
-            self,
-            video_id: int,
-            author_username: str,
-            author_email: str,
-            author_phone: str,
-            text: str,
-            replies: List[int] = None,
-            likes: int = 0,
-            comment_id: int = 0,
-            creation_time: float = 0,
+        self,
+        video_id: int,
+        author_username: str,
+        author_email: str,
+        author_phone: str,
+        text: str,
+        replies: List[int] = None,
+        likes: int = 0,
+        comment_id: int = 0,
+        creation_time: float = 0,
     ):
         self.video_id = video_id
         self.author_username = author_username
@@ -35,9 +35,7 @@ class Comment:
         self.likes = likes
 
         self.replies = replies if replies is not None else []
-        self.comment_id = (
-            random.randint(100000, 999999) if comment_id == 0 else comment_id
-        )
+        self.comment_id = random.randint(100000, 999999) if comment_id == 0 else comment_id
         self.creation_time = time.time() if creation_time == 0 else creation_time
 
     def to_dict(self):
@@ -57,15 +55,15 @@ class Comment:
 class CommentFactory:
     @staticmethod
     def new_comment(
-            video_id: int,
-            author_username: str,
-            author_email: str,
-            author_phone: str,
-            text: str,
-            replies: List[int] = None,
-            likes: int = 0,
-            creation_time: float = 0,
-            comment_id: int = 0,
+        video_id: int,
+        author_username: str,
+        author_email: str,
+        author_phone: str,
+        text: str,
+        replies: List[int] = None,
+        likes: int = 0,
+        creation_time: float = 0,
+        comment_id: int = 0,
     ):
         return Comment(
             video_id,
