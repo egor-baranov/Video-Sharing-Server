@@ -17,8 +17,11 @@ class VideoManager:
         promotional_videos = []
 
         for v in DatabaseWorker.read_videos():
-            if v.is_promotional and (
-                    v.max_show_count == -1 or v.max_show_count > v.views) and v.display_option != "none":
+            if (
+                v.is_promotional
+                and (v.max_show_count == -1 or v.max_show_count > v.views)
+                and v.display_option != "none"
+            ):
                 promotional_videos.append(v)
 
         return promotional_videos
@@ -45,8 +48,13 @@ class VideoManager:
     def add_comment_to_video(video_id: int, author: User, comment_text: str):
         video = VideoManager.get_video_by_id(video_id)
 
-        comment = CommentFactory.new_comment(video_id=video_id, text=comment_text, author_phone=author.phone,
-                                             author_email=author.email, author_username=author.username)
+        comment = CommentFactory.new_comment(
+            video_id=video_id,
+            text=comment_text,
+            author_phone=author.phone,
+            author_email=author.email,
+            author_username=author.username,
+        )
 
         CommentManager.add_comment(comment)
 

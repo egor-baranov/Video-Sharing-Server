@@ -7,6 +7,8 @@ videos_path = "components/database/data/videos.json"
 
 comments_path = "components/database/data/comments.json"
 
+notifications_path = "components/database/data/notifications.json"
+
 headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Credentials": "true",
