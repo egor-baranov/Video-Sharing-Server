@@ -128,7 +128,7 @@ def get_stats():
                     "dataServer": str(
                         float("{:.2f}".format(DatabaseWorker.get_used_disc_space() / 10 ** 6))
                     )
-                    + " MB",
+                                  + " MB",
                     "mediaServer": str(
                         float(
                             "{:.2f}".format(
@@ -136,19 +136,19 @@ def get_stats():
                             )
                         )
                     )
-                    + " MB",
+                                   + " MB",
                     "overall": str(
                         float(
                             "{:.2f}".format(
                                 (
-                                    sum([v.size for v in DatabaseWorker.read_videos()])
-                                    + DatabaseWorker.get_used_disc_space()
+                                        sum([v.size for v in DatabaseWorker.read_videos()])
+                                        + DatabaseWorker.get_used_disc_space()
                                 )
                                 / 10 ** 6
                             )
                         )
                     )
-                    + " MB",
+                               + " MB",
                 },
                 "userLocations": [u.coordinates for u in DatabaseWorker.read_users()],
             }
@@ -180,6 +180,18 @@ def reset_password():
             }
         )
     )
+    resp.headers = headers
+    return resp
+
+
+@app.route("/deleteVideo")
+@cross_origin()
+def delete_video():
+    video_id = int("videoId")
+
+    VideoManager.delete_video(video_id)
+
+    resp = make_response(jsonify({"ok": True}))
     resp.headers = headers
     return resp
 
