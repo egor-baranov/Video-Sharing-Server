@@ -14,7 +14,7 @@ class NotificationManager:
         NotificationManager._add_notification(
             user_id=user_id,
             notification_type=Notification.TYPE_RATE_VIDEO,
-            text=f"Пользователь {UserManager.get_user_by_id(other_user_id)} "
+            text=f"Пользователь {UserManager.get_user_by_id(other_user_id).username} "
                  f"оценил ваше видео {video_title[:20]}.",
             creation_time=creation_time
         )
@@ -24,7 +24,7 @@ class NotificationManager:
         NotificationManager._add_notification(
             user_id=user_id,
             notification_type=Notification.TYPE_SUBSCRIBE,
-            text=f"Пользователь {UserManager.get_user_by_id(other_user_id)} "
+            text=f"Пользователь {UserManager.get_user_by_id(other_user_id).username} "
                  f"подписался на вас.",
             creation_time=creation_time
         )
@@ -36,7 +36,7 @@ class NotificationManager:
         NotificationManager._add_notification(
             user_id=user_id,
             notification_type=Notification.TYPE_BROADCAST,
-            text=f"Пользователь {UserManager.get_user_by_id(other_user_id)} "
+            text=f"Пользователь {UserManager.get_user_by_id(other_user_id).username} "
                  f"начал трансляцию {broadcast_title[:20]}.",
             creation_time=creation_time
         )
@@ -48,7 +48,7 @@ class NotificationManager:
         NotificationManager._add_notification(
             user_id=user_id,
             notification_type=Notification.TYPE_RATE_COMMENT,
-            text=f"Пользователь {UserManager.get_user_by_id(other_user_id)} "
+            text=f"Пользователь {UserManager.get_user_by_id(other_user_id).username} "
                  f"оценил ваш комментарий {comment_text[:20]}.",
             creation_time=creation_time
         )
@@ -64,6 +64,7 @@ class NotificationManager:
                 creation_time=creation_time,
             )
         )
+        DatabaseWorker.write_notifications(notifications)
 
     @staticmethod
     def get_notifications_of_user(user_id: int) -> typing.List[Notification]:
