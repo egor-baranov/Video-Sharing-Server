@@ -18,7 +18,7 @@ class Notification:
         self.notification_type = notification_type
         self.creation_time = creation_time
 
-    def to_dict(self) -> typing.Dict[str]:
+    def to_dict(self):
         return {
             "text": self.text,
             "userId": self.user_id,
@@ -30,7 +30,7 @@ class Notification:
 class NotificationFactory:
     @staticmethod
     def new_notification(
-        text: str, user_id: int, notification_type: int, creation_time: float
+            text: str, user_id: int, notification_type: int, creation_time: float
     ) -> Notification:
         return Notification(text, user_id, notification_type, creation_time)
 
