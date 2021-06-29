@@ -302,7 +302,7 @@
     "authorEmail": "admin@admin.com",
     "authorPhone": "89004445533",
     "replies": [],
-    "text": "Нормально",
+    "text": "-Комментарий был удален администрацией-",
     "likes": 0,
     "commentId": 399044,
     "creationTime": 1615853108.9154716
@@ -313,7 +313,7 @@
     "authorEmail": "admin@admin.com",
     "authorPhone": "89004445533",
     "replies": [],
-    "text": "Да",
+    "text": "-Комментарий был удален администрацией-",
     "likes": 0,
     "commentId": 431298,
     "creationTime": 1615885898.661427
@@ -405,5 +405,16 @@
     "likes": 0,
     "commentId": 920640,
     "creationTime": 1622313708.9196405
+  },
+  {
+    "videoId": 5485667,
+    "authorUsername": "алекс",
+    "authorEmail": "cosword@rambler.ru",
+    "authorPhone": "89161500314",
+    "replies": [],
+    "text": "ого",
+    "likes": 0,
+    "commentId": 930148,
+    "creationTime": 1623217850.3596623
   }
 ]

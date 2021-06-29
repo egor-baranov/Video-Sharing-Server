@@ -3,8 +3,8 @@
     "username": "admin",
     "phone": "89004445533",
     "password": "password",
-    "city": "city",
-    "birthDate": "31.12.2000",
+    "city": "Прага",
+    "birthDate": "25.06.1966",
     "email": "admin@admin.com",
     "uploadedVideos": [
       1534532,
@@ -16,7 +16,8 @@
       946366,
       4433512,
       1359421,
-      8885413
+      8885413,
+      330234
     ],
     "likedVideos": [
       7805751,
@@ -29,19 +30,20 @@
       5574265,
       4374201,
       8885413,
-      1997380
+      1997380,
+      7650646
     ],
     "likedComments": [],
     "registerTime": 1612815838.8063781,
     "confirmCode": 0,
-    "coordinates": "60.0340955:30.2531278",
+    "coordinates": "55.9501106:37.8676307",
     "role": "admin",
     "userId": 643673
   },
   {
     "username": "egor",
     "phone": "88805553535",
-    "password": "123456",
+    "password": "",
     "city": "shs",
     "birthDate": "31.12.2000",
     "email": "a@b.com",
@@ -74,19 +76,21 @@
       5574265,
       3382095,
       2626218,
-      9053957
+      9053957,
+      5902410
     ],
     "likedVideos": [
       7650646,
       1534532,
       0,
-      4433512
+      4433512,
+      8931796
     ],
     "likedComments": [],
     "registerTime": 1612815838.8063908,
     "confirmCode": 0,
-    "coordinates": "55.9654114:37.3093116",
-    "role": "user",
+    "coordinates": "55.8923994:37.6727088",
+    "role": "admin",
     "userId": 695619
   },
   {
