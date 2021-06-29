@@ -1,4 +1,5 @@
 import random
+import time
 
 from flask import make_response, jsonify, request
 from flask import Blueprint
@@ -6,6 +7,7 @@ from flask import Blueprint
 from components.core import *
 from components.database.DatabaseWorker import DatabaseWorker
 from components.managers.CommentManager import CommentManager
+from components.managers.NotificationManager import NotificationManager
 from components.managers.UserManager import UserManager
 from components.managers.VideoManager import VideoManager
 from components.sms.SmsWorker import SmsWorker
@@ -332,7 +334,7 @@ def exist():
         jsonify(
             {
                 "ok": UserManager.get_user_by_email(email).is_not_fake()
-                or UserManager.get_user_by_phone(phone).is_not_fake()
+                      or UserManager.get_user_by_phone(phone).is_not_fake()
             }
         )
     )
@@ -381,6 +383,12 @@ def like_video():
             )
             DatabaseWorker.write_videos(videos)
             UserManager.update_user_data(user)
+
+            NotificationManager.add_rate_video_notification(user_id=
+                                                            UserManager.get_user_by_email(
+                                                                videos[i].author_email).user_id,
+                                                            other_user_id=user.user_id, video_title=videos[i].title,
+                                                            creation_time=time.time())
             resp.headers = headers
             return resp
 
@@ -500,5 +508,15 @@ def open_promotional_video():
     VideoManager.update_video_data(video)
 
     resp = make_response(jsonify({"ok": True, "video": video.to_dict()}))
+    resp.headers = headers
+    return resp
+
+
+@app.route("/getNotifications")
+@cross_origin()
+def get_notifications():
+    resp = make_response(jsonify({"ok": True, "data": [
+        n.to_dict() for n in NotificationManager.get_notifications_of_user(int(request.args.get("userId")))
+    ]}))
     resp.headers = headers
     return resp
