@@ -187,7 +187,7 @@ def reset_password():
 @app.route("/deleteVideo")
 @cross_origin()
 def delete_video():
-    video_id = int("videoId")
+    video_id = int(request.args.get("videoId"))
 
     VideoManager.delete_video(video_id)
 
