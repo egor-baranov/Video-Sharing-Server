@@ -18,9 +18,9 @@ class VideoManager:
 
         for v in DatabaseWorker.read_videos():
             if (
-                v.is_promotional
-                and (v.max_show_count == -1 or v.max_show_count > v.views)
-                and v.display_option != "none"
+                    v.is_promotional
+                    and (v.max_show_count == -1 or v.max_show_count > v.views)
+                    and v.display_option != "none"
             ):
                 promotional_videos.append(v)
 
@@ -66,3 +66,7 @@ class VideoManager:
         videos = DatabaseWorker.read_videos()
         videos.remove(list(filter(lambda it: it.video_id == video_id, videos))[0])
         DatabaseWorker.write_videos(videos)
+
+    @staticmethod
+    def does_video_exist(video_id: int) -> bool:
+        return any([it == video_id for it in DatabaseWorker.read_videos()])
