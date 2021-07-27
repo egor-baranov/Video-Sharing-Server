@@ -1,6 +1,8 @@
 import dto
 import json
+import typing
 import components.config as config
+from components.managers.VideoManager import VideoManager
 from dto.User import UserFactory, User
 from components.database.DatabaseWorker import DatabaseWorker
 
@@ -79,3 +81,13 @@ class UserManager:
             if video_id in u.uploaded_videos:
                 return u
         return UserFactory.new_fake_user()
+
+    @staticmethod
+    def get_favourite_tags(user_id: int) -> typing.Dict:
+        result_dict = {}
+        user = UserManager.get_user_by_id(user_id)
+        for video_id in user.liked_videos:
+            video = VideoManager.get_video_by_id(video_id)
+            for tag in video.tags.split(", "):
+                result_dict[tag] += 1
+        return result_dict
