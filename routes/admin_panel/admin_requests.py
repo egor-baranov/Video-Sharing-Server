@@ -189,6 +189,9 @@ def reset_password():
 def delete_video():
     video_id = int(request.args.get("videoId"))
 
+    user = UserManager.get_user_by_email(VideoManager.get_video_by_id(video_id).author_email)
+    user.uploaded_videos.remove(video_id)
+
     VideoManager.delete_video(video_id)
 
     resp = make_response(jsonify({"ok": True}))
