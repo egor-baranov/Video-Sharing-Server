@@ -252,7 +252,14 @@ def get_uploaded_videos():
 
         user = email_user if email_user.is_not_fake() else phone_user
 
-    resp = make_response(jsonify({"ok": True, "result": user.uploaded_videos}))
+    resp = make_response(
+        jsonify({
+            "ok": True,
+            "result": list(
+                filter(VideoManager.does_video_exist, user.uploaded_videos)
+            )
+        })
+    )
     resp.headers = headers
     return resp
 
@@ -520,3 +527,12 @@ def get_notifications():
     ]}))
     resp.headers = headers
     return resp
+
+
+@app.route("/getFeed")
+@cross_origin()
+def get_feed():
+    user = UserManager.get_user_by_id(int(request.args.get("userId")))
+    UserManager.get_favourite_tags(user.user_id)
+
+    pass
